@@ -1,0 +1,59 @@
+1% License
+
+Copyright (c) 2021 PampaSenior
+
+[FR]
+
+La permission est accordée par la présente, gratuitement, à chaque personne
+obtenant une copie de ce logiciel et de sa documentation associée d'utiliser,
+copier, modifier, fusionner, publier et distribuer le code à condition
+d'indiquer un moyen permettant d'accéder à la source originale de celui-ci,
+à savoir : https://github.com/PampaSenior/C2A
+
+Il n'est pas autorisé de percevoir de l'argent par l'utilisation ou la vente
+de ce logiciel sans reverser 1% des profits a/aux auteur(s).
+
+Dans le cas où du code ou des ressources seraient modifiées ou ajoutées à ce
+logiciel, elles devront rester libre, c'est à dire communicable, dans un
+format lisible à toute personne en faisant la demande.
+
+Cette licence permettant d'expliciter les droits d'auteur doit être incluse
+dans toutes les copies même partielle de cette application sans subir de
+modifications.
+
+Ce logiciel est fourni sans garantie d'aucune sorte, expressément ou implicitement,
+incluant, sans pour autant s'y limiter, aux garanties de qualité marchande, de non
+contrefaçon ou d'aptitude à un usage particulier.
+
+En aucun cas, le ou les auteurs ou titulaires des droits d'auteur ne pourront être
+tenus pour responsable notamment pour des dommages moraux, physiques ou
+financiers, directs ou indirects, ou pour des actions contractuelles ou délictuelles
+résultant de l'utilisation ou non de ce logiciel.
+
+[EN]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files, to use, copy, modify,
+merge, publish, distribute the code provided by giving a way to access to
+the original code, for exemple : https://github.com/PampaSenior/C2A
+
+It is not allowed to earn money by using or selling this software without 
+reverse 1% of the profit to the author.
+
+In the case the code would be changes or ressources would be added in this
+software, they must remain free. It's meaning transmissible in a
+readable format to any asking people.
+
+This license which inform about copyright and permissions must be included 
+in all copies or substantial portions of the software without modifications.
+
+The software is provided without warranty of any kind, express or implied
+including but not limited to the warranties of merchantability,
+noninfringement or fitness for a particular purpose.
+
+In no event shall the authors or copyright holders be liable for any claim,
+damages or other liability, whether in an action of contract, tort or
+otherwise, arising from, out of or in connection with the software or the use
+in the software.
+
+The authentic version is the french one not the english translation.

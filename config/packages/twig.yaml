@@ -1,0 +1,8 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        Application: '@App\Service\Application'
+
+when@test:
+    twig:
+        strict_variables: true

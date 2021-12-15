@@ -1,0 +1,22 @@
+{%~ if Noel == 0 %}
+  {% set MaxBoucle1 = 3 %}
+  {% set MaxBoucle2 = 5 %}
+{%~ else %}
+  {% set MaxBoucle1 = 4 %}
+  {% set MaxBoucle2 = 4 %}
+{%~ endif %}
+
+{% for i in 0..MaxBoucle1 %}
+  {{~ Indentation }}<div class="mx-auto d-flex justify-content-center">
+  {%~ for j in 0..MaxBoucle2 %}
+    {%~
+    include Modele
+    with { 'Indentation' : Indentation ~ '  ',
+           'Style' : Style,
+           'Classe' : Classe,
+           'Couleur' : Couleur,
+           'Jour' : (MaxBoucle2+1)*(loop.parent.loop.index-1)+loop.index }
+    ~%}
+  {%~ endfor %}
+  {{~ Indentation }}</div>
+{% endfor %}

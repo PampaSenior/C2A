@@ -1,0 +1,4 @@
+{{ Indentation }}<div class="m-2 text-success BlocNoel-{{ Classe }}" data-style="{{ Style }}" data-classe="{{ Classe }}" data-url="{{ path('Cadeau',{'Id':Jour}) }}">
+{{ Indentation }}  <i class="fas {% if Jour == 25 %}fa-star{% else %}fa-gift{% endif %} text-danger CadeauNoel-{{ Classe }}"></i>
+{{ Indentation }}  <strong class="m-0 ChiffreNoel-{{ Classe }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
+{{ Indentation }}</div>

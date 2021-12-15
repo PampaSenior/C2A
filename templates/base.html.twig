@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Default-Style" content="{{ Application.getStyleApplication() }}">
+    <meta name="author" content="{{ Application.getAuteur() }}">
+    <meta name="description" content="{{ Application.getDescriptionApplication() }}">
+    <meta name="Version" content="{{ Application.getVersion() }}">
+    {%~ if app.environment == 'dev' %}
+    <meta name="VersionPHP" content="{{ Application.getVersionPHP() }}">
+    <meta name="VersionSymfony" content="{{ Application.getVersionSymfony() }}">
+    {%~ endif %}
+    <title>
+    {%~ block title %}
+      {{ Application.getAcronymeApplication() }}
+    {%~ endblock %}
+    </title>
+    {%~ block stylesheets %}
+    <link rel="icon" href="{{ path('Accueil') }}{{ Application.getDossierImage() }}{{ Application.getIconeApplication() }}"> {% if app.environment == 'dev' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
+    <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}1-Bootstrap_V5.1.1.css" type="text/css" title="Jour"> {% if app.environment == 'dev' %}<!-- Permet d'utiliser le mode clair -->{% endif %} 
+    <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}2-Font_Awesome_V5.15.4.css" type="text/css"> {% if app.environment == 'dev' %}<!-- Permet d'utiliser la banque d'icones -->{% endif %} 
+    <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}3-Calendrier.css" type="text/css"> {% if app.environment == 'dev' %}<!-- Permet de rajouter du style sur la page du calendrier -->{% endif %} 
+    {%~ endblock %}
+    {%~ block javascripts %}
+    <script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}1-jQuery_V3.6.0.js"></script>
+    <script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}2-Bootstrap_V5.1.1.js"></script>
+    <script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}3-Font_Awesome_V5.15.4.js"></script>
+    {%~ endblock %}
+  </head>
+  <body style="background-color:{{ CouleurFond }}">
+    {%~ block body %}
+    {%~ endblock %}
+    {%~ block script %}
+    {%~ endblock %}
+  </body>
+</html>

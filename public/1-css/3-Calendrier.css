@@ -1,0 +1,129 @@
+@font-face {
+  font-family: "Kingthings Christmas";
+  src: url("../4-polices/Kingthings Christmas 2.2.ttf") format("truetype");
+}
+
+@keyframes ChuteNeige {
+  from { background-position: 0 0; }
+  to { background-position: 0 256px; }
+}
+
+@keyframes Ouvrable {
+  0% {
+    transform: scale(1.0;1.0);
+    }
+  50% {
+    transform: scale(0.9,0.9);
+    }
+  100% {
+    transform: scale(1.0,1.0);
+    }
+}
+
+body{
+  user-select: none;
+  background: url("../3-images/Neige.svg") repeat 0px 0px;
+  animation: ChuteNeige 10s linear infinite;
+  z-index: -1;
+}
+
+p{
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+#Titre{
+  font-family: "Kingthings Christmas";
+  font-size: 2em;
+}
+
+.modal-content{
+  background: url("../3-images/Neige.svg") repeat 0px 0px;
+  animation: ChuteNeige 10s linear infinite;
+  z-index: -2;
+}
+
+.AnimationOuvrable{
+  cursor: pointer;
+  animation: Ouvrable 2s infinite;
+}
+
+.BlocNoel-sm{
+  border: 0.5em solid;
+  border-radius: 1em;
+  width: 5em;
+  height: 5em;
+}
+
+.BlocNoel-lg{
+  border: 0.5em solid;
+  border-radius: 1em;
+  width: 8em;
+  height: 8em;
+}
+
+.BlocNoel-xl{
+  border: 0.5em solid;
+  border-radius: 1em;
+  width: 10em;
+  height: 10em;
+}
+
+.CadeauNoel-sm, .ChercheNoel-sm, .ErreurNoel-sm{
+  position: relative;
+  top: 10%;
+  font-size: 3em;
+}
+
+.CadeauNoel-lg, .ChercheNoel-lg, .ErreurNoel-lg{
+  position: relative;
+  top: 15%;
+  font-size: 5em;
+}
+
+.CadeauNoel-xl, .ChercheNoel-xl, .ErreurNoel-xl{
+  position: relative;
+  top: 10%;
+  font-size: 7em;
+}
+
+.ChiffreNoel-sm{
+  font-family: "Kingthings Christmas";
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  display:block;
+  position: relative;
+  top:-60%;
+  font-size:2em;
+}
+
+.ChiffreNoel-lg{
+  font-family: "Kingthings Christmas";
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  display:block;
+  position: relative;
+  top:-50%;
+  font-size:3em;
+}
+
+.ChiffreNoel-xl{
+  font-family: "Kingthings Christmas";
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  display:block;
+  position: relative;
+  top:-65%;
+  font-size:5em;
+}
+
+.Boule-sm{
+  width: 5em;
+  height: 5em;
+}
+
+.Boule-lg{
+  width: 8em;
+  height: 8em;
+}
+
+.Boule-xl{
+  width: 10em;
+  height: 10em;
+}
