@@ -3,9 +3,19 @@
   src: url("../4-polices/Kingthings Christmas 2.2.ttf") format("truetype");
 }
 
-@keyframes ChuteNeige {
+@keyframes ChuteNeigeGrande {
   from { background-position: 0 0; }
   to { background-position: 0 256px; }
+}
+
+@keyframes ChuteNeigeMoyenne {
+    from {background-position: 0 0;}
+    to {background-position: 0 192px;}
+}
+
+@keyframes ChuteNeigePetite {
+    from { background-position: 0 0;}
+    to {background-position: 0 128px;}
 }
 
 @keyframes Ouvrable {
@@ -20,13 +30,6 @@
     }
 }
 
-body{
-  user-select: none;
-  background: url("../3-images/Neige.svg") repeat 0px 0px;
-  animation: ChuteNeige 10s linear infinite;
-  z-index: -1;
-}
-
 p{
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -36,10 +39,51 @@ p{
   font-size: 2em;
 }
 
-.modal-content{
-  background: url("../3-images/Neige.svg") repeat 0px 0px;
-  animation: ChuteNeige 10s linear infinite;
-  z-index: -2;
+.rounded-25 {
+    border-radius: 1em;
+}
+
+.position-fixe {
+    position: fixed;
+}
+
+.position-absolue {
+    position: absolute;
+}
+
+.z-index-1 {
+    z-index: 1;
+}
+
+.z-index-n1 {
+    z-index: -1;
+}
+
+.neige-grande,
+.neige-moyenne,
+.neige-petite {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.neige-grande {
+    user-select: none;
+    background: url("../3-images/NeigeFloconGrand.svg") repeat 0px 0px;
+    animation: ChuteNeigeGrande 6s linear infinite;
+}
+
+.neige-moyenne {
+    user-select: none;
+    background: url("../3-images/NeigeFloconMoyen.svg") repeat 0px 0px;
+    animation: ChuteNeigeMoyenne 8s linear infinite;
+}
+
+.neige-petite {
+    user-select: none;
+    background: url("../3-images/NeigeFloconPetit.svg") repeat 0px 0px;
+    animation: ChuteNeigePetite 10s linear infinite;
 }
 
 .AnimationOuvrable{
@@ -56,14 +100,12 @@ p{
 
 .BlocNoel-lg{
   border: 0.5em solid;
-  border-radius: 1em;
   width: 8em;
   height: 8em;
 }
 
 .BlocNoel-xl{
   border: 0.5em solid;
-  border-radius: 1em;
   width: 10em;
   height: 10em;
 }
