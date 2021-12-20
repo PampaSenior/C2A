@@ -30,6 +30,10 @@
     }
 }
 
+body {
+    user-select: none;
+}
+
 p{
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
@@ -59,30 +63,40 @@ p{
     z-index: -1;
 }
 
-.neige-grande,
-.neige-moyenne,
-.neige-petite {
+.neige {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
 }
 
-.neige-grande {
-    user-select: none;
+.neige-flocon-grand {
     background: url("../3-images/NeigeFloconGrand.svg") repeat 0px 0px;
     animation: ChuteNeigeGrande 6s linear infinite;
 }
 
-.neige-moyenne {
-    user-select: none;
+.neige-flocon-moyen {
     background: url("../3-images/NeigeFloconMoyen.svg") repeat 0px 0px;
     animation: ChuteNeigeMoyenne 8s linear infinite;
 }
 
-.neige-petite {
-    user-select: none;
+.neige-flocon-petit {
     background: url("../3-images/NeigeFloconPetit.svg") repeat 0px 0px;
+    animation: ChuteNeigePetite 10s linear infinite;
+}
+
+.neige-boule-grande {
+    background: url("../3-images/NeigeBouleGrande.png") repeat 0px 0px;
+    animation: ChuteNeigeGrande 6s linear infinite;
+}
+
+.neige-boule-moyenne {
+    background: url("../3-images/NeigeBouleMoyenne.png") repeat 0px 0px;
+    animation: ChuteNeigeMoyenne 8s linear infinite;
+}
+
+.neige-boule-petite {
+    background: url("../3-images/NeigeBoulePetite.png") repeat 0px 0px;
     animation: ChuteNeigePetite 10s linear infinite;
 }
 

@@ -1,5 +1,19 @@
 {% extends 'base.html.twig' %}
 
+{%~ if Neige == 0 %}
+  {% set NeigeGrande = ' ' %}
+  {% set NeigeMoyenne = ' ' %}
+  {% set NeigePetite = ' ' %}
+{%~ elseif Neige == 1 %}
+  {% set NeigeGrande = ' neige-flocon-grand ' %}
+  {% set NeigeMoyenne = ' neige-flocon-moyen ' %}
+  {% set NeigePetite = ' neige-flocon-petit ' %}
+{%~ else %}
+  {% set NeigeGrande = ' neige-boule-grande ' %}
+  {% set NeigeMoyenne = ' neige-boule-moyenne ' %}
+  {% set NeigePetite = ' neige-boule-petite ' %}
+{%~ endif %}
+
 {%~ if Forme == 0 %}
   {% set Modele = 'accueil/_forme-grille.html.twig' %}
 {%~ else %}
@@ -14,9 +28,9 @@
 
 {% block body %}
   {{~ Indentation }}<div>
-  {{~ Indentation }}  <div class="neige-grande position-fixe z-index-n1"></div>
-  {{~ Indentation }}  <div class="neige-moyenne position-fixe z-index-n1"></div>
-  {{~ Indentation }}  <div class="neige-petite position-fixe z-index-n1"></div>
+  {{~ Indentation }}  <div class="neige {{~ NeigeGrande ~}} position-fixe z-index-n1"></div>
+  {{~ Indentation }}  <div class="neige {{~ NeigeMoyenne ~}} position-fixe z-index-n1"></div>
+  {{~ Indentation }}  <div class="neige {{~ NeigePetite ~}} position-fixe z-index-n1"></div>
   {{~ Indentation }}</div>
   {{~ Indentation }}<div class="mx-auto col-10 text-center">
   {{~ Indentation }}  <p class="my-5 h1 d-flex justify-content-center align-items-center">
@@ -37,6 +51,9 @@
     {%-
     include 'modale/BonneFete.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
+           'NeigeGrande' : NeigeGrande,
+           'NeigeMoyenne' : NeigeMoyenne,
+           'NeigePetite' : NeigePetite,
            'Titre' : TitreModale,
            'Texte' : TexteModale,
            'CouleurFond' : CouleurFond,

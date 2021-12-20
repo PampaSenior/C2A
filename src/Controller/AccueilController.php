@@ -33,6 +33,7 @@ class AccueilController extends AbstractController
         'CouleurFond' => $this->getParameter('CouleurFond'),
         'CouleurTexte' => $this->getParameter('CouleurTexte'),
         'Noel' => $this->getParameter('Noel'),
+        'Neige' => $this->getParameter('Neige'),
         'Forme' => $this->getParameter('Forme'),
         'Style' => $this->getParameter('Style'),
         'Taille' => $this->getParameter('Taille'),
