@@ -20,10 +20,10 @@
   {% set Modele = 'accueil/_forme-sapin.html.twig' %}
 {%~ endif %}
 
-{%~ if Style == 0 %}
-  {% set Dessin = 'accueil/_cadeau.html.twig' %}
+{%~ if Style in [0, 1] %}
+  {% set Dessin = 'accueil/_fontawesome-ok.html.twig' %}
 {%~ else %}
-  {% set Dessin = 'accueil/_boule.html.twig' %}
+  {% set Dessin = 'accueil/_fontawesome-nok.html.twig' %}
 {%~ endif %}
 
 {% block body %}

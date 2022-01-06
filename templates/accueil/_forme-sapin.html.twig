@@ -1,10 +1,12 @@
-{% set Compteur = 0 -%}
+{% set JourSpecial = 1 -%}
 
 {%~ if Noel == 0 %}
   {% set Max = [1,2,3,4,5,6,3] %}
 {%~ else %}
   {% set Max = [1,2,3,4,5,6,4] %}
 {%~ endif %}
+
+{% set Compteur = 0 -%}
 
 {% for i in 0..Max|length-1 %}
   {{~ Indentation }}<div class="mx-auto d-flex justify-content-center">
@@ -16,6 +18,7 @@
            'Style' : Style,
            'Classe' : Classe,
            'Couleur' : Couleur,
+           'JourSpecial' : JourSpecial,
            'Jour' : Compteur }
     ~%}
   {%~ endfor %}

@@ -1,3 +1,5 @@
+{% set JourSpecial = 25 -%}
+
 {%~ if Noel == 0 %}
   {% set MaxBoucle1 = 3 %}
   {% set MaxBoucle2 = 5 %}
@@ -6,16 +8,20 @@
   {% set MaxBoucle2 = 4 %}
 {%~ endif %}
 
+{% set Compteur = 0 -%}
+
 {% for i in 0..MaxBoucle1 %}
   {{~ Indentation }}<div class="mx-auto d-flex justify-content-center">
   {%~ for j in 0..MaxBoucle2 %}
+    {%~ set Compteur = Compteur+1 %}
     {%~
     include Modele
     with { 'Indentation' : Indentation ~ '  ',
            'Style' : Style,
            'Classe' : Classe,
            'Couleur' : Couleur,
-           'Jour' : (MaxBoucle2+1)*(loop.parent.loop.index-1)+loop.index }
+           'JourSpecial' : JourSpecial,
+           'Jour' : Compteur }
     ~%}
   {%~ endfor %}
   {{~ Indentation }}</div>
