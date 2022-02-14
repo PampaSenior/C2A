@@ -1,37 +1,37 @@
-@font-face {
+@font-face{
   font-family: "Kingthings Christmas";
   src: url("../4-polices/Kingthings Christmas 2.2.ttf") format("truetype");
 }
 
-@keyframes ChuteNeigeGrande {
+@keyframes ChuteNeigeGrande{
   from { background-position: 0 0; }
   to { background-position: 0 256px; }
 }
 
-@keyframes ChuteNeigeMoyenne {
-    from {background-position: 0 0;}
-    to {background-position: 0 192px;}
+@keyframes ChuteNeigeMoyenne{
+  from {background-position: 0 0;}
+  to {background-position: 0 192px;}
 }
 
-@keyframes ChuteNeigePetite {
-    from { background-position: 0 0;}
-    to {background-position: 0 128px;}
+@keyframes ChuteNeigePetite{
+  from { background-position: 0 0;}
+  to {background-position: 0 128px;}
 }
 
-@keyframes Ouvrable {
-  0% {
+@keyframes Ouvrable{
+  0%{
     transform: scale(1.0;1.0);
     }
-  50% {
+  50%{
     transform: scale(0.9,0.9);
     }
-  100% {
+  100%{
     transform: scale(1.0,1.0);
     }
 }
 
-body {
-    user-select: none;
+body{
+  user-select: none;
 }
 
 p{
@@ -43,61 +43,61 @@ p{
   font-size: 2em;
 }
 
-.rounded-25 {
-    border-radius: 1em;
+.rounded-25{
+  border-radius: 1em;
 }
 
-.position-fixe {
-    position: fixed;
+.position-fixe{
+  position: fixed;
 }
 
-.position-absolue {
-    position: absolute;
+.position-absolue{
+  position: absolute;
 }
 
-.z-index-1 {
-    z-index: 1;
+.z-index-1{
+  z-index: 1;
 }
 
-.z-index-n1 {
-    z-index: -1;
+.z-index-n1{
+  z-index: -1;
 }
 
-.neige {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+.neige{
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-.neige-flocon-grand {
-    background: url("../3-images/NeigeFloconGrand.svg") repeat 0px 0px;
-    animation: ChuteNeigeGrande 6s linear infinite;
+.neige-flocon-grand{
+  background: url("../3-images/NeigeFloconGrand.svg") repeat 0px 0px;
+  animation: ChuteNeigeGrande 6s linear infinite;
 }
 
-.neige-flocon-moyen {
-    background: url("../3-images/NeigeFloconMoyen.svg") repeat 0px 0px;
-    animation: ChuteNeigeMoyenne 8s linear infinite;
+.neige-flocon-moyen{
+  background: url("../3-images/NeigeFloconMoyen.svg") repeat 0px 0px;
+  animation: ChuteNeigeMoyenne 8s linear infinite;
 }
 
-.neige-flocon-petit {
-    background: url("../3-images/NeigeFloconPetit.svg") repeat 0px 0px;
-    animation: ChuteNeigePetite 10s linear infinite;
+.neige-flocon-petit{
+  background: url("../3-images/NeigeFloconPetit.svg") repeat 0px 0px;
+  animation: ChuteNeigePetite 10s linear infinite;
 }
 
-.neige-boule-grande {
-    background: url("../3-images/NeigeBouleGrande.png") repeat 0px 0px;
-    animation: ChuteNeigeGrande 6s linear infinite;
+.neige-boule-grande{
+  background: url("../3-images/NeigeBouleGrande.png") repeat 0px 0px;
+  animation: ChuteNeigeGrande 6s linear infinite;
 }
 
-.neige-boule-moyenne {
-    background: url("../3-images/NeigeBouleMoyenne.png") repeat 0px 0px;
-    animation: ChuteNeigeMoyenne 8s linear infinite;
+.neige-boule-moyenne{
+  background: url("../3-images/NeigeBouleMoyenne.png") repeat 0px 0px;
+  animation: ChuteNeigeMoyenne 8s linear infinite;
 }
 
-.neige-boule-petite {
-    background: url("../3-images/NeigeBoulePetite.png") repeat 0px 0px;
-    animation: ChuteNeigePetite 10s linear infinite;
+.neige-boule-petite{
+  background: url("../3-images/NeigeBoulePetite.png") repeat 0px 0px;
+  animation: ChuteNeigePetite 10s linear infinite;
 }
 
 .AnimationOuvrable{

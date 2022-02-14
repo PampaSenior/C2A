@@ -1,0 +1,20 @@
+{% set Langues = [
+  ['fr','Langue française','DrapeauFrance.svg'],
+  ['en','English Language','DrapeauAnglais.svg']
+] -%}
+
+{{~ Indentation }}<ul class="mx-auto col-11 pt-2 nav nav-tabs" role="tablist">
+{%~
+include 'accueil/information/_onglet-drapeau.html.twig'
+with { 'Indentation' : Indentation ~ '  ',
+       'Langues' : Langues }
+-%}
+{{~ Indentation }}</ul>
+{{~ Indentation }}<div class="mx-auto col-11 pb-2 px-2 tab-content">
+{%~
+include 'accueil/information/_traduction-texte.html.twig'
+with { 'Indentation' : Indentation ~ '  ',
+       'Langues' : Langues,
+       'Message' : Message }
+-%}
+{{~ Indentation }}</div>

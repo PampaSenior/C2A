@@ -14,6 +14,17 @@ class AccueilController extends AbstractController
    */
   public function Accueil(): Response
     {
+    $Resultat = $this->VerificationConfiguration();
+    if ($Resultat != '')
+      {
+      return $this->render('accueil/information/information.html.twig',
+          [
+          'Indentation' => '  ',
+          'Message' => $Resultat
+          ]
+        );
+      }
+
     $Date = new \Datetime('now');
     if ($Date->format('d-m') == '25-12')
       {
@@ -24,7 +35,7 @@ class AccueilController extends AbstractController
       $J25 = false;
       }
 
-    return $this->render('accueil/accueil.html.twig',
+    return $this->render('accueil/calendrier/calendrier.html.twig',
         [
         'Indentation' => '    ',
         'Titre' => $this->getParameter('Titre'),
@@ -40,5 +51,35 @@ class AccueilController extends AbstractController
         'J25' => $J25,
         ]
       );
+    }
+  // Vérification de la configuration.
+  private function VerificationConfiguration(): string
+    {
+    $Message = '';
+
+    if (!file_exists('../.env.local'))
+      {
+      return 'Configuration.Information.Fichier';
+      }
+
+    try
+      {
+      $this->getParameter('Titre');
+      $this->getParameter('TitreModale');
+      $this->getParameter('TexteModale');
+      $this->getParameter('CouleurFond');
+      $this->getParameter('CouleurTexte');
+      $this->getParameter('Noel');
+      $this->getParameter('Neige');
+      $this->getParameter('Forme');
+      $this->getParameter('Style');
+      $this->getParameter('Taille');
+      }
+    catch (\Exception $Pb)
+      {
+      return 'Configuration.Information.Variable';
+      }
+
+    return $Message;
     }
   }
