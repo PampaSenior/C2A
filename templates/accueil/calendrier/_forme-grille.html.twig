@@ -1,14 +1,18 @@
-{% set Compteur = 0 -%}
+{% set JourSpecial = 25 -%}
 
 {%~ if Noel == 0 %}
-  {% set Max = [1,2,3,4,5,6,3] %}
+  {% set MaxBoucle1 = 3 %}
+  {% set MaxBoucle2 = 5 %}
 {%~ else %}
-  {% set Max = [1,2,3,4,5,6,4] %}
+  {% set MaxBoucle1 = 4 %}
+  {% set MaxBoucle2 = 4 %}
 {%~ endif %}
 
-{% for i in 0..Max|length-1 %}
+{% set Compteur = 0 -%}
+
+{% for i in 0..MaxBoucle1 %}
   {{~ Indentation }}<div class="mx-auto d-flex justify-content-center">
-  {%~ for j in 0..Max[i]-1 %}
+  {%~ for j in 0..MaxBoucle2 %}
     {%~ set Compteur = Compteur+1 %}
     {%~
     include Modele
@@ -16,6 +20,7 @@
            'Style' : Style,
            'Classe' : Classe,
            'Couleur' : Couleur,
+           'JourSpecial' : JourSpecial,
            'Jour' : Compteur }
     ~%}
   {%~ endfor %}

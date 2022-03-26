@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{%~ if Neige == 0 %}
+  {% set NeigeGrande = ' ' %}
+  {% set NeigeMoyenne = ' ' %}
+  {% set NeigePetite = ' ' %}
+{%~ elseif Neige == 1 %}
+  {% set NeigeGrande = ' neige-flocon-grand ' %}
+  {% set NeigeMoyenne = ' neige-flocon-moyen ' %}
+  {% set NeigePetite = ' neige-flocon-petit ' %}
+{%~ else %}
+  {% set NeigeGrande = ' neige-boule-grande ' %}
+  {% set NeigeMoyenne = ' neige-boule-moyenne ' %}
+  {% set NeigePetite = ' neige-boule-petite ' %}
+{%~ endif %}
+
+{%~ if Forme == 0 %}
+  {% set Modele = 'accueil/calendrier/_forme-grille.html.twig' %}
+{%~ else %}
+  {% set Modele = 'accueil/calendrier/_forme-sapin.html.twig' %}
+{%~ endif %}
+
+{%~ if Style in [0, 1] %}
+  {% set Dessin = 'accueil/calendrier/_fontawesome-ok.html.twig' %}
+{%~ else %}
+  {% set Dessin = 'accueil/calendrier/_fontawesome-nok.html.twig' %}
+{%~ endif %}
+
+{% block body %}
+  {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
+  {{~ Indentation }}  <div>
+  {{~ Indentation }}    <div class="neige {{~ NeigeGrande ~}} position-fixe z-index-n1"></div>
+  {{~ Indentation }}    <div class="neige {{~ NeigeMoyenne ~}} position-fixe z-index-n1"></div>
+  {{~ Indentation }}    <div class="neige {{~ NeigePetite ~}} position-fixe z-index-n1"></div>
+  {{~ Indentation }}  </div>
+  {{~ Indentation }}  <div class="mx-auto col-10 text-center">
+  {{~ Indentation }}    <p class="my-5 h1 d-flex justify-content-center align-items-center">
+  {{~ Indentation }}      <i class="me-4 fas fa-holly-berry fa-2x text-danger"></i>
+  {{~ Indentation }}      <span id="Titre" style="color:{{ CouleurTexte }}">{{ Titre }}</span>
+  {{~ Indentation }}      <i class="ms-4 fas fa-candy-cane fa-2x text-success"></i>
+  {{~ Indentation }}    </p>
+  {%-
+  include Modele
+  with { 'Indentation' : Indentation ~ '    ',
+         'Noel' : Noel,
+         'Modele' : Dessin,
+         'Style' : Style,
+         'Classe' : Taille,
+         'Couleur' : CouleurTexte }
+  -%}
+  {%~ if J25 == 1 %}
+    {%-
+    include 'modale/BonneFete.html.twig'
+    with { 'Indentation' : Indentation ~ '    ',
+           'NeigeGrande' : NeigeGrande,
+           'NeigeMoyenne' : NeigeMoyenne,
+           'NeigePetite' : NeigePetite,
+           'Titre' : TitreModale,
+           'Texte' : TexteModale,
+           'CouleurFond' : CouleurFond,
+           'CouleurTexte' : CouleurTexte }
+    ~%}
+  {%~ endif %}
+  {{~ Indentation }}  </div>
+  {%~ block script %}
+    {%- set Indentation = Indentation ~ '  ' -%}
+    {%~ if J25 == 1 %}
+      {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-BonneFete.js"></script>
+    {%~ endif %}
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}5-JourAvant.js"></script>
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}6-JourActuel.js"></script>
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}7-JourChange.js"></script>
+  {%~ endblock %}
+  {{~ Indentation }}</body>
+{% endblock %}

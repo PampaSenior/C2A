@@ -6,6 +6,7 @@ parameters:
     CouleurFond: '%env(string:COULEUR_FOND)%'
     CouleurTexte: '%env(string:COULEUR_TEXTE)%'
     Noel: '%env(int:NOEL)%'
+    Neige: '%env(int:NEIGE)%'
     Forme: '%env(int:FORME)%'
     Style: '%env(int:STYLE)%'
     Taille: '%env(string:TAILLE)%'
