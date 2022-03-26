@@ -36,10 +36,10 @@ class Application
     $this->DescriptionApplication = "Calendrier de l'avent";
     $this->StyleApplication = "Jour";
 
-    $this->VersionDate = "15/12/2021";
+    $this->VersionDate = "26/03/2022";
     $this->VersionMajeur = "1";
     $this->VersionMineur = "0";
-    $this->VersionCorrectif = "0";
+    $this->VersionCorrectif = "1";
     $this->VersionPHP = phpversion();
     $this->VersionSymfony = \Symfony\Component\HttpKernel\Kernel::VERSION;
 
