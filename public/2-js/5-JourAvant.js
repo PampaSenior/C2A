@@ -23,7 +23,7 @@ function Clic(){
       {
       Widget.addClass('BlocNoel-'+Classe);
       }
-    Widget.html('<i class="fas fa-spinner fa-spin '+Couleur+' ChercheNoel-'+Classe+'"></i>');
+    Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' ChercheNoel-'+Classe+'"></i>');
   }
 
   let Succes = function(Reponse) {
@@ -51,7 +51,7 @@ function Clic(){
   }
 
   let Echec = function(Erreur) {
-    Widget.html('<i class="fas fa-exclamation-triangle '+Couleur+' ErreurNoel-'+Classe+'"></i>');
+    Widget.html('<i class="fa-solid fa-exclamation-triangle '+Couleur+' ErreurNoel-'+Classe+'"></i>');
     console.log("Le cadeau n'a pu être récupéré.\r\n\r\n"+
                 'Raison : ' + JSON.stringify(Erreur));
   }
