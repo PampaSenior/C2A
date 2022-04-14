@@ -1,9 +1,10 @@
-function CadeauDuJour(Clef) {
+function CadeauDuJour(Clef)
+  {
   localStorage.setItem('JourClic',Clef.data.Clef); //On sauvegarde comme clef unique l'année et le jour en cookie
   //localStorage.removeItem('JourClic'); //Pour supprimer le cookie js
   }
 
-$( document ).ready(function() {
+$(function() {
   const LaDate = new Date();
   const Jour = LaDate.getDate(); //Va de 1 à 31
   const Mois = LaDate.getMonth(); //Va de 0 à 11 donc décembre = 11

@@ -1,8 +1,12 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 parameters:
     Titre: '%env(string:TITRE)%'
-    TitreModale: '%env(string:TITRE_MODALE)%'
-    TexteModale: '%env(string:TEXTE_MODALE)%'
+    TitreCupidon: '%env(string:TITRE_CUPIDON)%'
+    TexteCupidon: '%env(string:TEXTE_CUPIDON)%'
+    TitrePoisson: '%env(string:TITRE_POISSON)%'
+    TextePoisson: '%env(string:TEXTE_POISSON)%'
+    TitreCadeau: '%env(string:TITRE_CADEAU)%'
+    TexteCadeau: '%env(string:TEXTE_CADEAU)%'
     CouleurFond: '%env(string:COULEUR_FOND)%'
     CouleurTexte: '%env(string:COULEUR_TEXTE)%'
     Noel: '%env(int:NOEL)%'

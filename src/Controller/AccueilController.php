@@ -26,21 +26,41 @@ class AccueilController extends AbstractController
       }
 
     $Date = new \Datetime('now');
-    if ($Date->format('d-m') == '25-12')
+    switch ($Date->format('d-m'))
       {
-      $J25 = true;
-      }
-    else
-      {
-      $J25 = false;
+      case '14-02':
+        $Jour = 14;
+        $Mois = 1; //Javascript compte les mois de 0 à 11.
+        $TitreModale = $this->getParameter('TitreCupidon');
+        $TexteModale = $this->getParameter('TexteCupidon');
+        $TypeModale = 'Cupidon';
+        break;
+      case '01-04':
+        $Jour = 1;
+        $Mois = 3; //Javascript compte les mois de 0 à 11
+        $TitreModale = $this->getParameter('TitrePoisson');
+        $TexteModale = $this->getParameter('TextePoisson');
+        $TypeModale = 'Poisson';
+        break;
+      case '25-12':
+        $Jour = 25;
+        $Mois = 11; //Javascript compte les mois de 0 à 11.
+        $TitreModale = $this->getParameter('TitreCadeau');
+        $TexteModale = $this->getParameter('TexteCadeau');
+        $TypeModale = 'Cadeau';
+        break;
+      default:
+        $Jour = 0;
+        $Mois = 0; //Javascript compte les mois de 0 à 11.
+        $TitreModale = '';
+        $TexteModale = '';
+        $TypeModale = '';
       }
 
     return $this->render('accueil/calendrier/calendrier.html.twig',
         [
         'Indentation' => '    ',
         'Titre' => $this->getParameter('Titre'),
-        'TitreModale' => $this->getParameter('TitreModale'),
-        'TexteModale' => $this->getParameter('TexteModale'),
         'CouleurFond' => $this->getParameter('CouleurFond'),
         'CouleurTexte' => $this->getParameter('CouleurTexte'),
         'Noel' => $this->getParameter('Noel'),
@@ -48,7 +68,8 @@ class AccueilController extends AbstractController
         'Forme' => $this->getParameter('Forme'),
         'Style' => $this->getParameter('Style'),
         'Taille' => $this->getParameter('Taille'),
-        'J25' => $J25,
+        'JourSpecial' => ['Jour'=>$Jour,'Mois'=>$Mois,'Titre'=>$TitreModale,'Texte'=>$TexteModale,'Type'=>$TypeModale],
+        'Jour' => $Date->format('d'),
         ]
       );
     }
@@ -65,8 +86,12 @@ class AccueilController extends AbstractController
     try
       {
       $this->getParameter('Titre');
-      $this->getParameter('TitreModale');
-      $this->getParameter('TexteModale');
+      $this->getParameter('TitreCupidon');
+      $this->getParameter('TexteCupidon');
+      $this->getParameter('TitrePoisson');
+      $this->getParameter('TextePoisson');
+      $this->getParameter('TitreCadeau');
+      $this->getParameter('TexteCadeau');
       $this->getParameter('CouleurFond');
       $this->getParameter('CouleurTexte');
       $this->getParameter('Noel');

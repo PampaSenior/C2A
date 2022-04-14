@@ -1,22 +1,25 @@
-function TexteCourt(Texte,Taille){
-    if (Texte.length > Taille)
-      {
-      return Texte.substr(0,Taille-3)+'...';
-      }
-    else
-      {
-      return Texte;
-      }
-}
+function TexteCourt(Texte,Taille)
+  {
+  if (Texte.length > Taille)
+    {
+    return Texte.substr(0,Taille-3)+'...';
+    }
+  else
+    {
+    return Texte;
+    }
+  }
 
-function Clic(){
+function Clic()
+  {
   const Couleur = 'text-danger';
   const Widget = $(event.currentTarget);
   const Style = Widget.data('style');
   const Classe = Widget.data('classe');
   const URL = Widget.data('url');
 
-  let Debut = function() {
+  let Debut = function()
+    {
     Widget.prop('disabled',true);
     Widget.removeClass('AnimationOuvrable');
     if (Style == true)
@@ -24,9 +27,10 @@ function Clic(){
       Widget.addClass('BlocNoel-'+Classe);
       }
     Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' ChercheNoel-'+Classe+'"></i>');
-  }
+    }
 
-  let Succes = function(Reponse) {
+  let Succes = function(Reponse)
+    {
     if (Classe == 'sm')
       {
       let Titre = Reponse.Gagnant+"\n"+Reponse.Cadeau;
@@ -48,18 +52,20 @@ function Clic(){
       let Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
       Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
       }
-  }
+    }
 
-  let Echec = function(Erreur) {
+  let Echec = function(Erreur)
+    {
     Widget.html('<i class="fa-solid fa-exclamation-triangle '+Couleur+' ErreurNoel-'+Classe+'"></i>');
     console.log("Le cadeau n'a pu être récupéré.\r\n\r\n"+
                 'Raison : ' + JSON.stringify(Erreur));
-  }
+    }
 
-  let Fin = function() {
+  let Fin = function()
+    {
     Widget.prop('disabled',false);
     Widget.off('click');
-  }
+    }
 
   $.ajax({
     url: URL,
@@ -72,7 +78,7 @@ function Clic(){
   })
 }
 
-$( document ).ready(function() {
+$(function() {
   const LaDate = new Date();
   const Jour = LaDate.getDate(); //Va de 1 à 31
   const Mois = LaDate.getMonth(); //Va de 0 à 11 donc décembre = 11

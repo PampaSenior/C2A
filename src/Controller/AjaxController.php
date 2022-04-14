@@ -25,7 +25,7 @@ class AjaxController extends AbstractController
     $Id = max(1,$Id);
 
     //Pour récupérer le numéro du jour et le mois côté serveur
-    $Temps = $this->date = new \DateTime('now');
+    $Temps = new \DateTime('now');
     $Jour = $Temps->format("j");
     $Mois = $Temps->format("m");
 
