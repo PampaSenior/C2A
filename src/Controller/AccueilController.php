@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Service\Verification;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -14,13 +16,13 @@ class AccueilController extends AbstractController
    */
   public function Accueil(): Response
     {
-    $Resultat = $this->VerificationConfiguration();
-    if ($Resultat != '')
+    $Verification = new Verification($this->container->get('parameter_bag'));
+    if (!$Verification->isValide())
       {
       return $this->render('accueil/information/information.html.twig',
           [
           'Indentation' => '  ',
-          'Message' => $Resultat
+          'Message' => $Verification->getErreur()
           ]
         );
       }
@@ -72,39 +74,5 @@ class AccueilController extends AbstractController
         'Jour' => $Date->format('d'),
         ]
       );
-    }
-  // Vérification de la configuration.
-  private function VerificationConfiguration(): string
-    {
-    $Message = '';
-
-    if (!file_exists('../.env.local'))
-      {
-      return 'Configuration.Information.Fichier';
-      }
-
-    try
-      {
-      $this->getParameter('Titre');
-      $this->getParameter('TitreCupidon');
-      $this->getParameter('TexteCupidon');
-      $this->getParameter('TitrePoisson');
-      $this->getParameter('TextePoisson');
-      $this->getParameter('TitreCadeau');
-      $this->getParameter('TexteCadeau');
-      $this->getParameter('CouleurFond');
-      $this->getParameter('CouleurTexte');
-      $this->getParameter('Noel');
-      $this->getParameter('Neige');
-      $this->getParameter('Forme');
-      $this->getParameter('Style');
-      $this->getParameter('Taille');
-      }
-    catch (\Exception $Pb)
-      {
-      return 'Configuration.Information.Variable';
-      }
-
-    return $Message;
     }
   }
