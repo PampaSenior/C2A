@@ -19,7 +19,7 @@ class AccueilController extends AbstractController
     $Verification = new Verification($this->container->get('parameter_bag'));
     if (!$Verification->isValide())
       {
-      return $this->render('accueil/information/information.html.twig',
+      return $this->render('message/information.html.twig',
           [
           'Indentation' => '  ',
           'Message' => $Verification->getErreur()

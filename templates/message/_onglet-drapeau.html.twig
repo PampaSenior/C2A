@@ -1,0 +1,12 @@
+{% for Clef, Drapeau in Drapeaux %}
+  {%~ if loop.first -%}
+    {% set Defaut = ' active' %}
+  {%~ else -%}
+    {% set Defaut = '' %}
+  {%~ endif -%}
+  {{~ Indentation }}<li class="nav-item" role="presentation">
+  {{~ Indentation }}  <button class="nav-link{{ Defaut }}" type="button" data-bs-toggle="tab" data-bs-target="#{{ Clef }}" aria-selected="true" title="{{ Titre|trans({},'messages',Clef) }}">
+  {{~ Indentation }}    <img src="{{ path('Accueil') }}{{ Application.getDossierImage() }}{{ Drapeau }}" width="45em">
+  {{~ Indentation }}  </button>
+  {{~ Indentation }}</li>
+{% endfor %}

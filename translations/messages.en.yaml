@@ -1,4 +1,5 @@
-Configuration:
-  Information:
+Langue: "English language"
+Information:
+  Configuration:
     Fichier: 'A problem of configuration was detected. The file ".env.local" doesn''t exists.'
-    Variable: "A problem of configuration was detected. At least one variable is misspelling or missing"
+    Variable: "A problem of configuration was detected. At least one variable is misspelling or missing."

@@ -52,9 +52,9 @@ class Verification
     switch ($this->Cas)
       {
       case 1:
-        return 'Configuration.Information.Fichier';
+        return 'Information.Configuration.Fichier';
       case 2:
-        return 'Configuration.Information.Variable';
+        return 'Information.Configuration.Variable';
       default:
         return "";
       }
