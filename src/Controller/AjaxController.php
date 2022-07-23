@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Service\Verification;
+use App\Service\Application;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -45,6 +46,24 @@ class AjaxController extends AbstractController
 
     if ($Id <= $Jour && $Mois == 12)
       {
+      //Pour vérifier l'image d'illustration du cadeau
+      if (isset($Resultats[$Id]['Illustration']))
+        {
+        $Dossier = (new Application())->getDossierImage();
+        $Fichier = $Dossier.$Resultats[$Id]['Illustration'];
+        $CheminOS = '../public/'.$Fichier;
+        $CheminURL = $this->generateUrl('Accueil').$Fichier;
+
+        if (file_exists($CheminOS))
+          {
+          $Resultats[$Id]['Illustration']=$CheminURL;
+          }
+        else
+          {
+          $Resultats[$Id]['Illustration']="";
+          }
+        }
+
       return new JsonResponse($Resultats[$Id]);
       }
     else

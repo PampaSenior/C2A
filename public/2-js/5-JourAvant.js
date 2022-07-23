@@ -31,27 +31,31 @@ function Clic()
 
   let Succes = function(Reponse)
     {
+    let Titre = '';
+    let Texte = '';
+
     if (Classe == 'sm')
       {
-      let Titre = Reponse.Gagnant+"\n"+Reponse.Cadeau;
-      Widget.attr('title',Titre);
-      let Texte = TexteCourt(Reponse.Gagnant,6)+'<br/>'+TexteCourt(Reponse.Cadeau,6);
-      Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
+      Titre = Reponse.Gagnant+"\n"+Reponse.Cadeau;
+      Texte = TexteCourt(Reponse.Gagnant,6)+'<br/>'+TexteCourt(Reponse.Cadeau,6);
       }
     else if (Classe == 'lg')
       {
-      let Titre = 'Gagnant : '+Reponse.Gagnant+"\nCadeau : "+Reponse.Cadeau;
-      Widget.attr('title',Titre);
-      let Texte = 'Gagnant :<br/>'+TexteCourt(Reponse.Gagnant,10)+'<br/>Cadeau :<br/>'+TexteCourt(Reponse.Cadeau,10);
-      Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
+      Titre = 'Gagnant : '+Reponse.Gagnant+"\nCadeau : "+Reponse.Cadeau;
+      Texte = 'Gagnant :<br/>'+TexteCourt(Reponse.Gagnant,10)+'<br/>Cadeau :<br/>'+TexteCourt(Reponse.Cadeau,10);
       }
     else
       {
-      let Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
-      Widget.attr('title',Titre);
-      let Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
-      Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
+      Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
+      Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
       }
+
+    if (Reponse.Illustration) //0, false, undefined, null et "" sont considérés comme faux
+      {
+      Widget.attr('style','background-image:url('+Reponse.Illustration+');background-size:cover;');
+      }
+    Widget.attr('title',Titre);
+    Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
     }
 
   let Echec = function(Erreur)
