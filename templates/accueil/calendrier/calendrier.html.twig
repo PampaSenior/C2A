@@ -64,8 +64,11 @@
       {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-JourSpecial.js"></script>
       {{~ Indentation }}<script>JourSpecial({{ JourSpecial['Jour'] }},{{ JourSpecial['Mois'] }});</script>
     {%~ endif %}
+    {%- set Jour = "now"|date("j") -%}
     {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}5-JourAvant.js"></script>
+    {{~ Indentation }}<script>JourAvant({{ Jour }},{{ MoisActivation }});</script>
     {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}6-JourActuel.js"></script>
+    {{~ Indentation }}<script>JourActuel({{ Jour }},{{ MoisActivation }});</script>
     {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}7-JourChange.js"></script>
     {{~ Indentation }}<script>setInterval(JourChange,1000,{{ Jour }});</script>
   {%~ endblock %}

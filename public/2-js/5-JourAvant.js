@@ -22,9 +22,9 @@ function Clic()
     {
     Widget.prop('disabled',true);
     Widget.removeClass('AnimationOuvrable');
-    if (Style == true)
+    if (Style == 2)
       {
-      Widget.addClass('BlocNoel-'+Classe);
+      Widget.addClass('Boule-'+Classe);
       }
     Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' ChercheNoel-'+Classe+'"></i>');
     }
@@ -82,23 +82,25 @@ function Clic()
   })
 }
 
-$(function() {
+function JourAvant(J,M)
+  {
   const LaDate = new Date();
-  const Jour = LaDate.getDate(); //Va de 1 à 31
-  const Mois = LaDate.getMonth(); //Va de 0 à 11 donc décembre = 11
-  const Annee = LaDate.getFullYear(); //Année complète et pas sur 2 éléments
+  const Mois = LaDate.getMonth(); //Va de 0 à 11
   const Jours = $('[data-style]');
 
   //Pour contraindre Id de 1 à nb de jours
-  const JourMax = Math.min(Jour, Jours.length);
+  const JourMax = Math.min(J, Jours.length);
 
-  if (Jour <= JourMax && Mois == 11) //Si on est en décembre mais au maximum le 25
+  if (Mois == M-1) //Si on est le bon mois
     {
-    for (var i=0; i<JourMax-1; i++) //Avant aujourd'hui on affiche les résultats en simulant des clics
+    for (var i=0; i<=JourMax-1; i++) //Attention les indices de Jours vont de 0 à JourMax-1
       {
-      $(Jours[i]).on('click',Clic);
-      Jours[i].click();
+      $(Jours[i]).on('click',Clic); //Mise en place du clic de révélation jusqu'à aujourd'hui
+
+      if (i < JourMax-1 || J > Jours.length) //Utilisation de la révélation jusqu'à la veille ou sur tous si on dépasse le dernier jour
+        {
+        Jours[i].click();
+        }
       }
-    $(Jours[Jour-1]).on('click',Clic); //Aujourd'hui on met un event clic
     }
-});
+  };

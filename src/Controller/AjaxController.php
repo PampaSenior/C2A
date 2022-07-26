@@ -20,14 +20,14 @@ class AjaxController extends AbstractController
   /**
    * @Route("/Cadeau/{Id}", name="Cadeau", requirements={"Id"="\d+"}, methods={"GET"})
    */
-  public function Cadeau(int $Id, TranslatorInterface $translator): JsonResponse
+  public function Cadeau(int $Id, TranslatorInterface $Translator): JsonResponse
     {
     $Verification = new Verification($this->container->get('parameter_bag'));
     if (!$Verification->isValide())
       {
       $Sortie = [
-                'fr'=>$translator->trans($Verification->getErreur(),[],'messages','fr'),
-                'en'=>$translator->trans($Verification->getErreur(),[],'messages','en')
+                'fr'=>$Translator->trans($Verification->getErreur(),[],'messages','fr'),
+                'en'=>$Translator->trans($Verification->getErreur(),[],'messages','en')
                 ];
       return new JsonResponse($Sortie);
       }
@@ -35,16 +35,15 @@ class AjaxController extends AbstractController
     $Pot2Miel = $this->getParameter('Pot2Miel');
     $Resultats = $this->getParameter('Resultats');
 
-    //Pour contraindre Id de 1 à nb de résultats
-    $Id = min($Id,count($Resultats));
-    $Id = max(1,$Id);
-
     //Pour récupérer le numéro du jour et le mois côté serveur
-    $Temps = new \DateTime('now');
-    $Jour = $Temps->format("j");
-    $Mois = $Temps->format("m");
+    $Date = new \DateTime('now');
+    $Jour = $Date->format("j");
+    $Mois = $Date->format("n");
 
-    if ($Id <= $Jour && $Mois == 12)
+    //Pour mettre le mois actuel en cas de développement
+    $MoisActivation = $this->getParameter('kernel.environment') == "dev" ? $Mois : 12;
+
+    if ($Id <= $Jour && $Mois == $MoisActivation && isset($Resultats[$Id]))
       {
       //Pour vérifier l'image d'illustration du cadeau
       if (isset($Resultats[$Id]['Illustration']))
