@@ -15,7 +15,6 @@ parameters:
     Style: '%env(int:STYLE)%'
     Taille: '%env(string:TAILLE)%'
     Pot2Miel: '%env(json:POT_2_MIEL)%'
-    Resultats: '%env(json:RESULTATS)%'
 
 framework:
     secret: '%env(APP_SECRET)%'

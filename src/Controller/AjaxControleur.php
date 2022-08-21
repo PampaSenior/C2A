@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
   /**
    * @Route("/Ajax")
    */
-class AjaxController extends AbstractController
+class AjaxControleur extends AbstractController
   {
   /**
    * @Route("/Cadeau/{Id}", name="Cadeau", requirements={"Id"="\d+"}, methods={"GET"})
@@ -33,17 +33,14 @@ class AjaxController extends AbstractController
       }
 
     $Pot2Miel = $this->getParameter('Pot2Miel');
-    $Resultats = $this->getParameter('Resultats');
 
     //Pour récupérer le numéro du jour et le mois côté serveur
     $Date = new \DateTime('now');
     $Jour = $Date->format("j");
     $Mois = $Date->format("n");
 
-    //Pour mettre le mois actuel en cas de développement
-    $MoisActivation = $this->getParameter('kernel.environment') == "dev" ? $Mois : 12;
-
-    if ($Id <= $Jour && $Mois == $MoisActivation && isset($Resultats[$Id]))
+    $Resultats = $_ENV['Resultats'];
+    if ($Id <= $Jour && $Mois == $_ENV['Mois'] && isset($Resultats[$Id]))
       {
       //Pour vérifier l'image d'illustration du cadeau
       if (isset($Resultats[$Id]['Illustration']))

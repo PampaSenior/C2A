@@ -3,3 +3,4 @@ Information:
   Configuration:
     Fichier: 'A problem of configuration was detected. The file ".env.local" doesn''t exists.'
     Variable: "A problem of configuration was detected. At least one variable is misspelling or missing."
+    Tirage: 'No winner is listed. The file "resultats.csv" doesn''t exist or misswritten.'

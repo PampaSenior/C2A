@@ -47,6 +47,7 @@ class Application
     $this->DossierScript = '2-js/';
     $this->DossierImage = '3-images/';
     $this->DossierPolice = '4-polices/';
+    $this->DossierDocument = '5-documents/';
     }
 
   public function getPrenomAuteur(): string {return $this->PrenomAuteur;}
@@ -72,4 +73,5 @@ class Application
   public function getDossierScript(): string {return $this->DossierScript;}
   public function getDossierImage(): string {return $this->DossierImage;}
   public function getDossierPolice(): string {return $this->DossierPolice;}
+  public function getDossierDocument(): string {return $this->DossierDocument;}
   }

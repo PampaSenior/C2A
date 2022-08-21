@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AccueilController extends AbstractController
+class AccueilControleur extends AbstractController
   {
   /**
    * @Route("/", name="Accueil", methods={"GET"})
@@ -59,9 +59,6 @@ class AccueilController extends AbstractController
         $TypeModale = '';
       }
 
-    //Pour mettre le mois actuel en cas de développement
-    $MoisActivation = $this->getParameter('kernel.environment') == "dev" ? $Date->format('n') : 12; //Pour mettre le mois actuel en cas de développement
-
     return $this->render('accueil/calendrier/calendrier.html.twig',
         [
         'Indentation' => '    ',
@@ -74,7 +71,7 @@ class AccueilController extends AbstractController
         'Style' => $this->getParameter('Style'),
         'Taille' => $this->getParameter('Taille'),
         'JourSpecial' => ['Jour'=>$Jour,'Mois'=>$Mois,'Titre'=>$TitreModale,'Texte'=>$TexteModale,'Type'=>$TypeModale],
-        'MoisActivation' => $MoisActivation
+        'MoisActivation' => $_ENV['Mois']
         ]
       );
     }

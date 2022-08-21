@@ -31,6 +31,12 @@ function Clic()
 
   let Succes = function(Reponse)
     {
+    if (Reponse.fr || Reponse.en) //0, false, undefined, null et "" sont considérés comme faux
+      {
+      Echec(Reponse.en+" "+Reponse.fr); //La vérification de l'application a échouée
+      return;
+      }
+
     let Titre = '';
     let Texte = '';
 
@@ -50,12 +56,13 @@ function Clic()
       Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
       }
 
+    Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
+    Widget.attr('title',Titre);
+
     if (Reponse.Illustration) //0, false, undefined, null et "" sont considérés comme faux
       {
       Widget.attr('style','background-image:url('+Reponse.Illustration+');background-size:cover;');
       }
-    Widget.attr('title',Titre);
-    Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
     }
 
   let Echec = function(Erreur)

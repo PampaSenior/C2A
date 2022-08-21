@@ -3,3 +3,4 @@ Information:
   Configuration:
     Fichier: 'Un problème de configuration a été détecté. Le fichier ".env.local" n''existe pas.'
     Variable: "Un problème de configuration a été détecté. Une des variables est mal écrite ou absente."
+    Tirage: 'Aucun gagnant n''est renseigné. Le fichier "resultats.csv" n''existe pas ou est mal écrit.'

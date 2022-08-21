@@ -12,6 +12,11 @@ class Verification
     {
     $this->Cas = 0;
 
+    if ($_ENV['Resultats'] == [])
+      {
+      $this->Cas = 3;
+      }
+
     try
       {
       $parametre->get('Titre');
@@ -29,7 +34,6 @@ class Verification
       $parametre->get('Style');
       $parametre->get('Taille');
       $parametre->get('Pot2Miel');
-      $parametre->get('Resultats');
       }
     catch (\Exception $Pb)
       {
@@ -55,6 +59,8 @@ class Verification
         return 'Information.Configuration.Fichier';
       case 2:
         return 'Information.Configuration.Variable';
+      case 3:
+        return 'Information.Configuration.Tirage';
       default:
         return "";
       }
