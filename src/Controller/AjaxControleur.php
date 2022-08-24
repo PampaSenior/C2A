@@ -32,6 +32,7 @@ class AjaxControleur extends AbstractController
       return new JsonResponse($Sortie);
       }
 
+    $Noel = $this->getParameter('Noel') == 1; //TODO : Mettre cela dans Tirage mais après Verification...
     $Pot2Miel = $this->getParameter('Pot2Miel');
 
     //Pour récupérer le numéro du jour et le mois côté serveur
@@ -39,7 +40,7 @@ class AjaxControleur extends AbstractController
     $Jour = $Date->format("j");
     $Mois = $Date->format("n");
 
-    $Resultats = $_ENV['Resultats'];
+    $Resultats = array_slice($_ENV['Resultats'],0,24+$Noel,true); //On ne prends que 24 éléments sauf si noël est activé; TODO : Mettre cela dans Tirage mais après Verification...
     if ($Id <= $Jour && $Mois == $_ENV['Mois'] && isset($Resultats[$Id]))
       {
       //Pour vérifier l'image d'illustration du cadeau
