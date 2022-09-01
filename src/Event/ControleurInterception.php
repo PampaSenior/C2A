@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventSubscriber;
+namespace App\Event;
 
 use App\Service\Tirage;
 
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class ControleurSoumission implements EventSubscriberInterface
+class ControleurInterception implements EventSubscriberInterface
   {
   private int $Mois;
   private array $Resultats;
