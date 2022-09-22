@@ -105,93 +105,65 @@ p{
   animation: Ouvrable 2s infinite;
 }
 
-.BlocNoel-sm{
+.sm{
+  --taille: 5em;
+  --top-chiffre: -60%;
+  --font-chiffre: 2em;
+  --top-texte: 10%;
+  --font-texte: 3em;
+}
+
+.lg{
+  --taille: 8em;
+  --top-chiffre: -50%;
+  --font-chiffre: 3em;
+  --top-texte: 15%;
+  --font-texte: 5em;
+}
+
+.xl{
+  --taille: 10em;
+  --top-chiffre: -65%;
+  --font-chiffre: 5em;
+  --top-texte: 10%;
+  --font-texte: 7em;
+}
+
+.xxl{
+  --taille: 11em;
+  --top-chiffre: -70%;
+  --font-chiffre: 6em;
+  --top-texte: 10%;
+  --font-texte: 8em;
+}
+
+.Bloc{
   border: 0.5em solid;
   border-radius: 1em;
-  width: 5em;
-  height: 5em;
-  min-width: 5em;
-  min-height: 5em;
-  max-width: 5em;
-  max-height: 5em;
+  width: var(--taille);
+  height: var(--taille);
+  min-width: var(--taille);
+  min-height: var(--taille);
+  max-width: var(--taille);
+  max-height: var(--taille);
 }
 
-.BlocNoel-lg{
-  border: 0.5em solid;
-  width: 8em;
-  height: 8em;
-  min-width: 8em;
-  min-height: 8em;
-  max-width: 8em;
-  max-height: 8em;
+.Boule{
+  width: var(--taille);
+  height: var(--taille);
 }
 
-.BlocNoel-xl{
-  border: 0.5em solid;
-  width: 10em;
-  height: 10em;
-  min-width: 10em;
-  min-height: 10em;
-  max-width: 10em;
-  max-height: 10em;
-}
-
-.CadeauNoel-sm, .ChercheNoel-sm, .ErreurNoel-sm{
-  position: relative;
-  top: 10%;
-  font-size: 3em;
-}
-
-.CadeauNoel-lg, .ChercheNoel-lg, .ErreurNoel-lg{
-  position: relative;
-  top: 15%;
-  font-size: 5em;
-}
-
-.CadeauNoel-xl, .ChercheNoel-xl, .ErreurNoel-xl{
-  position: relative;
-  top: 10%;
-  font-size: 7em;
-}
-
-.ChiffreNoel-sm{
+.Chiffre{
   font-family: "Kingthings Christmas";
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  display:block;
+  display: block;
   position: relative;
-  top:-60%;
-  font-size:2em;
+  top: var(--top-chiffre);
+  font-size: var(--font-chiffre);
 }
 
-.ChiffreNoel-lg{
-  font-family: "Kingthings Christmas";
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  display:block;
+.Affiche, .Cherche, .Erreur{
   position: relative;
-  top:-50%;
-  font-size:3em;
-}
-
-.ChiffreNoel-xl{
-  font-family: "Kingthings Christmas";
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-  display:block;
-  position: relative;
-  top:-65%;
-  font-size:5em;
-}
-
-.Boule-sm{
-  width: 5em;
-  height: 5em;
-}
-
-.Boule-lg{
-  width: 8em;
-  height: 8em;
-}
-
-.Boule-xl{
-  width: 10em;
-  height: 10em;
+  top: var(--top-texte);
+  font-size: var(--font-texte);
 }

@@ -59,6 +59,12 @@ class AccueilControleur extends AbstractController
         $TypeModale = '';
       }
 
+    $Taille = strtolower($this->getParameter('Taille'));
+    if (!in_array($Taille,['sm','lg','xl','xxl']))
+      {
+      $Taille = 'xxl';
+      }
+
     return $this->render('accueil/calendrier/calendrier.html.twig',
         [
         'Indentation' => '    ',
@@ -69,7 +75,7 @@ class AccueilControleur extends AbstractController
         'Neige' => $this->getParameter('Neige'),
         'Forme' => $this->getParameter('Forme'),
         'Style' => $this->getParameter('Style'),
-        'Taille' => $this->getParameter('Taille'),
+        'Taille' => $Taille,
         'JourSpecial' => ['Jour'=>$Jour,'Mois'=>$Mois,'Titre'=>$TitreModale,'Texte'=>$TexteModale,'Type'=>$TypeModale],
         'MoisActivation' => $_ENV['Mois']
         ]

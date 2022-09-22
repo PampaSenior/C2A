@@ -15,7 +15,7 @@ function Clic()
   const Couleur = 'text-danger';
   const Widget = $(event.currentTarget);
   const Style = Widget.data('style');
-  const Classe = Widget.data('classe');
+  const Taille = Widget.data('taille');
   const URL = Widget.data('url');
 
   let Debut = function()
@@ -24,9 +24,9 @@ function Clic()
     Widget.removeClass('AnimationOuvrable');
     if (Style == 2)
       {
-      Widget.addClass('Boule-'+Classe);
+      Widget.addClass('Boule '+Taille);
       }
-    Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' ChercheNoel-'+Classe+'"></i>');
+    Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' Cherche '+Taille+'"></i>');
     }
 
   let Succes = function(Reponse)
@@ -40,20 +40,25 @@ function Clic()
     let Titre = '';
     let Texte = '';
 
-    if (Classe == 'sm')
+    if (Taille == 'sm')
       {
       Titre = Reponse.Gagnant+"\n"+Reponse.Cadeau;
       Texte = TexteCourt(Reponse.Gagnant,6)+'<br/>'+TexteCourt(Reponse.Cadeau,6);
       }
-    else if (Classe == 'lg')
+    else if (Taille == 'lg')
       {
       Titre = 'Gagnant : '+Reponse.Gagnant+"\nCadeau : "+Reponse.Cadeau;
       Texte = 'Gagnant :<br/>'+TexteCourt(Reponse.Gagnant,10)+'<br/>Cadeau :<br/>'+TexteCourt(Reponse.Cadeau,10);
       }
-    else
+    else if (Taille == 'xl')
       {
       Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
       Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
+      }
+    else
+      {
+      Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
+      Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,24)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,24);
       }
 
     Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
@@ -67,7 +72,7 @@ function Clic()
 
   let Echec = function(Erreur)
     {
-    Widget.html('<i class="fa-solid fa-exclamation-triangle '+Couleur+' ErreurNoel-'+Classe+'"></i>');
+    Widget.html('<i class="fa-solid fa-exclamation-triangle '+Couleur+' Erreur '+Taille+'"></i>');
     console.log("Le cadeau n'a pu être récupéré.\r\n\r\n"+
                 'Raison : ' + JSON.stringify(Erreur));
     }
