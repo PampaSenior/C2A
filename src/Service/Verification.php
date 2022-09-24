@@ -32,6 +32,7 @@ class Verification
       $parametre->get('Neige');
       $parametre->get('Forme');
       $parametre->get('Style');
+      $parametre->get('Bordure');
       $parametre->get('Taille');
       $parametre->get('Pot2Miel');
       }

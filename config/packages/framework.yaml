@@ -13,6 +13,7 @@ parameters:
     Neige: '%env(int:NEIGE)%'
     Forme: '%env(int:FORME)%'
     Style: '%env(int:STYLE)%'
+    Bordure: '%env(int:BORDURE)%'
     Taille: '%env(string:TAILLE)%'
     Pot2Miel: '%env(json:POT_2_MIEL)%'
 

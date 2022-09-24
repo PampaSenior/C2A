@@ -15,6 +15,7 @@ function Clic()
   const Couleur = 'text-danger';
   const Widget = $(event.currentTarget);
   const Style = Widget.data('style');
+  const Bordure = Widget.data('bordure');
   const Taille = Widget.data('taille');
   const URL = Widget.data('url');
 
@@ -24,9 +25,9 @@ function Clic()
     Widget.removeClass('AnimationOuvrable');
     if (Style == 2)
       {
-      Widget.addClass('Boule '+Taille);
+      Widget.addClass('bloc '+Bordure+' '+Taille);
       }
-    Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' Cherche '+Taille+'"></i>');
+    Widget.html('<i class="fa-solid fa-spinner fa-spin '+Couleur+' cherche '+Taille+'"></i>');
     }
 
   let Succes = function(Reponse)
@@ -45,12 +46,12 @@ function Clic()
       Titre = Reponse.Gagnant+"\n"+Reponse.Cadeau;
       Texte = TexteCourt(Reponse.Gagnant,6)+'<br/>'+TexteCourt(Reponse.Cadeau,6);
       }
-    else if (Taille == 'lg')
+    else if (Taille == 'md')
       {
       Titre = 'Gagnant : '+Reponse.Gagnant+"\nCadeau : "+Reponse.Cadeau;
       Texte = 'Gagnant :<br/>'+TexteCourt(Reponse.Gagnant,10)+'<br/>Cadeau :<br/>'+TexteCourt(Reponse.Cadeau,10);
       }
-    else if (Taille == 'xl')
+    else if (Taille == 'lg')
       {
       Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
       Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
@@ -72,7 +73,7 @@ function Clic()
 
   let Echec = function(Erreur)
     {
-    Widget.html('<i class="fa-solid fa-exclamation-triangle '+Couleur+' Erreur '+Taille+'"></i>');
+    Widget.html('<i class="fa-solid fa-exclamation-triangle '+Couleur+' erreur '+Taille+'"></i>');
     console.log("Le cadeau n'a pu être récupéré.\r\n\r\n"+
                 'Raison : ' + JSON.stringify(Erreur));
     }
@@ -98,7 +99,7 @@ function JourAvant(J,M)
   {
   const LaDate = new Date();
   const Mois = LaDate.getMonth(); //Va de 0 à 11
-  const Jours = $('[data-style]');
+  const Jours = $('[data-taille]');
 
   //Pour contraindre Id de 1 à nb de jours
   const JourMax = Math.min(J, Jours.length);

@@ -4,7 +4,7 @@ function JourActuel(J,M)
   const Jour = LaDate.getDate(); //Va de 1 à 31
   const Mois = LaDate.getMonth(); //Va de 0 à 11
   const Annee = LaDate.getFullYear(); //Année complète et pas sur 2 éléments
-  const Jours = $('[data-style]');
+  const Jours = $('[data-taille]');
 
   //Pour contraindre Id de 1 à nb de jours
   const JourMax = Math.min(J, Jours.length);

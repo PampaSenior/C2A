@@ -43,8 +43,25 @@ p{
   font-size: 2em;
 }
 
-.rounded-25{
-  border-radius: 1em;
+.z-index-1{
+  z-index: 1;
+}
+
+.z-index-n1{
+  z-index: -1;
+}
+
+.bordure-0{
+  --taille-fin: calc(var(--taille) - 1em);
+}
+
+.bordure-1{
+  --taille-fin: var(--taille);
+  border-width: 0.5em !important;
+}
+
+.bordure-arrondie{
+  border-radius: 1em !important;
 }
 
 .position-fixe{
@@ -53,14 +70,6 @@ p{
 
 .position-absolue{
   position: absolute;
-}
-
-.z-index-1{
-  z-index: 1;
-}
-
-.z-index-n1{
-  z-index: -1;
 }
 
 .neige{
@@ -113,47 +122,40 @@ p{
   --font-texte: 3em;
 }
 
-.lg{
+.md{
   --taille: 8em;
-  --top-chiffre: -50%;
+  --top-chiffre: -52%;
   --font-chiffre: 3em;
-  --top-texte: 15%;
+  --top-texte: 12%;
   --font-texte: 5em;
 }
 
-.xl{
+.lg{
   --taille: 10em;
-  --top-chiffre: -65%;
+  --top-chiffre: -47%;
+  --font-chiffre: 4em;
+  --top-texte: 15%;
+  --font-texte: 6em;
+}
+
+.xl{
+  --taille: 11em;
+  --top-chiffre: -55%;
   --font-chiffre: 5em;
-  --top-texte: 10%;
+  --top-texte: 13%;
   --font-texte: 7em;
 }
 
-.xxl{
-  --taille: 11em;
-  --top-chiffre: -70%;
-  --font-chiffre: 6em;
-  --top-texte: 10%;
-  --font-texte: 8em;
+.bloc{
+  width: var(--taille-fin);
+  height: var(--taille-fin);
+  min-width: var(--taille-fin);
+  min-height: var(--taille-fin);
+  max-width: var(--taille-fin);
+  max-height: var(--taille-fin);
 }
 
-.Bloc{
-  border: 0.5em solid;
-  border-radius: 1em;
-  width: var(--taille);
-  height: var(--taille);
-  min-width: var(--taille);
-  min-height: var(--taille);
-  max-width: var(--taille);
-  max-height: var(--taille);
-}
-
-.Boule{
-  width: var(--taille);
-  height: var(--taille);
-}
-
-.Chiffre{
+.chiffre{
   font-family: "Kingthings Christmas";
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   display: block;
@@ -162,7 +164,7 @@ p{
   font-size: var(--font-chiffre);
 }
 
-.Affiche, .Cherche, .Erreur{
+.affiche, .cherche, .erreur{
   position: relative;
   top: var(--top-texte);
   font-size: var(--font-texte);

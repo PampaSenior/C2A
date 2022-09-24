@@ -60,9 +60,24 @@ class AccueilControleur extends AbstractController
       }
 
     $Taille = strtolower($this->getParameter('Taille'));
-    if (!in_array($Taille,['sm','lg','xl','xxl']))
+    if (!in_array($Taille,['sm','md','lg','xl']))
       {
-      $Taille = 'xxl';
+      $Taille = 'xl';
+      }
+
+    switch ($this->getParameter('Bordure'))
+      {
+      case 1:
+        $Bordure = 'border border-success bordure-1';
+        break;
+      case 2:
+        $Bordure = 'border border-success bordure-1 bordure-arrondie';
+        break;
+      case 3:
+        $Bordure = 'border border-success bordure-1 rounded-circle';
+        break;
+      default:
+        $Bordure = 'bordure-0';
       }
 
     return $this->render('accueil/calendrier/calendrier.html.twig',
@@ -75,6 +90,7 @@ class AccueilControleur extends AbstractController
         'Neige' => $this->getParameter('Neige'),
         'Forme' => $this->getParameter('Forme'),
         'Style' => $this->getParameter('Style'),
+        'Bordure' => $Bordure,
         'Taille' => $Taille,
         'JourSpecial' => ['Jour'=>$Jour,'Mois'=>$Mois,'Titre'=>$TitreModale,'Texte'=>$TexteModale,'Type'=>$TypeModale],
         'MoisActivation' => $_ENV['Mois']
