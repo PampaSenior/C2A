@@ -1,4 +1,5 @@
-function Changement(JourOriginal) {
+function JourChange(JourOriginal)
+  {
   const LaDate = new Date();
   const Jour = LaDate.getDate(); //Va de 1 à 31
 
@@ -8,10 +9,3 @@ function Changement(JourOriginal) {
     location.reload(true);
     }
   }
-
-$( document ).ready(function() {
-  const LaDate = new Date();
-  const Jour = LaDate.getDate(); //Va de 1 à 31
-
-  setInterval(Changement, 1000, Jour);
-});

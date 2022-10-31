@@ -1,28 +1,28 @@
-function CadeauDuJour(Clef) {
-  localStorage.setItem('JourClic',Clef.data.Clef); //On sauvegarde comme clef unique l'année et le jour en cookie
-  //localStorage.removeItem('JourClic'); //Pour supprimer le cookie js
-  }
-
-$( document ).ready(function() {
+function JourActuel(J,M)
+  {
   const LaDate = new Date();
   const Jour = LaDate.getDate(); //Va de 1 à 31
-  const Mois = LaDate.getMonth(); //Va de 0 à 11 donc décembre = 11
+  const Mois = LaDate.getMonth(); //Va de 0 à 11
   const Annee = LaDate.getFullYear(); //Année complète et pas sur 2 éléments
-  const Jours = $('[data-style]');
+  const Jours = $('[data-taille]');
 
   //Pour contraindre Id de 1 à nb de jours
-  const JourMax = Math.min(Jour, Jours.length);
+  const JourMax = Math.min(J, Jours.length);
 
-  if (Jour <= JourMax && Mois == 11) //Si on est en décembre mais au maximum le 25
+  //Pour le cookie js
+  const Clef = 'JourClic';
+  const Valeur = Jour+'-'+Mois+'-'+Annee;;
+
+  if (J <= JourMax && Mois == M-1) //Si on est le bon mois mais au maximum le 24/25
     {
-    if (localStorage.getItem('JourClic') == null || localStorage.getItem('JourClic') != Annee+'-'+Jour)
+    if (localStorage.getItem(Clef) == null || localStorage.getItem(Clef) != Valeur)
       {
-      $(Jours[Jour-1]).on('click',{'Clef':Annee+'-'+Jour},CadeauDuJour);
-      $(Jours[Jour-1]).addClass('AnimationOuvrable');
+      $(Jours[J-1]).on('click',function() {localStorage.setItem(Clef,Valeur);}); //Mise en place du clic de sauvegarde de la révélation
+      $(Jours[J-1]).addClass('AnimationOuvrable');
       }
     else
       {
-      Jours[Jour-1].click();
+      Jours[J-1].click(); //Utilisation de la révélation
       }
     }
-});
+  }

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {{~ Indentation }}<body class="vh-100 d-flex">
+  {{~ Indentation }}  <div class="mx-auto my-auto col-2 border border-2 border-warning rounded">
+  {{~ Indentation }}    <div class="mx-auto col-10 p-2 text-info text-center">
+  {{~ Indentation }}      <i class="fa-solid fa-exclamation-circle fa-3x"></i>
+  {{~ Indentation }}    </div>
+  {{~ Indentation }}    <div class="mx-auto col-10 border border-warning rounded"></div>
+  {%~
+  include 'message/_affiche-langue.html.twig'
+  with { 'Indentation' : Indentation ~ '    ',
+         'Message' : Message }
+  ~%}
+  {{~ Indentation }}  </div>
+  {{~ Indentation }}</body>
+{% endblock %}

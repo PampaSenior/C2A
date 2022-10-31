@@ -35,9 +35,9 @@
   {{~ Indentation }}  </div>
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
   {{~ Indentation }}    <p class="my-5 h1 d-flex justify-content-center align-items-center">
-  {{~ Indentation }}      <i class="me-4 fas fa-holly-berry fa-2x text-danger"></i>
+  {{~ Indentation }}      <i class="me-4 fa-solid fa-holly-berry fa-2x text-danger"></i>
   {{~ Indentation }}      <span id="Titre" style="color:{{ CouleurTexte }}">{{ Titre }}</span>
-  {{~ Indentation }}      <i class="ms-4 fas fa-candy-cane fa-2x text-success"></i>
+  {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
   {{~ Indentation }}    </p>
   {%-
   include Modele
@@ -45,31 +45,33 @@
          'Noel' : Noel,
          'Modele' : Dessin,
          'Style' : Style,
-         'Classe' : Taille,
+         'Bordure' : Bordure,
+         'Taille' : Taille,
          'Couleur' : CouleurTexte }
   -%}
-  {%~ if J25 == 1 %}
+  {%~ if JourSpecial['Jour'] != 0 %}
     {%-
-    include 'modale/BonneFete.html.twig'
+    include 'modale/JourSpecial.html.twig'
     with { 'Indentation' : Indentation ~ '    ',
-           'NeigeGrande' : NeigeGrande,
-           'NeigeMoyenne' : NeigeMoyenne,
-           'NeigePetite' : NeigePetite,
-           'Titre' : TitreModale,
-           'Texte' : TexteModale,
-           'CouleurFond' : CouleurFond,
-           'CouleurTexte' : CouleurTexte }
+           'Titre' : JourSpecial['Titre'],
+           'Texte' : JourSpecial['Texte'],
+           'Type' : JourSpecial['Type'] }
     ~%}
   {%~ endif %}
   {{~ Indentation }}  </div>
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
-    {%~ if J25 == 1 %}
-      {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-BonneFete.js"></script>
+    {%~ if JourSpecial['Jour'] != 0 %}
+      {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-JourSpecial.js"></script>
+      {{~ Indentation }}<script>JourSpecial({{ JourSpecial['Jour'] }},{{ JourSpecial['Mois'] }});</script>
     {%~ endif %}
+    {%- set Jour = "now"|date("j") -%}
     {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}5-JourAvant.js"></script>
+    {{~ Indentation }}<script>JourAvant({{ Jour }},{{ MoisActivation }});</script>
     {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}6-JourActuel.js"></script>
+    {{~ Indentation }}<script>JourActuel({{ Jour }},{{ MoisActivation }});</script>
     {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}7-JourChange.js"></script>
+    {{~ Indentation }}<script>setInterval(JourChange,1000,{{ Jour }});</script>
   {%~ endblock %}
   {{~ Indentation }}</body>
 {% endblock %}

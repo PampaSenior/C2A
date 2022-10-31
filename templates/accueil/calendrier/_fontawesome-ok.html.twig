@@ -1,12 +1,12 @@
 {%~ if Jour == JourSpecial -%}
   {% set Image = 'fa-star' %}
 {%~ elseif Style == 1 -%}
-  {% set Image = random(['fa-gift', 'fa-gifts', 'fa-candy-cane', 'fa-holly-berry', 'fa-snowman', 'fa-snowflake', 'fa-sleigh', 'fa-igloo']) %}
+  {% set Image = random(['fa-gift', 'fa-tree', 'fa-candy-cane', 'fa-holly-berry', 'fa-snowman', 'fa-snowflake', 'fa-sleigh', 'fa-igloo', 'fa-mitten']) %}
 {%~ else -%}
   {% set Image = 'fa-gift' %}
 {%~ endif -%}
 
-{{~ Indentation }}<div class="m-2 text-success BlocNoel-{{ Classe }}" data-style="{{ Style }}" data-classe="{{ Classe }}" data-url="{{ path('Cadeau',{'Id':Jour}) }}">
-{{~ Indentation }}  <i class="fas {{ Image }} text-danger CadeauNoel-{{ Classe }}"></i>
-{{~ Indentation }}  <strong class="m-0 ChiffreNoel-{{ Classe }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
+{{~ Indentation }}<div class="m-2 text-success bloc {{ Bordure }} {{ Taille }}" data-style="{{ Style }}" data-bordure="{{ Bordure }}" data-taille="{{ Taille }}" data-url="{{ path('Cadeau',{'Id':Jour}) }}">
+{{~ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Taille }}"></i>
+{{~ Indentation }}  <strong class="m-0 chiffre {{ Taille }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
 {{~ Indentation }}</div>

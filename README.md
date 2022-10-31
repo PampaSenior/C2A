@@ -24,7 +24,7 @@
   </h3>
 
   <p align="center">
-    Ce projet vous permet de mettre en place un calendrier de l'avent très rapidement et simplement. 
+    Ce projet vous permet de mettre en place un calendrier de l'avent très rapidement et simplement.
     Ainsi, chaque jour, les utilisateurs pourront dévoiler un gagnant et son cadeau en cliquant
     sur le jour actuel.
     <br />
@@ -55,6 +55,17 @@
       <a href="#configuration-fr">Configuration</a>
     </li>
     <li>
+      <a href="#resultats">Résultats</a>
+      <ul>
+        <li>
+          <a href="#externe">Tirage externe</a>
+        </li>
+        <li>
+          <a href="#interne">Tirage interne</a>
+        </li>
+      </ul>
+    </li>
+    <li>
       <a href="#feuille-route">Feuille de route</a>
     </li>
     <li>
@@ -78,7 +89,7 @@
 ![aperçu-2]
 
 Ce calendrier de l'avent a été développé afin de laisser une grande
-liberté de présentation à ceux qui souhaiteraient s'en servir. 
+liberté de présentation à ceux qui souhaiteraient s'en servir.
 En effet, les choix possibles sont nombreux :
 - la forme (en grille ou en sapin);
 - le style (affichage prédéterminé ou aléatoire d'images);
@@ -112,11 +123,16 @@ En effet, les choix possibles sont nombreux :
    cd C2A/
    composer update
    ```
-3. Créer le fichier de configuration
+3. Installer l'application
+- En production
    ```sh
-   cp .env .env.local
+   php bin/console Installation
    ```
-4. Éditer la configuration
+- En développement
+   ```sh
+   php bin/console Installation --dev
+   ```
+4. Éditer la configuration (optionnel)
    ```sh
    nano .env.local
    ```
@@ -133,20 +149,97 @@ Tout se passe dans le .env.local généré pendant la phase d'installation.
 - «APP_ENV» représente l'environnement de l'application (dev ou prod)
 - «APP_SECRET» représente la chaine hexadecimale secrète de symfony
 - «TITRE» représente le texte au dessus du calendrier
-- «TITRE_MODALE» représente le titre de la fenêtre pour l'oeuf de pâques
-- «TEXTE_MODALE» représente le texte dans la fenêtre pour l'oeuf de pâques
+- «TITRE_CUPIDON» represente le titre de la modale pour la St valentin
+- «TEXTE_CUPIDON» represente le texte de la modale pour la St valentin
+- «TITRE_POISSON» represente le titre de la modale pour le 1er avril
+- «TEXTE_POISSON» represente le texte de la modale pour le 1er avril
+- «TITRE_CADEAU» represente le titre de la modale pour Noël
+- «TEXTE_CADEAU» represente le texte de la modale pour Noël
 - «COULEUR_FOND» représente la couleur hexadécimale de l'arrière plan
 - «COULEUR_TEXTE» représente la couleur hexadécimale du texte
 - «NOEL» représente le fait d'afficher où non le 25 décembre
 - «NEIGE» représente la neige à afficher
 - «FORME» représente le placement des éléments du calendrier (grille ou sapin)
 - «STYLE» représente l'aspect graphique des éléments du calendrier (cadeau ou image)
-- «TAILLE» représente la place que doit prendre les éléments du calendrier (xs, lg, xl)
+- «BORDURE» représente l'aspect des bordures de chaque élément (aucune, carrée, arrondie ou ronde)
+- «TAILLE» représente la place que doit prendre les éléments du calendrier (sm, md, lg ou xl)
 - «POT_2_MIEL» représente le résultat à afficher en cas de tricherie
-- «RESULTATS» contient les données des gagnants ainsi que de leur cadeau
 
-Il suffit de décommenter les lignes de chacune de ces variables.
-Elles sont déjà pré-remplies avec des exemples.
+<p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
+
+<h3 id="resultats">Résultats</h3>
+
+Il existe 2 options pour renseigner les résultats :
+- soit renseigner un fichier csv avec pour chaque jour le gagnant, le cadeau et
+optionnellement l'illustration qui se nommera «resultats.csv». On parlera ici
+de tirage externe puisque les résultats sont générés en dehors de l'application.
+- soit renseigner deux fichiers csv avec pour l'un, nommé «participants.csv»,
+la liste des participants, et dans l'autre, nommé «lots.csv»,
+les cadeaux disponibles avec optionnellement le nom de la photo qui y correspond.
+On parlera ici de tirage interne puisque c'est l'application qui se chargera de
+générer l'attribution des lots à certain participants.
+
+Peut importe l'option choisie, le ou les csv sont présents dans le dossier
+«C2A/public/5-documents». Un exemple de chaque y a été mis pour aider. Ils sont
+préfixé par le terme «exemple-».
+
+De plus, les images d'illustration des cadeaux sont à mettre dans le dossier
+«C2A/public/3-image».
+
+Et enfin, la ligne d'entête qui explique les colonnes dans chaque csv ne doit pas
+être supprimée.
+
+<p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
+
+- <h4 id="externe">Tirage externe</h4>
+
+Le csv «resultats.csv» doit contenir entre 24 et 25 lignes, chacune représentant un jour,
+ayant de 2 à 3 colonnes séparées par une «,».
+- La première colonne sera le nom et prénom du gagnant
+- La seconde colonne sera le nom du cadeau
+- La troisième colonne, qui est optionnelle, sera le nom du fichier image correspondant
+au cadeau
+
+Exemple de lignes dans ce fichier sans image d'illustration pour le cadeau :
+
+Dupond Dupont,Fusée  
+Avril Septembre,tibia
+
+Exemple de lignes dans ce fichier avec image d'illustration pour le cadeau :
+
+Dupond Dupont,Fusée,fusee.png  
+Avril Septembre,tibia,os.png
+
+<p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
+
+- <h4 id="interne">Tirage interne</h4>
+
+Dans cette seconde option, l'application se chargera de générer l'attribution
+des lots à des participants en créant «resultats.csv» lors du premier accès à
+l'application grâce aux fichiers «participants.csv» et «lots.csv».
+
+Le csv «participants.csv» ne doit contenir qu'une colonne sans limite sur le nombre
+de ligne et chacune représentera un participant
+
+Exemple de lignes dans ce fichier :
+
+Dupond Dupont  
+Avril Septembre
+
+Le csv «lots.csv» doit contenir entre 24 et 25 lignes de 1 à 2 colonnes séparées par une «,».
+- La première colonne sera le nom du cadeau
+- La seconde colonne, qui est optionnelle, sera le nom du fichier image correspondant
+au cadeau
+
+Exemple de lignes dans ce fichier sans image d'illustration pour le cadeau :
+
+Fusée  
+os
+
+Exemple de lignes dans ce fichier avec image d'illustration pour le cadeau :
+
+Fusée,fusee.png  
+tibia,os.png
 
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
@@ -154,7 +247,7 @@ Elles sont déjà pré-remplies avec des exemples.
 
 - Ajouter d'autres modèles de calendrier
 - Moderniser la police d'écriture
-- Tirer au sort le gagnant et son cadeau
+- Mettre des feux d'artifices pour les modales de jours spéciaux
 
  --> Des idées sont les bienvenues
 
@@ -207,6 +300,8 @@ Image pour la neige : <a href="https://pixabay.com/vectors/snowflake-christmas-w
 Image pour les jours : <a href="https://pixabay.com/vectors/advent-advent-calendar-printable-4623596/">pinwhalestock</a>
 <br />
 Police de noël : <a href="https://www.dafont.com/fr/kingthings-christmas.font">Kevin King</a>
+<br />
+Drapeau des langues : <a href="https://fr.m.wikipedia.org">Wikipedia</a>
 
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
@@ -228,6 +323,12 @@ Tutoriel pour une meilleure neige [FR] :
   </li>
   <li>
     <a href="https://www.creativejuiz.fr/blog/doc/snow-animation-css3/">Aperçu</a>
+  </li>
+</ol>
+Tutoriel pour les feux d'artifices [FR] :
+<ol>
+  <li>
+    <a href="https://copyfuture.com/blogs-details/202202010753010075">我想养只猫</a>
   </li>
 </ol>
 
@@ -269,6 +370,17 @@ Tutoriel pour une meilleure neige [FR] :
     </li>
     <li>
       <a href="#configuration-en">Configuration</a>
+    </li>
+    <li>
+      <a href="#results">Results</a>
+      <ul>
+        <li>
+          <a href="#external">External drawing of lot</a>
+        </li>
+        <li>
+          <a href="#internal">Internal drawing of lot</a>
+        </li>
+      </ul>
     </li>
     <li>
       <a href="#roadmap">Roadmap</a>
@@ -327,11 +439,16 @@ Hence, your have plenty of choices :
    cd C2A/
    composer update
    ```
-3. Create configuration
+3. Install the app
+- In production
    ```sh
-   cp .env .env.local
+   php bin/console Installation
    ```
-4. Edit configuration
+- In developement
+   ```sh
+   php bin/console Installation --dev
+   ```
+4. Edit configuration (optionnal)
    ```sh
    nano .env.local
    ```
@@ -348,19 +465,92 @@ All you need is to configure the .env.local generate during the installation.
 - «APP_ENV» is the software environnement (dev or prod)
 - «APP_SECRET» is the secret hexadecimal string for symfony
 - «TITRE» is the texte for the title above the calendar
-- «TITRE_MODALE» is the texte for the title of the easter egg
-- «TEXTE_MODALE» is the texte for the window of the easter egg
+- «TITRE_CUPIDON» is the text for the title of the easter egg for valentine's day
+- «TEXTE_CUPIDON» is the text for the text of the easter egg for valentine's day
+- «TITRE_POISSON» is the text for the title of the easter egg for the joke day
+- «TEXTE_POISSON» is the text for the text of the easter egg for the joke day
+- «TITRE_CADEAU» is the text for the title of the easter egg for christmas
+- «TEXTE_CADEAU» is the text for the text of the easter egg for christmas
 - «COULEUR_FOND» is the hexadecimal color of the background
 - «COULEUR_TEXTE» is the hexadecimal color of the texte
 - «NOEL» is for showing the christmas day
 - «NEIGE» is for the snow to display
 - «FORME» is for the shape of the calendar (grid or christmas tree)
 - «STYLE» is for the days graphism in the calendar (font or picture)
-- «TAILLE» is the size of the calendar (xs, lg, xl)
+- «BORDURE» is for the border for every day (none, square, rounded or circle)
+- «TAILLE» is the size of the calendar (sm, md, lg or xl)
 - «POT_2_MIEL» is an honeypot for hacker
-- «RESULTATS» is the datas for winners and gifts
 
-You must uncomment every lines for theses variables. They have been written with exemples.
+<p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
+
+<h3 id="results">Results</h3>
+
+There is 2 options in order to inform the results :
+- either inform into a csv file named «resultats.csv», with for everyday, the winner, the gift
+and optionally a picture. We call this option the external drawing of lot because results are
+created outside the application.
+- either inform into two csv file, the first one named «participants.csv» containing participants
+and the second one named «lots.csv» containing available gifts with optionally the name of the linked
+picture. We call this option the internal drawing of lot because results are
+created by the application by associate a gift to a winner.
+
+Regardless of the chosen option, all the csv files are in the folder «C2A/public/5-documents».
+An example of each are present inside this folder for help. They are prefixed with the
+term «exemple-».
+
+Moreover, images for gifts must be in the folder «C2A/public/3-image».
+
+And finally, the first line in every csv which explain the column must not be deleted.
+
+<p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
+
+- <h4 id="external">External drawing of lot</h4>
+
+The csv «resultats.csv» must contain between 24 and 25 lines, everyone account for a day,
+with 2 or 3 columns separated by «,».
+- The first column will be the name and the surname of the winner
+- The second column will be the name of the gift
+- The third column, which is optional, will be the name of the image linked to the gift
+
+Exemple of lines in this file without any image for illustrate the gift :
+
+Dupond Dupont,Rocket  
+April September,shinbone
+
+Exemple of lines in this file with an image for illustrate the gift :
+
+Dupond Dupont,Rocket,rocket.png  
+April September,shinbone,bone.png
+
+<p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
+
+- <h4 id="interne">Internal drawing of lot</h4>
+
+In this second option, the application will associate gifts to participants by generating
+the «resultats.csv» file using «participants.csv» and «lots.csv» ones during the first
+access by the web browser.
+
+The csv «participants.csv» must contain only one column without any limit for the line
+number and everyone account for a participant.
+
+Exemple of lines in this file :
+
+Dupond Dupont  
+April September
+
+The csv «lots.csv» must contain between 24 and 25 lines with 1 or 2 colums separated by «,».
+- The first column will be the name of the gift
+- The second column, which is optional, will be the name of the image linked to the gift
+
+Exemple of lines in this file without any image for illustrate the gift :
+
+Rocket  
+bone
+
+Exemple of lines in this file with an image for illustrate the gift :
+
+Rocket,rocket.png  
+shinbone,bone.png
 
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
@@ -368,7 +558,7 @@ You must uncomment every lines for theses variables. They have been written with
 
 - Add calendar templates
 - Modernize font
-- Winner and gift random generation
+- Use fireworks in modal for special days
 
 --> Give ideas
 
@@ -381,14 +571,14 @@ of this software and associated documentation files, to use, copy, modify,
 merge, publish, distribute the code provided by giving a way to access to
 the original code, for exemple : https://github.com/PampaSenior/C2A
 
-It is not allowed to earn money by using or selling this software without 
+It is not allowed to earn money by using or selling this software without
 reverse 1% of the profit to the author.
 
 In the case the code would be changes or ressources would be added in this
 software, they must remain free. It's meaning transmissible in a
 readable format to any asking people.
 
-This license which inform about copyright and permissions must be included 
+This license which inform about copyright and permissions must be included
 in all copies or substantial portions of the Software without modifications.
 
 The software is provided without warranty of any kind, express or implied
@@ -421,6 +611,8 @@ Snow picture : <a href="https://pixabay.com/vectors/snowflake-christmas-winter-f
 Daily pictures : <a href="https://pixabay.com/vectors/advent-advent-calendar-printable-4623596/">pinwhalestock</a>
 <br />
 Christmas font : <a href="https://www.dafont.com/fr/kingthings-christmas.font">Kevin King</a>
+<br />
+Languages flag : <a href="https://fr.m.wikipedia.org">Wikipedia</a>
 
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
@@ -435,13 +627,19 @@ Others daily pictures :
     <a href="https://pixabay.com/fr/vectors/av%c3%a8nement-calendrier-de-l-avent-4623597/">pinwhalestock</a>
   </li>
 </ol>
-Better snow tutorial [FR] : 
+Snow tutorial [FR] :
 <ol>
   <li>
     <a href="https://www.creativejuiz.fr/blog/css-css3/creer-une-animation-de-neige-ou-de-particules-en-css3">Michaël Crofte</a>
   </li>
   <li>
     <a href="https://www.creativejuiz.fr/blog/doc/snow-animation-css3/">Preview</a>
+  </li>
+</ol>
+Fireworks tutorial [FR] :
+<ol>
+  <li>
+    <a href="https://copyfuture.com/blogs-details/202202010753010075">我想养只猫</a>
   </li>
 </ol>
 

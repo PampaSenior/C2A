@@ -1,0 +1,8 @@
+{% for Clef, Drapeau in Drapeaux %}
+  {%~ if loop.first -%}
+    {% set Defaut = ' show active' %}
+  {%~ else -%}
+    {% set Defaut = '' %}
+  {%~ endif -%}
+  {{~ Indentation }}<div class="tab-pane fade{{ Defaut }}" id="{{ Clef }}" role="tabpanel">{{ Message|trans({},'messages',Clef) }}</div>
+{% endfor %}
