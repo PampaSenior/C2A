@@ -20,6 +20,8 @@ class Verification
     try
       {
       $parametre->get('Titre');
+      $parametre->get('TitreNouvelAn');
+      $parametre->get('TexteNouvelAn');
       $parametre->get('TitreCupidon');
       $parametre->get('TexteCupidon');
       $parametre->get('TitrePoisson');

@@ -12,7 +12,11 @@
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-footer border-success border-2 z-index-1">
 {{ Indentation }}        <div class="mx-auto">
-{%~ if Type == 'Cupidon' %}
+{%~ if Type == 'NouvelAn' %}
+  {{~ Indentation }}          <i class="fa-solid fa-champagne-glasses fa-2x text-primary"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-handshake fa-2x text-danger"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-martini-glass fa-2x text-success"></i>
+{%~ elseif Type == 'Cupidon' %}
   {{~ Indentation }}          <i class="fa-solid fa-user fa-2x text-primary"></i>
   {{~ Indentation }}          <i class="fa-solid fa-heart fa-beat fa-2x text-danger"></i>
   {{~ Indentation }}          <i class="fa-solid fa-venus-mars fa-2x text-secondary"></i>

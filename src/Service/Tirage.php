@@ -20,13 +20,13 @@ class Tirage
                 ];
     foreach ($Fichiers as $Clef => $Fichier)
       {
-      $this->Chemin[$Clef] = $Dossier.$Fichier;
+      $this->Chemins[$Clef] = $Dossier.$Fichier;
       }
     }
 
   public function getResultats(): array
     {
-    $Fichier = $this->Chemin['Resultats'];
+    $Fichier = $this->Chemins['Resultats'];
 
     if (!file_exists($Fichier))
       {
@@ -38,10 +38,10 @@ class Tirage
 
   private function TirageAuSort(): void
     {
-    $Contenu = $this->LectureCSV($this->Chemin['Participants']);
+    $Contenu = $this->LectureCSV($this->Chemins['Participants']);
     $Participants = array_slice($Contenu,1,null,true); //Suppression uniquement de la 1ere ligne d'entête
 
-    $Contenu = $this->LectureCSV($this->Chemin['Lots']);
+    $Contenu = $this->LectureCSV($this->Chemins['Lots']);
     $Lots = array_slice($Contenu,1,25,true); //Suppression de la 1ere ligne d'entête et on borne à 25 jours donc lignes
 
     if ($Participants != [] && $Lots != [])
@@ -60,7 +60,7 @@ class Tirage
       elseif (count($Participants)<count($Lots))
         {
         $Cadeaux = array_rand($Lots,$NbElements);
-      $Cas = 2;
+        $Cas = 2;
         }
 
       $Tableau = [];
@@ -88,7 +88,7 @@ class Tirage
         $Resultats = $Resultats."\n".$Element;
         }
 
-      file_put_contents($this->Chemin['Resultats'],$Resultats,LOCK_EX);
+      file_put_contents($this->Chemins['Resultats'],$Resultats,LOCK_EX);
 
       }
 
@@ -98,7 +98,7 @@ class Tirage
     {
     $Resultats = [];
 
-    $Contenu = $this->LectureCSV($this->Chemin['Resultats']);
+    $Contenu = $this->LectureCSV($this->Chemins['Resultats']);
     $Contenu = array_slice($Contenu,1,25,true); //Suppression de la 1ere ligne d'entête et on borne à 25 jours donc lignes
 
     foreach ($Contenu as $Clef => $Ligne)

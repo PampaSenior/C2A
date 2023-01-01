@@ -30,6 +30,13 @@ class AccueilControleur extends AbstractController
     $Date = new \Datetime('now');
     switch ($Date->format('d-m'))
       {
+      case '01-01':
+        $Jour = 1;
+        $Mois = 0; //Javascript compte les mois de 0 à 11.
+        $TitreModale = $this->getParameter('TitreNouvelAn');
+        $TexteModale = $this->getParameter('TexteNouvelAn');
+        $TypeModale = 'NouvelAn';
+        break;
       case '14-02':
         $Jour = 14;
         $Mois = 1; //Javascript compte les mois de 0 à 11.

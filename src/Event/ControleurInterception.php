@@ -22,7 +22,7 @@ class ControleurInterception implements EventSubscriberInterface
     $this->Mois = $parametre->get('kernel.environment') == "dev" ? $Date->format('n') : 12; //Pour mettre le mois actuel en cas de développement
 
     $Tirage = new Tirage();
-    $this->Resultats= $Tirage->getResultats();
+    $this->Resultats = $Tirage->getResultats();
     }
 
   public function onKernelController(ControllerEvent $Evenement)
@@ -31,7 +31,7 @@ class ControleurInterception implements EventSubscriberInterface
     $_ENV['Resultats'] = $this->Resultats;
     }
 
-  public static function getSubscribedEvents()
+  public static function getSubscribedEvents(): array
     {
     return [
            KernelEvents::CONTROLLER => 'onKernelController',
