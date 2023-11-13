@@ -37,7 +37,7 @@ class Application
     $this->DescriptionApplication = "Un calendrier de l'avent possédant une très grande liberté de configuration";
     $this->StyleApplication = "Jour";
 
-    $this->VersionDate = "31/10/2022";
+    $this->VersionDate = "13/11/2023";
     $this->VersionMajeur = "1";
     $this->VersionMineur = "0";
     $this->VersionCorrectif = "2";

@@ -107,8 +107,8 @@ En effet, les choix possibles sont nombreux :
 * [Composer V2.1.12](https://getcomposer.org/)
 * [Symfony V5.4.0](https://symfony.com/)
 * [jQuery V3.6.0](https://jquery.com)
-* [Bootstrap V5.1.1](https://getbootstrap.com)
-* [Font Awesome V5.15.4](https://fontawesome.com/)
+* [Bootstrap V5.2.2](https://getbootstrap.com)
+* [Font Awesome V6.2.1](https://fontawesome.com/)
 
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
@@ -149,6 +149,8 @@ Tout se passe dans le .env.local généré pendant la phase d'installation.
 - «APP_ENV» représente l'environnement de l'application (dev ou prod)
 - «APP_SECRET» représente la chaine hexadecimale secrète de symfony
 - «TITRE» représente le texte au dessus du calendrier
+- «TITRE_NOUVEL_AN» represente le titre de la modale pour la nouvelle année
+- «TEXTE_NOUVEL_AN» represente le texte de la modale pour la nouvelle année
 - «TITRE_CUPIDON» represente le titre de la modale pour la St valentin
 - «TEXTE_CUPIDON» represente le texte de la modale pour la St valentin
 - «TITRE_POISSON» represente le titre de la modale pour le 1er avril
@@ -159,7 +161,7 @@ Tout se passe dans le .env.local généré pendant la phase d'installation.
 - «COULEUR_TEXTE» représente la couleur hexadécimale du texte
 - «NOEL» représente le fait d'afficher où non le 25 décembre
 - «NEIGE» représente la neige à afficher
-- «FORME» représente le placement des éléments du calendrier (grille ou sapin)
+- «FORME» représente le placement des éléments du calendrier (grille, losange ou sapin)
 - «STYLE» représente l'aspect graphique des éléments du calendrier (cadeau ou image)
 - «BORDURE» représente l'aspect des bordures de chaque élément (aucune, carrée, arrondie ou ronde)
 - «TAILLE» représente la place que doit prendre les éléments du calendrier (sm, md, lg ou xl)
@@ -181,7 +183,11 @@ générer l'attribution des lots à certain participants.
 
 Peut importe l'option choisie, le ou les csv sont présents dans le dossier
 «C2A/public/5-documents». Un exemple de chaque y a été mis pour aider. Ils sont
-préfixé par le terme «exemple-».
+préfixé par le terme «exemple-» et sont téléchargeable en complétant l' url
+de la page d'accueil (celle du calendrier) par :
+- 5-documents/exemple-lots.csv
+- 5-documents/exemple-participants.csv
+- 5-documents/exemple-resultats.csv
 
 De plus, les images d'illustration des cadeaux sont à mettre dans le dossier
 «C2A/public/3-image».
@@ -423,8 +429,8 @@ Hence, your have plenty of choices :
 * [Composer V2.1.12](https://getcomposer.org/)
 * [Symfony V5.4.0](https://symfony.com/)
 * [jQuery V3.6.0](https://jquery.com)
-* [Bootstrap V5.1.1](https://getbootstrap.com)
-* [Font Awesome V5.15.4](https://fontawesome.com/)
+* [Bootstrap V5.2.2](https://getbootstrap.com)
+* [Font Awesome V6.2.1](https://fontawesome.com/)
 
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
@@ -465,6 +471,8 @@ All you need is to configure the .env.local generate during the installation.
 - «APP_ENV» is the software environnement (dev or prod)
 - «APP_SECRET» is the secret hexadecimal string for symfony
 - «TITRE» is the texte for the title above the calendar
+- «TITRE_NOUVEL_AN» is the text for the title of the easter egg for new year's day
+- «TEXTE_NOUVEL_AN» is the text for the text of the easter egg for new year's day
 - «TITRE_CUPIDON» is the text for the title of the easter egg for valentine's day
 - «TEXTE_CUPIDON» is the text for the text of the easter egg for valentine's day
 - «TITRE_POISSON» is the text for the title of the easter egg for the joke day
@@ -475,7 +483,7 @@ All you need is to configure the .env.local generate during the installation.
 - «COULEUR_TEXTE» is the hexadecimal color of the texte
 - «NOEL» is for showing the christmas day
 - «NEIGE» is for the snow to display
-- «FORME» is for the shape of the calendar (grid or christmas tree)
+- «FORME» is for the shape of the calendar (grid, lozenge or christmas tree)
 - «STYLE» is for the days graphism in the calendar (font or picture)
 - «BORDURE» is for the border for every day (none, square, rounded or circle)
 - «TAILLE» is the size of the calendar (sm, md, lg or xl)
@@ -496,7 +504,10 @@ created by the application by associate a gift to a winner.
 
 Regardless of the chosen option, all the csv files are in the folder «C2A/public/5-documents».
 An example of each are present inside this folder for help. They are prefixed with the
-term «exemple-».
+term «exemple-» and can be dowloaded by completing the homepage URL (calendar one) with :
+- 5-documents/exemple-lots.csv
+- 5-documents/exemple-participants.csv
+- 5-documents/exemple-resultats.csv
 
 Moreover, images for gifts must be in the folder «C2A/public/3-image».
 
