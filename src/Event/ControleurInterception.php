@@ -19,7 +19,7 @@ class ControleurInterception implements EventSubscriberInterface
   public function __construct(ContainerBagInterface $parametre)
     {
     $Date = new \Datetime('now');
-    $this->Mois = $parametre->get('kernel.environment') == "dev" ? $Date->format('n') : 12; //Pour mettre le mois actuel en cas de développement
+    $this->Mois = $parametre->get('kernel.environment') != "prod" ? $Date->format('n') : 12; //Pour mettre le mois actuel en cas de développement
 
     $Tirage = new Tirage();
     $this->Resultats = $Tirage->getResultats();

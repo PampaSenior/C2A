@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="Default-Style" content="{{ Application.getStyleApplication() }}">
     <meta name="author" content="{{ Application.getAuteur() }}">
+    <meta name="generator" content="{{ Application.getApplication() }}">
     <meta name="description" content="{{ Application.getDescriptionApplication() }}">
+    <meta name="Publication" content="{{ Application.getVersionDate() }}">
     <meta name="Version" content="{{ Application.getVersion() }}">
     {%~ if app.environment == 'dev' %}
     <meta name="VersionPHP" content="{{ Application.getVersionPHP() }}">

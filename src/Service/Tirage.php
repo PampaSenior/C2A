@@ -6,6 +6,7 @@ use App\Service\Application;
 
 class Tirage
   {
+  private Application $Application;
   private array $Chemins;
 
   public function __construct()
@@ -88,7 +89,7 @@ class Tirage
         $Resultats = $Resultats."\n".$Element;
         }
 
-      file_put_contents($this->Chemins['Resultats'],$Resultats,LOCK_EX);
+      $this->EcritureCSV($this->Chemins['Resultats'],$Resultats);
 
       }
 
@@ -122,14 +123,20 @@ class Tirage
     return $Resultats;
     }
 
-  private function LectureCSV(string $Fichier): array
+  private function LectureCSV(string $Chemin): array
     {
-    if (file_exists($Fichier))
+    $Resultat = [];
+
+    if (file_exists($Chemin))
       {
-      return file($Fichier,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+      $Resultat = file($Chemin,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       }
 
-    return [];
+    return $Resultat;
     }
 
+  private function EcritureCSV(string $Chemin, string $Contenu): void
+    {
+    file_put_contents($Chemin,$Contenu,LOCK_EX);
+    }
   }
