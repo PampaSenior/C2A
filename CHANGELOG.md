@@ -23,6 +23,9 @@
 <details>
   <ol>
     <li>
+      <a href="#V1.0.3-fr">V1.0.3</a>
+    </li>
+    <li>
       <a href="#V1.0.2-fr">V1.0.2</a>
     </li>
     <li>
@@ -34,14 +37,44 @@
   </ol>
 </details>
 
+<h3 id="V1.0.3-fr">V1.0.3 - 2023-11-13</h3>
+
+<h5>Ajout</h5>
+
+- Un nouveau modèle de calendrier (losange)
+- Un nouveau jour spécial (1er janvier)
+- Mise en place de tests unitaires
+
+<h5>Modification</h5>
+
+- Amélioration du modèle de calendrier en sapin
+- Mise à jour en Boostrap 5.2.2 et FontAwesome 6.2.1
+
+<h5>Dépréciation</h5>
+
+- Aucun
+
+<h5>Suppression</h5>
+
+- Nettoyage du module doctrine/orm
+
+<h5>Réparation</h5>
+
+- Modification du nombre d'étapes effectuées pendant l'installation
+
+<h5>Sécurisation</h5>
+
+- Suppression du téléchargement des fichiers lots.csv, participants.csv et resultats.csv
+
+<p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
+
 <h3 id="V1.0.2-fr">V1.0.2 - 2022-10-31</h3>
 
 <h5>Ajout</h5>
 
 - Une commande pour installer l'application automatiquement
-- Nouveaux jours spéciaux
-- Nouveaux paramètres pour l'application
-- Une nouvelle taille
+- Nouveaux jours spéciaux (14/02 et 01/04)
+- Une nouvelle taille (xxl)
 - Nouveaux choix de bordure (aucune, carrée, arrondie ou ronde)
 - Afficher une illustration pour le cadeau (optionnel)
 
@@ -77,8 +110,8 @@
 <h5>Ajout</h5>
 
 - Vérification de la configuration
-- Nouveau style d'affichage avec de l'aléatoire
-- Nouveau choix de chute de neige (boule)
+- Un nouveau style d'affichage avec de l'aléatoire
+- Un nouveau choix de chute de neige (boule)
 - Journal de modifications
 
 <h5>Modification</h5>
@@ -145,6 +178,9 @@
 <details>
   <ol>
     <li>
+      <a href="#V1.0.3-en">V1.0.3</a>
+    </li>
+    <li>
       <a href="#V1.0.2-en">V1.0.2</a>
     </li>
     <li>
@@ -156,14 +192,44 @@
   </ol>
 </details>
 
+<h3 id="V1.0.3-en">V1.0.3 - 2023-11-13</h3>
+
+<h5>Added</h5>
+
+- A new calendar template (lozenge)
+- A new special day (1st january)
+- Establishment of unit tests
+
+<h5>Changed</h5>
+
+- Improvement for the christmas tree calendar template
+- Update for Boostrap 5.2.2 and FontAwesome 6.2.1
+
+<h5>Deprecated</h5>
+
+- None
+
+<h5>Removed</h5>
+
+- Bundle cleaning with doctrine/orm
+
+<h5>Fixed</h5>
+
+- Modification about the steps number during the installation
+
+<h5>Security</h5>
+
+- Cancellation of files download for lots.csv, participants.csv and resultats.csv
+
+<p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
+
 <h3 id="V1.0.2-en">V1.0.2 - 2022-10-31</h3>
 
 <h5>Added</h5>
 
 - A command to automatically install the application
-- New special days
-- New parameters for the application
-- A New size
+- New specials days (14/02 and 01/04)
+- A new size (xxl)
 - New border styles (none, square, rounded or circle)
 - Show an image of the gift (optional)
 
@@ -199,8 +265,8 @@
 <h5>Added</h5>
 
 - Configuration checking
-- New display style with random
-- New falling snow choice (snowball)
+- A new display style with random
+- A new falling snow choice (snowball)
 - Changelog
 
 <h5>Changed</h5>

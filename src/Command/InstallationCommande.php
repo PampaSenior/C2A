@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use Symfony\Component\Console\Helper\ProgressBar;
 
-class ConfigurationCommand extends Command
+class InstallationCommande extends Command
   {
   //Nom de variable obligatoire
   protected static $defaultName = 'Installation';
@@ -57,7 +57,7 @@ class ConfigurationCommand extends Command
 
   protected function execute(InputInterface $Entree, OutputInterface $Sortie): int
     {
-    $BarreProgression = new ProgressBar($Sortie,count($this->Chemins));
+    $BarreProgression = new ProgressBar($Sortie,4);
     $BarreProgression->setFormat('normal');
     $BarreProgression->setBarWidth(10);
     $BarreProgression->start();

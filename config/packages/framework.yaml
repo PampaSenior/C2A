@@ -1,6 +1,8 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
 parameters:
     Titre: '%env(string:TITRE)%'
+    TitreNouvelAn: '%env(string:TITRE_NOUVEL_AN)%'
+    TexteNouvelAn: '%env(string:TEXTE_NOUVEL_AN)%'
     TitreCupidon: '%env(string:TITRE_CUPIDON)%'
     TexteCupidon: '%env(string:TEXTE_CUPIDON)%'
     TitrePoisson: '%env(string:TITRE_POISSON)%'

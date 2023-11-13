@@ -16,6 +16,8 @@
 
 {%~ if Forme == 0 %}
   {% set Modele = 'accueil/calendrier/_forme-grille.html.twig' %}
+{%~ elseif Forme == 1 %}
+  {% set Modele = 'accueil/calendrier/_forme-losange.html.twig' %}
 {%~ else %}
   {% set Modele = 'accueil/calendrier/_forme-sapin.html.twig' %}
 {%~ endif %}

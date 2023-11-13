@@ -24,19 +24,20 @@ class Application
   private $DossierScript;
   private $DossierImage;
   private $DossierPolice;
+  private $DossierDocument;
 
   public function __construct()
     {
     $this->PrenomAuteur = "Pampa";
     $this->NomAuteur = "Senior";
 
-    $this->NomApplication = "Calendrier";
+    $this->NomApplication = "Calendrier de l'avent";
     $this->AcronymeApplication = "C2A";
     $this->IconeApplication = "Hache.png";
-    $this->DescriptionApplication = "Calendrier de l'avent";
+    $this->DescriptionApplication = "Un calendrier de l'avent possédant une très grande liberté de configuration";
     $this->StyleApplication = "Jour";
 
-    $this->VersionDate = "31/10/2022";
+    $this->VersionDate = "13/11/2023";
     $this->VersionMajeur = "1";
     $this->VersionMineur = "0";
     $this->VersionCorrectif = "2";
@@ -52,11 +53,11 @@ class Application
 
   public function getPrenomAuteur(): string {return $this->PrenomAuteur;}
   public function getNomAuteur(): string {return $this->NomAuteur;}
-  public function getAuteur(): string {return $this->PrenomAuteur." ".$this->NomAuteur;}
+  public function getAuteur(): string {return $this->getPrenomAuteur()." ".$this->getNomAuteur();}
 
   public function getNomApplication(): string {return $this->NomApplication;}
   public function getAcronymeApplication(): string {return $this->AcronymeApplication;}
-  public function getApplication(): string {return $this->AcronymeApplication." : ".$this->NomApplication;}
+  public function getApplication(): string {return $this->getAcronymeApplication()." : ".$this->getNomApplication();}
   public function getIconeApplication(): string {return $this->IconeApplication;}
   public function getDescriptionApplication(): string {return $this->DescriptionApplication;}
   public function getStyleApplication(): string {return $this->StyleApplication;}
@@ -65,7 +66,7 @@ class Application
   public function getVersionMajeur(): string {return $this->VersionMajeur;}
   public function getVersionMineur(): string {return $this->VersionMineur;}
   public function getVersionCorrectif(): string {return $this->VersionCorrectif;}
-  public function getVersion(): string {return $this->VersionMajeur.".".$this->VersionMineur.".".$this->VersionCorrectif;}
+  public function getVersion(): string {return $this->getVersionMajeur().".".$this->getVersionMineur().".".$this->getVersionCorrectif();}
   public function getVersionPHP(): string {return $this->VersionPHP;}
   public function getVersionSymfony(): string {return $this->VersionSymfony;}
 
