@@ -14,13 +14,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 use Symfony\Component\Console\Helper\ProgressBar;
 
-class InstallationCommande extends Command
+#[AsCommand(
+    name: 'Installation',
+    description: 'FR : Installation automatique de l\'application.\nEN : Automatic application installation.',
+    hidden: false,
+    aliases: ['app:Installation']
+)]
+class Installation extends Command
   {
-  //Nom de variable obligatoire
-  protected static $defaultName = 'Installation';
-  //Nom de variable obligatoire
-  protected static $defaultDescription = "FR : Installation automatique de l'application.\nEN : Automatic application installation.";
-
   private array $Chemins;
   private array $Resultats;
 
@@ -77,14 +78,14 @@ class InstallationCommande extends Command
       if ($Resultat[1] === false)
         {
         $Sortie->writeln("<fg=bright-red>FR: Installation du fichier échoué.\nEN : File installation failed.</>");
+        return Command::FAILURE;
         }
       else
         {
         $Sortie->writeln("<fg=green>FR : Installation du fichier réussie.\nEN : File installation successed.</>");
+        return Command::SUCCESS;
         }
       }
-
-    return Command::SUCCESS;
     }
 
   private function Secret(int $Taille): string

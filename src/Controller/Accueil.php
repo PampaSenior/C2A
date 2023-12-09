@@ -9,11 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AccueilControleur extends AbstractController
+class Accueil extends AbstractController
   {
-  /**
-   * @Route("/", name="Accueil", methods={"GET"})
-   */
+  #[Route('/', name: 'Accueil', methods: ['GET'])]
   public function Accueil(): Response
     {
     $Verification = new Verification($this->container->get('parameter_bag'));

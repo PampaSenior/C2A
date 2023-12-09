@@ -12,14 +12,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-  /**
-   * @Route("/Ajax")
-   */
-class AjaxControleur extends AbstractController
+#[Route('/Ajax')]
+class Ajax extends AbstractController
   {
-  /**
-   * @Route("/Cadeau/{Id}", name="Cadeau", requirements={"Id"="\d+"}, methods={"GET"})
-   */
+  #[Route('/Cadeau/{Id}', name: 'Cadeau', requirements: ['Id' => '\d+'], methods: ['GET'])]
   public function Cadeau(int $Id, TranslatorInterface $Translator): JsonResponse
     {
     $Verification = new Verification($this->container->get('parameter_bag'));
