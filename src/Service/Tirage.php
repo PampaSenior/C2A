@@ -12,7 +12,7 @@ class Tirage
   public function __construct()
     {
     $this->Application = new Application();
-    $Dossier = '../public/'.$this->Application->getDossierDocument();
+    $Dossier = $this->Application->getDossierPublic() . $this->Application->getDossierDocument();
 
     $Fichiers = [
                 'Resultats' => 'resultats.csv',

@@ -26,11 +26,8 @@ class ApplicationTest extends WebTestCase
                 $this->Application->getDossierDocument(),
                 ];
 
-    //Hack pour faire fonctionner les liens relatifs pendant les tests
-    chdir('public');
-
     $Client = static::createClient(); //Générer un navigateur fictif
-    $Crawler = $Client->request('GET','/');
+    $Crawler = $Client->request('GET', '/');
 
     $Liens = $Crawler->filter('link');
     foreach ($Liens as $Clef => $Style)
@@ -46,10 +43,10 @@ class ApplicationTest extends WebTestCase
 
     foreach ($Fichiers as $Fichier)
       {
-      $this->assertFileExists('../public/'.$Fichier);
+      $this->assertFileExists($this->Application->getDossierPublic() . $Fichier);
       }
 
-    $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/',$this->Application->getVersionPHP());
-    $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/',$this->Application->getVersionSymfony());
+    $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/', $this->Application->getVersionPHP());
+    $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/', $this->Application->getVersionSymfony());
     }
   }

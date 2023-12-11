@@ -20,6 +20,7 @@ class Application
   private $VersionPHP;
   private $VersionSymfony;
 
+  private $DossierPublic;
   private $DossierStyle;
   private $DossierScript;
   private $DossierImage;
@@ -40,10 +41,11 @@ class Application
     $this->VersionDate = "13/11/2023";
     $this->VersionMajeur = "1";
     $this->VersionMineur = "0";
-    $this->VersionCorrectif = "2";
+    $this->VersionCorrectif = "3";
     $this->VersionPHP = phpversion();
     $this->VersionSymfony = \Symfony\Component\HttpKernel\Kernel::VERSION;
 
+    $this->DossierPublic = __DIR__ . '/../../public/';
     $this->DossierStyle = '1-css/';
     $this->DossierScript = '2-js/';
     $this->DossierImage = '3-images/';
@@ -70,6 +72,7 @@ class Application
   public function getVersionPHP(): string {return $this->VersionPHP;}
   public function getVersionSymfony(): string {return $this->VersionSymfony;}
 
+  public function getDossierPublic(): string {return $this->DossierPublic;}
   public function getDossierStyle(): string {return $this->DossierStyle;}
   public function getDossierScript(): string {return $this->DossierScript;}
   public function getDossierImage(): string {return $this->DossierImage;}

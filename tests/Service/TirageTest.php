@@ -19,7 +19,7 @@ class TirageTest extends \PHPUnit\Framework\TestCase
     // /!\ Le __construct() est déconseillé pour PhpUnit
     $this->Application = new Application();
 
-    $Dossier = '../public/'.$this->Application->getDossierDocument();
+    $Dossier = $this->Application->getDossierPublic() . $this->Application->getDossierDocument();
 
     $Fichiers = [
                 'Resultats' => 'resultats.csv',
@@ -29,12 +29,9 @@ class TirageTest extends \PHPUnit\Framework\TestCase
 
     foreach ($Fichiers as $Clef => $Fichier)
       {
-      $this->Chemins[$Clef] = $Dossier.$Fichier;
+      $this->Chemins[$Clef] = $Dossier . $Fichier;
       $this->CSV[$Clef] = '';
       }
-
-    //Hack pour faire fonctionner les liens relatifs pendant les tests
-    chdir('public');
 
     //Cas où "participants" possède moins d'éléments que "lots"
     $this->GenerationDesCas(
