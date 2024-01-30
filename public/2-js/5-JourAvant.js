@@ -1,15 +1,3 @@
-function TexteCourt(Texte,Taille)
-  {
-  if (Texte.length > Taille)
-    {
-    return Texte.substr(0,Taille-3)+'...';
-    }
-  else
-    {
-    return Texte;
-    }
-  }
-
 function Clic()
   {
   const Couleur = 'text-danger';
@@ -44,25 +32,25 @@ function Clic()
     if (Taille == 'sm')
       {
       Titre = Reponse.Gagnant+"\n"+Reponse.Cadeau;
-      Texte = TexteCourt(Reponse.Gagnant,6)+'<br/>'+TexteCourt(Reponse.Cadeau,6);
+      Texte = Reponse.Gagnant+'<br/>'+Reponse.Cadeau;
       }
     else if (Taille == 'md')
       {
       Titre = 'Gagnant : '+Reponse.Gagnant+"\nCadeau : "+Reponse.Cadeau;
-      Texte = 'Gagnant :<br/>'+TexteCourt(Reponse.Gagnant,10)+'<br/>Cadeau :<br/>'+TexteCourt(Reponse.Cadeau,10);
+      Texte = 'Gagnant :<br/>'+Reponse.Gagnant+'<br/>Cadeau :<br/>'+Reponse.Cadeau;
       }
     else if (Taille == 'lg')
       {
       Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
-      Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,22)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,22);
+      Texte = 'Le gagnant :<br/>'+Reponse.Gagnant+'<br/>Le cadeau :<br/>'+Reponse.Cadeau;
       }
     else
       {
-      Titre = 'Le gagnant : '+Reponse.Gagnant+"\nLe cadeau : "+Reponse.Cadeau;
-      Texte = 'Le gagnant :<br/>'+TexteCourt(Reponse.Gagnant,24)+'<br/>Le cadeau :<br/>'+TexteCourt(Reponse.Cadeau,24);
+      Titre = 'Le gagnant est : '+Reponse.Gagnant+"\nLe cadeau est : "+Reponse.Cadeau;
+      Texte = 'Le gagnant est :<br/>'+Reponse.Gagnant+'<br/>Le cadeau est :<br/>'+Reponse.Cadeau;
       }
 
-    Widget.html('<span class="text-break '+Couleur+'">'+Texte+'</span>');
+    Widget.html('<span class="d-block text-truncate '+Couleur+'">'+Texte+'</span>');
     Widget.attr('title',Titre);
 
     if (Reponse.Illustration) //0, false, undefined, null et "" sont considérés comme faux
