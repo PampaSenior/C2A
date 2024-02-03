@@ -51,6 +51,10 @@
          'Taille' : Taille,
          'Couleur' : CouleurTexte }
   -%}
+  {%-
+  include 'modale/ZoomResultat.html.twig'
+  with { 'Indentation' : Indentation ~ '    ' }
+  ~%}
   {%~ if JourSpecial['Jour'] != 0 %}
     {%-
     include 'modale/JourSpecial.html.twig'
@@ -63,16 +67,17 @@
   {{~ Indentation }}  </div>
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-ZoomResultat.js"></script>
     {%~ if JourSpecial['Jour'] != 0 %}
-      {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-JourSpecial.js"></script>
+      {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}5-JourSpecial.js"></script>
       {{~ Indentation }}<script>JourSpecial({{ JourSpecial['Jour'] }},{{ JourSpecial['Mois'] }});</script>
     {%~ endif %}
     {%- set Jour = "now"|date("j") -%}
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}5-JourAvant.js"></script>
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}6-JourAvant.js"></script>
     {{~ Indentation }}<script>JourAvant({{ Jour }},{{ MoisActivation }});</script>
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}6-JourActuel.js"></script>
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}7-JourActuel.js"></script>
     {{~ Indentation }}<script>JourActuel({{ Jour }},{{ MoisActivation }});</script>
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}7-JourChange.js"></script>
+    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}8-JourChange.js"></script>
     {{~ Indentation }}<script>setInterval(JourChange,1000,{{ Jour }});</script>
   {%~ endblock %}
   {{~ Indentation }}</body>

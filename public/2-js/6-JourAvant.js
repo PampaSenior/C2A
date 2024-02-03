@@ -1,4 +1,4 @@
-function Clic()
+function ClicJour()
   {
   const Couleur = 'text-danger';
   const Widget = $(event.currentTarget);
@@ -50,12 +50,15 @@ function Clic()
       Texte = 'Le gagnant est :<br/>'+Reponse.Gagnant+'<br/>Le cadeau est :<br/>'+Reponse.Cadeau;
       }
 
-    Widget.html('<span class="d-block text-truncate '+Couleur+'">'+Texte+'</span>');
     Widget.attr('title',Titre);
+    Widget.addClass('position-relative');
+    Widget.html('<span class="d-block text-truncate '+Couleur+'">'+Texte+'</span>');
+    Widget.append('<div><button type="button" class="py-2 position-absolute top-100 start-100 translate-middle badge bg-danger border-0" onclick="ClicLoupe()" data-gagnant="'+Reponse.Gagnant+'" data-cadeau="'+Reponse.Cadeau+'"><i class="fa-solid fa-magnifying-glass"></i></button></div>');
 
     if (Reponse.Illustration) //0, false, undefined, null et "" sont considérés comme faux
       {
       Widget.attr('style','background-image:url('+Reponse.Illustration+');background-size:cover;');
+      Widget.find('div button').attr('data-photo',Reponse.Illustration);
       }
     }
 
@@ -96,7 +99,7 @@ function JourAvant(J,M)
     {
     for (var i=0; i<=JourMax-1; i++) //Attention les indices de Jours vont de 0 à JourMax-1
       {
-      $(Jours[i]).on('click',Clic); //Mise en place du clic de révélation jusqu'à aujourd'hui
+      $(Jours[i]).on('click',ClicJour); //Mise en place du clic de révélation jusqu'à aujourd'hui
 
       if (i < JourMax-1 || J > Jours.length) //Utilisation de la révélation jusqu'à la veille ou sur tous si on dépasse le dernier jour
         {
