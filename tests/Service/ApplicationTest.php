@@ -3,50 +3,45 @@
 namespace App\Tests;
 
 use App\Service\Application;
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ApplicationTest extends WebTestCase
-  {
-  private Application $Application;
+{
+    private Application $application;
 
-  /**
-   * Permet de vérifier la fonctionnalité de configuration de l'application
-   */
-  public function testApplication(): void
+    /**
+     * Permet de vérifier la fonctionnalité de configuration de l'application
+     */
+    public function testApplication(): void
     {
-    // /!\ Le __construct() est déconseillé pour PhpUnit
-    $this->Application = new Application();
+        $this->application = new Application();
 
-    $Fichiers = [
-                $this->Application->getDossierStyle(),
-                $this->Application->getDossierScript(),
-                $this->Application->getDossierImage(),
-                $this->Application->getDossierPolice(),
-                $this->Application->getDossierDocument(),
-                ];
+        $fichiers = [
+            $this->application->getDossierStyle(),
+            $this->application->getDossierScript(),
+            $this->application->getDossierImage(),
+            $this->application->getDossierPolice(),
+            $this->application->getDossierDocument(),
+        ];
 
-    $Client = static::createClient(); //Générer un navigateur fictif
-    $Crawler = $Client->request('GET', '/');
+        $client = static::createClient(); //Générer un navigateur fictif
+        $indexation = $client->request('GET', '/');
 
-    $Liens = $Crawler->filter('link');
-    foreach ($Liens as $Clef => $Style)
-      {
-      $Fichiers[] = $Liens->eq($Clef)->attr('href');
-      }
+        $liens = $indexation->filter('link');
+        foreach ($liens as $style) {
+            $fichiers[] = substr($style->getAttribute('href'), 1); /*On enlève le slash initial*/ /*@phpstan-ignore method.notFound (faux positif)*/ /*phpcs:ignore Generic.Files.LineLength*/
+        }
 
-    $Scriptes = $Crawler->filter('script');
-    foreach ($Scriptes as $Clef => $Scripte)
-      {
-      $Fichiers[] = $Scriptes->eq($Clef)->attr('src');
-      }
+        $scriptes = $indexation->filter('script');
+        foreach ($scriptes as $scripte) {
+            $fichiers[] = substr($scripte->getAttribute('src'), 1); /*On enlève le slash initial*/ /*@phpstan-ignore method.notFound (faux positif)*/ /*phpcs:ignore Generic.Files.LineLength*/
+        }
 
-    foreach ($Fichiers as $Fichier)
-      {
-      $this->assertFileExists($this->Application->getDossierPublic() . $Fichier);
-      }
+        foreach ($fichiers as $fichier) {
+            $this->assertFileExists($this->application->getDossierPublic() . $fichier);
+        }
 
-    $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/', $this->Application->getVersionPHP());
-    $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/', $this->Application->getVersionSymfony());
+        $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/', $this->application->getVersionPHP());
+        $this->assertMatchesRegularExpression('/\d+\.\d+\.\d+/', $this->application->getVersionSymfony());
     }
-  }
+}

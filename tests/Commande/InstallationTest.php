@@ -13,7 +13,10 @@ class InstallationTest extends KernelTestCase
     /** @var array<string, array{Dossier:string, Source:string, Cible:string}> $chemins */
     private array $chemins;
 
-    public function testExecute(): void
+    /**
+     * Permet de vérifier la fonctionnalité d'installation automatique de l'application
+     */
+    public function testInstallation(): void
     {
         $this->suffixe = '.sauver';
 
@@ -42,8 +45,8 @@ class InstallationTest extends KernelTestCase
             'Cible' => 'lots.csv',
         ];
 
-        $kernel = static::createKernel();
-        $application = new Application($kernel);
+        $noyau = static::createKernel();
+        $application = new Application($noyau);
 
         $command = $application->find('app:Installation');
         $commandTester = new CommandTester($command);

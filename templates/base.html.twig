@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Default-Style" content="{{ Application.getStyleApplication() }}">
+    <meta http-equiv="Default-Style" content="{{ Application.getStyle() }}">
     <meta name="author" content="{{ Application.getAuteur() }}">
     <meta name="generator" content="{{ Application.getApplication() }}">
-    <meta name="description" content="{{ Application.getDescriptionApplication() }}">
+    <meta name="description" content="{{ Application.getDescription() }}">
     <meta name="Publication" content="{{ Application.getVersionDate() }}">
     <meta name="Version" content="{{ Application.getVersion() }}">
     {%~ if app.environment == 'dev' %}
@@ -14,11 +14,11 @@
     {%~ endif %}
     <title>
     {%~ block title %}
-      {{ Application.getAcronymeApplication() }}
+      {{ Application.getAcronyme() }}
     {%~ endblock %}
     </title>
     {%~ block stylesheets %}
-    <link rel="icon" href="{{ path('Accueil') }}{{ Application.getDossierImage() }}{{ Application.getIconeApplication() }}"> {% if app.environment == 'dev' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
+    <link rel="icon" href="{{ path('Accueil') }}{{ Application.getDossierImage() }}{{ Application.getIcone() }}"> {% if app.environment == 'dev' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
     <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}1-Bootstrap_V5.3.2.css" type="text/css" title="Jour"> {% if app.environment == 'dev' %}<!-- Permet d'utiliser le thème bootstrap -->{% endif %} 
     <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}2-Font_Awesome_V6.5.1.css" type="text/css"> {% if app.environment == 'dev' %}<!-- Permet d'utiliser la banque d'icones -->{% endif %} 
     <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}3-Calendrier.css" type="text/css"> {% if app.environment == 'dev' %}<!-- Permet de rajouter du style sur la page du calendrier -->{% endif %} 
