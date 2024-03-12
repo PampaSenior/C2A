@@ -4,6 +4,7 @@ function ClicJour()
     const Widget = $(event.currentTarget);
     const Style = Widget.data('style');
     const Bordure = Widget.data('bordure');
+    const Zoom = Widget.data('zoom');
     const Taille = Widget.data('taille');
     const URL = Widget.data('url');
 
@@ -39,13 +40,39 @@ function ClicJour()
             Texte = 'Le gagnant est :<br/>' + Reponse.Gagnant + '<br/>Le cadeau est :<br/>' + Reponse.Cadeau;
         }
 
+        if (Zoom == 1) {
+            position = 'position-absolute top-0 start-0';
+        } else if (Zoom == 2) {
+            position = 'position-absolute top-0 start-50';
+        } else if (Zoom == 3) {
+            position = 'position-absolute top-0 start-100';
+        } else if (Zoom == 4) {
+            position = 'position-absolute top-50 start-0';
+        } else if (Zoom == 5) {
+            position = 'position-absolute top-50 start-100';
+        } else if (Zoom == 6) {
+            position = 'position-absolute top-100 start-0';
+        } else if (Zoom == 7) {
+            position = 'position-absolute top-100 start-50';
+        } else if (Zoom == 8) {
+            position = 'position-absolute top-100 start-100';
+        }
+
         Widget.attr('title', Titre);
         Widget.addClass('position-relative');
         Widget.html('<span class="d-block text-truncate ' + Couleur + '">' + Texte + '</span>');
-        Widget.append('<div><button type="button" class="py-2 position-absolute top-100 start-100 translate-middle badge bg-danger border-0" onclick="ClicLoupe()" data-gagnant="' + Reponse.Gagnant + '" data-cadeau="' + Reponse.Cadeau + '"><i class="fa-solid fa-magnifying-glass"></i></button></div>');
 
         if (Reponse.Illustration) { //0, false, undefined, null et "" sont considérés comme faux
             Widget.attr('style', 'background-image:url(' + Reponse.Illustration + ');background-size:cover;');
+        }
+
+        if (Zoom != 0) {
+            Widget.append('<div><button type="button" class="py-2 ' + position + ' translate-middle badge bg-danger border-0" onclick="ClicLoupe()"><i class="fa-solid fa-magnifying-glass"></i></button></div>');
+            Widget.find('div button').attr('data-gagnant', Reponse.Gagnant);
+            Widget.find('div button').attr('data-cadeau', Reponse.Cadeau);
+        }
+
+        if (Zoom != 0 && Reponse.Illustration) {
             Widget.find('div button').attr('data-photo', Reponse.Illustration);
         }
     }

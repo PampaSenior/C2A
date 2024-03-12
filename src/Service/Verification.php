@@ -33,6 +33,7 @@ class Verification
             $parametre->get('Forme');
             $parametre->get('Style');
             $parametre->get('Bordure');
+            $parametre->get('Zoom');
             $parametre->get('Taille');
             $parametre->get('Pot2Miel');
         } catch (\Exception $pb) {

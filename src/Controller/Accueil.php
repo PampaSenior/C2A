@@ -80,6 +80,21 @@ class Accueil extends AbstractController
                 $Bordure = 'bordure-0';
         }
 
+        switch ($this->getParameter('Zoom')) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                $Zoom = $this->getParameter('Zoom');
+                break;
+            default:
+                $Zoom = 0;
+        }
+
         return $this->render(
             'accueil/calendrier/calendrier.html.twig',
             [
@@ -92,6 +107,7 @@ class Accueil extends AbstractController
                 'Forme' => $this->getParameter('Forme'),
                 'Style' => $this->getParameter('Style'),
                 'Bordure' => $Bordure,
+                'Zoom' => $Zoom,
                 'Taille' => $Taille,
                 'JourSpecial' => [
                     'Jour' => $Jour,

@@ -48,13 +48,16 @@
          'Modele' : Dessin,
          'Style' : Style,
          'Bordure' : Bordure,
+         'Zoom' : Zoom,
          'Taille' : Taille,
          'Couleur' : CouleurTexte }
   -%}
-  {%-
-  include 'modale/ZoomResultat.html.twig'
-  with { 'Indentation' : Indentation ~ '    ' }
-  ~%}
+  {%~ if Zoom != 0 %}
+    {%-
+    include 'modale/ZoomResultat.html.twig'
+    with { 'Indentation' : Indentation ~ '    ' }
+    ~%}
+  {%~ endif %}
   {%~ if JourSpecial['Jour'] != 0 %}
     {%-
     include 'modale/JourSpecial.html.twig'

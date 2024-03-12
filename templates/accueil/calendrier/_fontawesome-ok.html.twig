@@ -6,7 +6,7 @@
   {% set Image = 'fa-gift' %}
 {%~ endif -%}
 
-{{~ Indentation }}<div id={{ Jour }} class="m-2 text-success bloc {{ Bordure }} {{ Taille }}" data-style="{{ Style }}" data-bordure="{{ Bordure }}" data-taille="{{ Taille }}" data-url="{{ path('Cadeau',{'Id':Jour}) }}">
+{{~ Indentation }}<div id={{ Jour }} class="m-2 text-success bloc {{ Bordure }} {{ Taille }}" data-style="{{ Style }}" data-bordure="{{ Bordure }}" data-zoom="{{ Zoom }}" data-taille="{{ Taille }}" data-url="{{ path('Cadeau',{'Id':Jour}) }}">
 {{~ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Taille }}"></i>
 {{~ Indentation }}  <strong class="m-0 chiffre {{ Taille }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
 {{~ Indentation }}</div>
