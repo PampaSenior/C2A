@@ -1,11 +1,11 @@
-{% set JourSpecial = 25 -%}
-
 {%~ if Noel == 0 %}
   {% set MaxBoucle1 = 3 %}
   {% set MaxBoucle2 = 5 %}
+  {% set JourEtoile = [24] %}
 {%~ else %}
   {% set MaxBoucle1 = 4 %}
   {% set MaxBoucle2 = 4 %}
+  {% set JourEtoile = [25] %}
 {%~ endif %}
 
 {% set Compteur = 0 -%}
@@ -13,16 +13,16 @@
 {% for i in 0..MaxBoucle1 %}
   {{~ Indentation }}<div class="mx-auto d-flex justify-content-center">
   {%~ for j in 0..MaxBoucle2 %}
-    {%~ set Compteur = Compteur+1 %}
+    {%~ set Compteur = Compteur + 1 %}
     {%~
-    include Modele
+    include 'accueil/calendrier/_jour.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
            'Style' : Style,
            'Bordure' : Bordure,
            'Zoom' : Zoom,
            'Taille' : Taille,
            'Couleur' : Couleur,
-           'JourSpecial' : JourSpecial,
+           'JourEtoile' : JourEtoile,
            'Jour' : Compteur }
     ~%}
   {%~ endfor %}

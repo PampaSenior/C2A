@@ -22,12 +22,6 @@
   {% set Modele = 'accueil/calendrier/_forme-sapin.html.twig' %}
 {%~ endif %}
 
-{%~ if Style in [0, 1] %}
-  {% set Dessin = 'accueil/calendrier/_fontawesome-ok.html.twig' %}
-{%~ else %}
-  {% set Dessin = 'accueil/calendrier/_fontawesome-nok.html.twig' %}
-{%~ endif %}
-
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
   {{~ Indentation }}  <div>
@@ -44,13 +38,12 @@
   {%-
   include Modele
   with { 'Indentation' : Indentation ~ '    ',
+         'Couleur' : CouleurTexte,
          'Noel' : Noel,
-         'Modele' : Dessin,
          'Style' : Style,
          'Bordure' : Bordure,
          'Zoom' : Zoom,
-         'Taille' : Taille,
-         'Couleur' : CouleurTexte }
+         'Taille' : Taille }
   -%}
   {%~ if Zoom != 0 %}
     {%-

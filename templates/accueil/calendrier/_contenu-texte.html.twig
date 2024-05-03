@@ -1,0 +1,47 @@
+{%~ if Zoom == 1 %}
+  {% set Position = 'position-absolute top-0 start-0' %}
+{%~ elseif Zoom == 2 %}
+  {% set Position = 'position-absolute top-0 start-50' %}
+{%~ elseif Zoom == 3 %}
+  {% set Position = 'position-absolute top-0 start-100' %}
+{%~ elseif Zoom == 4 %}
+  {% set Position = 'position-absolute top-50 start-0' %}
+{%~ elseif Zoom == 5 %}
+  {% set Position = 'position-absolute top-50 start-100' %}
+{%~ elseif Zoom == 6 %}
+  {% set Position = 'position-absolute top-100 start-0' %}
+{%~ elseif Zoom == 7 %}
+  {% set Position = 'position-absolute top-100 start-50' %}
+{%~ elseif Zoom == 8 %}
+  {% set Position = 'position-absolute top-100 start-100' %}
+{%~ else %}
+  {% set Position = '' %}
+{%~ endif %}
+
+{%~ if Taille == 'sm' %}
+  {% set TexteGagnant = 'Resultat.Gagnant.sm'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.sm'|trans({},'messages') %}
+{%~ elseif Taille == 'md' %}
+  {% set TexteGagnant = 'Resultat.Gagnant.md'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.md'|trans({},'messages') %}
+{%~ elseif Taille == 'lg' %}
+  {% set TexteGagnant = 'Resultat.Gagnant.lg'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.lg'|trans({},'messages') %}
+{%~ else %}
+  {% set TexteGagnant = 'Resultat.Gagnant.xl'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.xl'|trans({},'messages') %}
+{%~ endif %}
+
+{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Bordure }} {{ Taille }} position-relative" title="{{ TexteGagnant }}{{ Gagnant }}{{ '\n' }}{{ TexteCadeau }}{{ Cadeau }}" data-taille="{{ Taille }}">
+{{~ Indentation }}  <span class="d-block text-danger text-truncate">
+{{~ Indentation }}    {% if TexteGagnant != '' %}<p class="m-0">{{ TexteGagnant }}</p>{%~ endif %}
+{{~ Indentation }}    <p class="m-0">{{ Gagnant }}</p>
+{{~ Indentation }}    {% if TexteCadeau != '' %}<p class="m-0">{{ TexteCadeau }}</p>{%~ endif %}
+{{~ Indentation }}    <p class="m-0">{{ Cadeau }}</p>
+{{~ Indentation }}  </span>
+{{~ Indentation }}  <div>
+{{~ Indentation }}    <button type="button" class="py-2 {{ Position }} translate-middle badge bg-danger border-0" data-gagnant="{{ Gagnant }}" data-cadeau="{{ Cadeau }}" {% if Illustration != '' %}data-photo="{{ Illustration }}" %}{% endif %} onclick="ClicLoupe()">
+{{~ Indentation }}      <i class="fa-solid fa-magnifying-glass"></i>
+{{~ Indentation }}    </button>
+{{~ Indentation }}  </div>
+{{~ Indentation }}</div>

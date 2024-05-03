@@ -1,0 +1,32 @@
+{%~ if Style is defined %}
+  {%~ if Style in 0..1 %}
+    {%~
+    include 'accueil/calendrier/_contenu-fontawesome.html.twig'
+    with { 'Indentation' : Indentation ~ '  ',
+           'Couleur' : Couleur,
+           'Aleatoire': Style,
+           'Jour': Jour,
+           'JourEtoile' : JourEtoile }
+    ~%}
+  {%- else %}
+    {%~
+    include 'accueil/calendrier/_contenu-image.html.twig'
+    with { 'Indentation' : Indentation ~ '  ',
+           'Bordure': Bordure,
+           'Taille' : Taille,
+           'Jour': Jour }
+    ~%}
+  {%- endif %}
+{%~ else %}
+  {%~
+  include 'accueil/calendrier/_contenu-texte.html.twig'
+  with { 'Indentation' : Indentation ~ '  ',
+         'Bordure': Bordure,
+         'Zoom': Zoom,
+         'Taille' : Taille,
+         'Jour': Jour,
+         'Gagnant': Gagnant,
+         'Cadeau': Cadeau,
+         'Illustration': Illustration }
+  ~%}
+{%~ endif %}
