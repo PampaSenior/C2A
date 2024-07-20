@@ -2,9 +2,10 @@
 
 namespace App\Command;
 
-use App\Service\Application;
+use App\Service\Ressource;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -18,46 +19,13 @@ use Symfony\Component\Console\Helper\ProgressBar;
 )]
 class Installation extends Command
 {
-    /** @var array<string, array{Dossier:string, Source:string, Cible:string}> $chemins */
-    private array $chemins;
-    /** @var array<int, string> $messages */
-    private array $messages;
-    /** @var array<int, bool> $echecs */
-    private array $echecs;
+    private Ressource $ressources;
 
-    public function __construct()
+    public function __construct(ParameterBagInterface $parametre)
     {
         parent::__construct();
 
-        $application = new Application();
-        $dossierRacine = $application->getDossierPublic() . '../';
-        $dossierDocument = $application->getDossierPublic() . $application->getDossierDocument();
-
-        $this->chemins['Initialisation'] = [
-            'Dossier' => $dossierRacine,
-            'Source' => '.env',
-            'Cible' => '.env.local'
-        ];
-        $this->chemins['Resultat'] = [
-            'Dossier' => $dossierDocument,
-            'Source' => 'exemple-resultats.csv',
-            'Cible' => 'resultats.csv'
-        ];
-        $this->chemins['Participant'] = [
-            'Dossier' => $dossierDocument,
-            'Source' => 'exemple-participants.csv',
-            'Cible' => 'participants.csv'
-        ];
-        $this->chemins['Lot'] = [
-            'Dossier' => $dossierDocument,
-            'Source' => 'exemple-lots.csv',
-            'Cible' => 'lots.csv'
-        ];
-
-        $this->messages = [
-            "<fg=green>FR : Installation du fichier réussie.\nEN : File installation successed.</>",
-            "<fg=bright-red>FR: Installation du fichier échouée.\nEN : File installation failed.</>",
-        ];
+        $this->ressources = new Ressource($parametre);
     }
 
     protected function configure(): void
@@ -74,18 +42,36 @@ class Installation extends Command
 
     protected function execute(InputInterface $entree, OutputInterface $sortie): int
     {
+        $messages = [
+            "<fg=bright-red>FR: Installation du fichier échouée.\nEN : File installation failed.</>",
+            "<fg=green>FR : Installation du fichier réussie.\nEN : File installation successed.</>",
+        ];
 
-        $avancement = new ProgressBar($sortie, count($this->chemins));
+        $etat = Command::SUCCESS;
+
+        $avancement = new ProgressBar(
+            $sortie,
+            count($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN))
+        );
         $avancement->setFormat('normal');
         $avancement->setBarWidth(10);
         $avancement->start();
 
-        foreach ($this->chemins as $clef => $fichier) {
-            $this->echecs[] = $this->generation($clef, $fichier, $entree->getOption('dev') ? 'dev' : 'prod');
+        foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $clef => $fichier) {
+            $succes = $this->generation($clef, $fichier, $entree->getOption('dev') ? 'dev' : 'prod');
+
+            if ($succes === false) {
+                $etat = Command::FAILURE;
+            }
 
             $sortie->write("\r");
-            $sortie->writeln('Installation : ' . $fichier['Source'] . ' --> ' . $fichier['Cible']);
-            $sortie->writeln($this->messages[end($this->echecs) === true]);
+            $sortie->writeln(
+                'Installation : '
+                . $fichier[$this->ressources::CAS_SAUVEGARDE]
+                . ' --> '
+                . $fichier[$this->ressources::CAS_ORIGINAL]
+            );
+            $sortie->writeln($messages[$succes]);
 
             $avancement->advance();
             $avancement->display();
@@ -93,13 +79,7 @@ class Installation extends Command
 
         $avancement->finish();
 
-        foreach ($this->echecs as $echec) {
-            if ($echec) {
-                return Command::FAILURE;
-            }
-        }
-
-        return Command::SUCCESS;
+        return $etat;
     }
 
     private function secret(int $taille): string
@@ -108,38 +88,42 @@ class Installation extends Command
         return bin2hex($chaine);
     }
 
-    /** @param array{Dossier:string, Source:string, Cible:string} $fichier */
+    /** @param array{original: string, sauvegarde: string} $fichier */
     private function generation(string $clef, array $fichier, string $option): bool
     {
-        $succes = false;
+        $sortie = false;
 
-        $fichierSource = $fichier['Dossier'] . $fichier['Source'];
-        $fichierCible = $fichier['Dossier'] . $fichier['Cible'];
+        if (file_exists($fichier[$this->ressources::CAS_SAUVEGARDE])) {
+            $contenu = $this->ressources->lecture(
+                $clef,
+                $this->ressources::CAS_SAUVEGARDE
+            );
 
-        if (file_exists($fichierSource)) {
-            $contenu = file_get_contents($fichierSource);
-
-            if ($clef == 'Initialisation') {
+            if ($clef == 'initialisation') {
                 $contenu = preg_replace(
                     '/^#([A-Z]+.*)/m',
                     '${1}',
-                    $contenu === false ? '' : $contenu
+                    $contenu
                 ); //Supprime le caractère de commentaire
-                $contenu = preg_replace(
-                    '/0{32}/',
-                    $this->secret(16),
-                    is_null($contenu) ? '' : $contenu
-                ); //Renseigne le secret
                 $contenu = preg_replace(
                     '/^(APP_ENV=).*/m',
                     '${1}' . $option,
                     is_null($contenu) ? '' : $contenu
                 ); /*Renseigne l'environnement*/
+                $contenu = preg_replace(
+                    '/0{32}/',
+                    $this->secret(16),
+                    is_null($contenu) ? '' : $contenu
+                ); //Renseigne le secret
             }
 
-            $succes = file_put_contents($fichierCible, $contenu, LOCK_EX);
+            $sortie = $this->ressources->ecriture(
+                $clef,
+                $this->ressources::CAS_ORIGINAL,
+                is_null($contenu) ? '' : $contenu
+            );
         }
 
-        return $succes === false;
+        return $sortie;
     }
 }

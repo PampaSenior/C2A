@@ -6,7 +6,7 @@
   {%~ endif -%}
   {{~ Indentation }}<li class="nav-item" role="presentation">
   {{~ Indentation }}  <button class="nav-link{{ Defaut }}" type="button" data-bs-toggle="tab" data-bs-target="#{{ Clef }}" aria-selected="true" title="{{ Titre|trans({},'messages',Clef) }}">
-  {{~ Indentation }}    <img src="{{ path('Accueil') }}{{ Application.getDossierImage() }}{{ Drapeau }}" width="45em">
+  {{~ Indentation }}    <img src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'images') ~ Drapeau) }}" width="45em">
   {{~ Indentation }}  </button>
   {{~ Indentation }}</li>
 {% endfor %}

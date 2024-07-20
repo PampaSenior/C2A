@@ -2,57 +2,35 @@
 
 namespace App\Tests;
 
-use App\Service\Application as Logiciel;
+use App\Service\Ressource;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class InstallationTest extends KernelTestCase
 {
+    private Ressource $ressources;
     private string $suffixe;
-    /** @var array<string, array{Dossier:string, Source:string, Cible:string}> $chemins */
-    private array $chemins;
 
     /**
      * Permet de vérifier la fonctionnalité d'installation automatique de l'application
      */
     public function testInstallation(): void
     {
+        $noyau = self::bootKernel();
+
+        $parametre = static::getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $this->ressources = new Ressource($parametre);
+
         $this->suffixe = '.sauver';
 
-        $application = new Logiciel();
-        $dossierRacine = $application->getDossierPublic() . '../';
-        $dossierDocument = $application->getDossierPublic() . $application->getDossierDocument();
-
-        $this->chemins['Initialisation'] = [
-            'Dossier' => $dossierRacine,
-            'Source' => '.env',
-            'Cible' => '.env.local',
-        ];
-        $this->chemins['Resultat'] = [
-            'Dossier' => $dossierDocument,
-            'Source' => 'exemple-resultats.csv',
-            'Cible' => 'resultats.csv',
-        ];
-        $this->chemins['Participant'] = [
-            'Dossier' => $dossierDocument,
-            'Source' => 'exemple-participants.csv',
-            'Cible' => 'participants.csv',
-        ];
-        $this->chemins['Lot'] = [
-            'Dossier' => $dossierDocument,
-            'Source' => 'exemple-lots.csv',
-            'Cible' => 'lots.csv',
-        ];
-
-        $noyau = static::createKernel();
         $application = new Application($noyau);
-
         $command = $application->find('app:Installation');
         $commandTester = new CommandTester($command);
 
         //Sauvegarde des fichiers générés par l'installation déjà présents
-        $this->originaux('Sauvegarder', 'Cible');
+        $this->originaux('sauvegarder');
 
         //Cas avec l'argument pour de la production
         $commandTester->execute(['--dev' => false]);
@@ -65,15 +43,16 @@ class InstallationTest extends KernelTestCase
         $this->nettoyage();
 
         //Cas d'un fichier source absent
-        foreach ($this->chemins as $fichier) {
-            $document = $fichier['Dossier'] . $fichier['Source'];
-
-            $affichageEchec = 'Installation : ' . $fichier['Source'] . ' --> ' . $fichier['Cible']
-                . PHP_EOL .
-                "FR: Installation du fichier échouée.\nEN : File installation failed.";
+        foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $fichier) {
+            $affichageEchec = 'Installation : '
+                . $fichier[$this->ressources::CAS_SAUVEGARDE]
+                . ' --> '
+                . $fichier[$this->ressources::CAS_ORIGINAL]
+                . PHP_EOL
+                . "FR: Installation du fichier échouée.\nEN : File installation failed.";
 
             //Sauvegarde du fichier original
-            $this->original('Sauvegarder', $document);
+            $this->original('sauvegarder', $fichier[$this->ressources::CAS_SAUVEGARDE]);
 
             $commandTester->execute([]);
             $this->assertSame($commandTester->getStatusCode(), 1);
@@ -81,28 +60,26 @@ class InstallationTest extends KernelTestCase
             $this->nettoyage();
 
             //Rétablissement du fichier original
-            $this->original('Retablir', $document);
+            $this->original('retablir', $fichier['sauvegarde']);
         }
 
         //Rétablissement des fichiers générés par l'installation déjà présents
-        $this->originaux('Retablir', 'Cible');
+        $this->originaux('retablir');
     }
 
     private function nettoyage(): void
     {
-        foreach ($this->chemins as $fichier) {
-            $chemin = $fichier['Dossier'] . $fichier['Cible'];
-            if (file_exists($chemin)) {
-                unlink($chemin);
+        foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $fichier) {
+            if (file_exists($fichier[$this->ressources::CAS_ORIGINAL])) {
+                unlink($fichier[$this->ressources::CAS_ORIGINAL]);
             }
         }
     }
 
-    private function originaux(string $sens, string $contexte): void
+    private function originaux(string $sens): void
     {
-        foreach ($this->chemins as $fichier) {
-            $document = $fichier['Dossier'] . $fichier[$contexte];
-            $this->original($sens, $document);
+        foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $fichier) {
+            $this->original($sens, $fichier[$this->ressources::CAS_ORIGINAL]);
         }
     }
 
@@ -126,12 +103,17 @@ class InstallationTest extends KernelTestCase
         //Vérification de la sortie de la commande
         $this->assertSame($commande->getStatusCode(), $sortie);
         //Vérification de la génération des fichiers
-        foreach ($this->chemins as $fichier) {
-            $fichierCible = $fichier['Dossier'] . $fichier['Cible'];
-            $this->assertFileExists($fichierCible);
+        foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $fichier) {
+            $this->assertFileExists($fichier[$this->ressources::CAS_ORIGINAL]);
         }
         //Vérification du contenu de .env.local
-        $contenu = file_get_contents($this->chemins['Initialisation']['Cible']);
+        $contenu = file_get_contents(
+            $this->ressources->getFichier(
+                $this->ressources::FORMAT_CHEMIN,
+                'initialisation',
+                $this->ressources::CAS_ORIGINAL
+            )
+        );
         $this->assertStringContainsString('APP_ENV=' . $environnement, $contenu === false ? '' : $contenu);
         $this->assertMatchesRegularExpression('/^APP_SECRET=[0-9a-f]{32}$/m', $contenu === false ? '' : $contenu);
     }

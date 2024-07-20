@@ -8,7 +8,7 @@
     <meta name="description" content="{{ Application.getDescription() }}">
     <meta name="Publication" content="{{ Application.getVersionDate() }}">
     <meta name="Version" content="{{ Application.getVersion() }}">
-    {%~ if app.environment == 'dev' %}
+    {%~ if app.environment != 'prod' %}
     <meta name="VersionPHP" content="{{ Application.getVersionPHP() }}">
     <meta name="VersionSymfony" content="{{ Application.getVersionSymfony() }}">
     {%~ endif %}
@@ -18,15 +18,15 @@
     {%~ endblock %}
     </title>
     {%~ block stylesheets %}
-    <link rel="icon" href="{{ path('Accueil') }}{{ Application.getDossierImage() }}{{ Application.getIcone() }}"> {% if app.environment == 'dev' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
-    <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}1-Bootstrap_V5.3.2.css" type="text/css" title="Jour"> {% if app.environment == 'dev' %}<!-- Permet d'utiliser le thème bootstrap -->{% endif %} 
-    <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}2-Font_Awesome_V6.5.1.css" type="text/css"> {% if app.environment == 'dev' %}<!-- Permet d'utiliser la banque d'icones -->{% endif %} 
-    <link rel="stylesheet" href="{{ path('Accueil') }}{{ Application.getDossierStyle() }}3-Calendrier.css" type="text/css"> {% if app.environment == 'dev' %}<!-- Permet de rajouter du style sur la page du calendrier -->{% endif %} 
+    <link rel="icon" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'images') ~ Application.getIcone()) }}"> {% if app.environment != 'prod' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
+    <link rel="stylesheet" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'styles') ~ '1-Bootstrap_V5.3.2.css') }}" type="text/css" title="Jour"> {% if app.environment != 'prod' %}<!-- Permet d'utiliser le thème bootstrap -->{% endif %} 
+    <link rel="stylesheet" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'styles') ~ '2-Font_Awesome_V6.5.1.css') }}" type="text/css"> {% if app.environment != 'prod' %}<!-- Permet d'utiliser la banque d'icones -->{% endif %} 
+    <link rel="stylesheet" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'styles') ~ '3-Calendrier.css') }}" type="text/css"> {% if app.environment != 'prod' %}<!-- Permet de rajouter du style sur la page du calendrier -->{% endif %} 
     {%~ endblock %}
     {%~ block javascripts %}
-    <script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}1-jQuery_V3.7.1.js"></script>
-    <script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}2-Bootstrap_V5.3.2.js"></script>
-    <script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}3-Font_Awesome_V6.5.1.js"></script>
+    <script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '1-jQuery_V3.7.1.js') }}"></script>
+    <script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '2-Bootstrap_V5.3.2.js') }}"></script>
+    <script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '3-Font_Awesome_V6.5.1.js') }}"></script>
     {%~ endblock %}
   </head>
   {%~ block body %}

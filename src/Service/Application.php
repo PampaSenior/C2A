@@ -21,12 +21,11 @@ class Application
     private string $versionPHP;
     private string $versionSymfony;
 
-    private string $dossierPublic;
-    private string $dossierStyle;
-    private string $dossierScript;
-    private string $dossierImage;
-    private string $dossierPolice;
-    private string $dossierDocument;
+    /** @var array<string, string> $dossiers */
+    private array $dossiers;
+
+    /** @var array<string, string> $fichiers */
+    private array $fichiers;
 
     public function __construct()
     {
@@ -46,12 +45,19 @@ class Application
         $this->versionPHP = phpversion();
         $this->versionSymfony = \Symfony\Component\HttpKernel\Kernel::VERSION;
 
-        $this->dossierPublic = __DIR__ . '/../../public/';
-        $this->dossierStyle = '1-css/';
-        $this->dossierScript = '2-js/';
-        $this->dossierImage = '3-images/';
-        $this->dossierPolice = '4-polices/';
-        $this->dossierDocument = '5-documents/';
+        $this->dossiers = [
+            'styles' => '1-css',
+            'scriptes' => '2-js',
+            'images' => '3-images',
+            'polices' => '4-polices',
+            'documents' => '5-documents',
+        ];
+
+        $this->fichiers = [
+            'resultats' => 'resultats.csv',
+            'participants' => 'participants.csv',
+            'lots' => 'lots.csv'
+        ];
     }
 
     public function getPrenomAuteur(): string
@@ -134,33 +140,15 @@ class Application
         return $this->versionSymfony;
     }
 
-    public function getDossierPublic(): string
+    /** @return array<string, string> */
+    public function getDossiers(): array
     {
-        return $this->dossierPublic;
+        return $this->dossiers;
     }
 
-    public function getDossierStyle(): string
+    /** @return array<string, string> */
+    public function getFichiers(): array
     {
-        return $this->dossierStyle;
-    }
-
-    public function getDossierScript(): string
-    {
-        return $this->dossierScript;
-    }
-
-    public function getDossierImage(): string
-    {
-        return $this->dossierImage;
-    }
-
-    public function getDossierPolice(): string
-    {
-        return $this->dossierPolice;
-    }
-
-    public function getDossierDocument(): string
-    {
-        return $this->dossierDocument;
+        return $this->fichiers;
     }
 }

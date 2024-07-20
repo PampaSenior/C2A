@@ -18,6 +18,7 @@ parameters:
     Bordure: '%env(int:BORDURE)%'
     Zoom: '%env(int:ZOOM)%'
     Taille: '%env(string:TAILLE)%'
+    Tirage: '%env(int:TIRAGE)%'
     Pot2Miel: '%env(json:POT_2_MIEL)%'
 
 framework:

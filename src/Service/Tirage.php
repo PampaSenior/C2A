@@ -2,97 +2,72 @@
 
 namespace App\Service;
 
-use App\Service\Application;
+use App\Service\Ressource;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Tirage
 {
-    private Application $application;
-    /** @var array<string, string> $chemins */
-    private array $chemins;
+    private string $mode;
+    private int $nb;
+    private Ressource $ressources;
 
-    public function __construct()
+    public function __construct(ParameterBagInterface $parametre)
     {
-        $this->application = new Application();
-        $dossier = $this->application->getDossierPublic() . $this->application->getDossierDocument();
-
-        $fichiers = [
-            'Resultats' => 'resultats.csv',
-            'Participants' => 'participants.csv',
-            'Lots' => 'lots.csv'
-        ];
-        foreach ($fichiers as $clef => $fichier) {
-            $this->chemins[$clef] = $dossier . $fichier;
+        switch ($parametre->get('Tirage')) {
+            case 1:
+                $this->mode = 'participants';
+                break;
+            case 2:
+                $this->mode = 'lots';
+                break;
+            default:
+                $this->mode = 'resultats';
         }
+        $this->nb = 24 + $parametre->get('Noel');
+        $this->ressources = new Ressource($parametre);
     }
 
-    /** @return array<int, array{Gagnant:string, Cadeau:string, Illustration?:string}> */
+    /** @return array<int, array{Gagnant: string, Cadeau: string, Illustration?: string}> */
     public function getResultats(): array
     {
-        $fichier = $this->chemins['Resultats'];
-
-        if (!file_exists($fichier)) {
-            $this->tirageAuSort();
+        if (
+            !file_exists(
+                $this->ressources->getFichier(
+                    $this->ressources::FORMAT_CHEMIN,
+                    'resultats',
+                    $this->ressources::CAS_ORIGINAL
+                )
+            )
+        ) {
+            $this->setTirageAuSort();
         }
 
-        return $this->chargementResultats();
+        return $this->getTirageAuSort();
     }
 
-    private function tirageAuSort(): void
+    private function setTirageAuSort(): void
     {
-        $contenu = $this->lectureCSV($this->chemins['Participants']);
-        $participants = array_slice($contenu, 1, null, true); //Supprime uniquement la 1ere ligne d'entête
+        $participants = $this->extractionCSV('participants');
+        $lots = $this->extractionCSV('lots');
 
-        $contenu = $this->lectureCSV($this->chemins['Lots']);
-        $lots = array_slice($contenu, 1, 25, true); //Supprime la 1ere ligne d'entête et borne à 25 jours (= lignes)
-
-        if ($participants != [] && $lots != []) {
-            $nbElements = min(count($participants), count($lots));
-
-            $gagnants = $participants;
-            $cadeaux = $lots;
-            $cas = 0;
-
-            if (count($participants) > count($lots)) {
-                $gagnants = array_rand($participants, $nbElements);
-                $cas = 1;
-            } elseif (count($participants) < count($lots)) {
-                $cadeaux = array_rand($lots, $nbElements);
-                $cas = 2;
+        if ($this->nb == count($participants) && $this->nb == count($lots)) {
+            //Génération des lignes pour le CSV
+            $lignes = [];
+            for ($i = 0; $i <= $this->nb - 1; $i++) {
+                $lignes[$i] = $participants[$i] . ',' . $lots[$i];
             }
 
-            $tableau = [];
-            for ($i = 1; $i <= min($nbElements, 25); $i++) {
-                switch ($cas) {
-                    case 0:
-                        $tableau[$i] = $gagnants[$i] . ',' . $cadeaux[$i];
-                        break;
-                    case 1:
-                        $tableau[$i] = $participants[$gagnants[$i - 1]] . ',' . $cadeaux[$i];
-                        break;
-                    case 2:
-                        $tableau[$i] = $gagnants[$i] . ',' . $lots[$cadeaux[$i - 1]];
-                        break;
-                }
-            }
-
-            shuffle($tableau);
-
-            $resultats = 'Gagnant,Cadeau,Illustration';
-            foreach ($tableau as $element) {
-                $resultats = $resultats . "\n" . $element;
-            }
-
-            $this->ecritureCSV($this->chemins['Resultats'], $resultats);
+            //Création du fichier de résultats avec ces lignes
+            $this->insertionCSV('resultats', $lignes);
         }
     }
 
-    /** @return array<int, array{Gagnant:string, Cadeau:string, Illustration?:string}> */
-    private function chargementResultats(): array
+    /** @return array<int, array{Gagnant: string, Cadeau: string, Illustration?: string}> */
+    private function getTirageAuSort(): array
     {
         $resultats = [];
 
-        $contenu = $this->lectureCSV($this->chemins['Resultats']);
-        $contenu = array_slice($contenu, 1, 25, true); //Supprime la 1ere ligne d'entête et borne à 25 jours (= lignes)
+        $contenu = $this->extractionCSV('resultats');
 
         foreach ($contenu as $clef => $ligne) {
             $separation = explode(",", $ligne);
@@ -113,19 +88,29 @@ class Tirage
     }
 
     /** @return array<int, string> */
-    private function lectureCSV(string $chemin): array
+    private function extractionCSV(string $clef): array
     {
-        $resultat = [];
+        $contenu = $this->ressources->lecture($clef, $this->ressources::CAS_ORIGINAL);
+        $contenu = preg_split("/\R/", $contenu); /*Transforme la chaine en tableau (\R = \r\n, \n et \r)*/
+        $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /*Supprimer la ligne d'entête*/
 
-        if (file_exists($chemin)) {
-            $resultat = file($chemin, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+        if ($this->mode === $clef) {
+            shuffle($contenu);
         }
 
-        return $resultat === false ? [] : $resultat;
+        return array_slice($contenu, 0, $this->nb, false); /*On va retourner uniquement 24 à 25 lignes*/
     }
 
-    private function ecritureCSV(string $chemin, string $contenu): void
+    /** @param array<int, string> $contenu */
+    private function insertionCSV(string $clef, array $contenu): void
     {
-        file_put_contents($chemin, $contenu, LOCK_EX);
+        $finLigne = "\n";
+        $enTete = 'Gagnant,Cadeau,Illustration' . $finLigne;
+
+        if ($this->mode === $clef) {
+            shuffle($contenu);
+        }
+
+        $this->ressources->ecriture($clef, $this->ressources::CAS_ORIGINAL, $enTete . implode($finLigne, $contenu));
     }
 }

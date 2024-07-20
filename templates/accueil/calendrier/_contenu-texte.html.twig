@@ -39,9 +39,11 @@
 {{~ Indentation }}    {% if TexteCadeau != '' %}<p class="m-0">{{ TexteCadeau }}</p>{%~ endif %}
 {{~ Indentation }}    <p class="m-0">{{ Cadeau }}</p>
 {{~ Indentation }}  </span>
-{{~ Indentation }}  <div>
-{{~ Indentation }}    <button type="button" class="py-2 {{ Position }} translate-middle badge bg-danger border-0" data-gagnant="{{ Gagnant }}" data-cadeau="{{ Cadeau }}" {% if Illustration != '' %}data-photo="{{ Illustration }}" %}{% endif %} onclick="ClicLoupe()">
-{{~ Indentation }}      <i class="fa-solid fa-magnifying-glass"></i>
-{{~ Indentation }}    </button>
-{{~ Indentation }}  </div>
+{%~ if Zoom is not null %}
+  {{~ Indentation }}  <div>
+  {{~ Indentation }}    <button type="button" class="py-2 {{ Position }} translate-middle badge bg-danger border-0" data-gagnant="{{ Gagnant }}" data-cadeau="{{ Cadeau }}" {%~ if Illustration != '' %} data-photo="{{ Illustration }}" {% endif ~%} onclick="ClicLoupe()">
+  {{~ Indentation }}      <i class="fa-solid fa-magnifying-glass"></i>
+  {{~ Indentation }}    </button>
+  {{~ Indentation }}  </div>
+{%~ endif %}
 {{~ Indentation }}</div>

@@ -2,18 +2,27 @@
 
 namespace App\Service;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use App\Service\Ressource;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Verification
 {
     private int $cas;
 
-    public function __construct(ContainerBagInterface $parametre)
+    public function __construct(ParameterBagInterface $parametre)
     {
         $this->cas = 0;
 
-        if ($_ENV['Resultats'] == []) {
-            $this->cas = 3;
+        // Note : ce service n'utilise pas les paramètres du .env
+        $ressources = new Ressource($parametre);
+
+        if (
+            !file_exists(
+                $ressources->getFichier($ressources::FORMAT_CHEMIN, 'initialisation', $ressources::CAS_ORIGINAL)
+            )
+        ) {
+            $this->cas = 1;
+            return;
         }
 
         try {
@@ -35,13 +44,28 @@ class Verification
             $parametre->get('Bordure');
             $parametre->get('Zoom');
             $parametre->get('Taille');
+            $parametre->get('Tirage');
             $parametre->get('Pot2Miel');
         } catch (\Exception $pb) {
             $this->cas = 2;
+            return;
         }
 
-        if (!file_exists('../.env.local')) {
-            $this->cas = 1;
+        if (
+            !file_exists(
+                $ressources->getFichier($ressources::FORMAT_CHEMIN, 'resultats', $ressources::CAS_ORIGINAL)
+            ) &&
+            (
+                !file_exists(
+                    $ressources->getFichier($ressources::FORMAT_CHEMIN, 'participants', $ressources::CAS_ORIGINAL)
+                ) ||
+                !file_exists(
+                    $ressources->getFichier($ressources::FORMAT_CHEMIN, 'lots', $ressources::CAS_ORIGINAL)
+                )
+            )
+        ) {
+            $this->cas = 3;
+            return;
         }
     }
 

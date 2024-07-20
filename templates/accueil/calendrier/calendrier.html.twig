@@ -1,14 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{%~ if Neige == 0 %}
-  {% set NeigeGrande = ' ' %}
-  {% set NeigeMoyenne = ' ' %}
-  {% set NeigePetite = ' ' %}
-{%~ elseif Neige == 1 %}
+{%~ if Neige == 1 %}
   {% set NeigeGrande = ' neige-flocon-grand ' %}
   {% set NeigeMoyenne = ' neige-flocon-moyen ' %}
   {% set NeigePetite = ' neige-flocon-petit ' %}
-{%~ else %}
+{%~ elseif Neige == 2 %}
   {% set NeigeGrande = ' neige-boule-grande ' %}
   {% set NeigeMoyenne = ' neige-boule-moyenne ' %}
   {% set NeigePetite = ' neige-boule-petite ' %}
@@ -24,11 +20,13 @@
 
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
-  {{~ Indentation }}  <div>
-  {{~ Indentation }}    <div class="neige {{~ NeigeGrande ~}} position-fixe z-index-n1"></div>
-  {{~ Indentation }}    <div class="neige {{~ NeigeMoyenne ~}} position-fixe z-index-n1"></div>
-  {{~ Indentation }}    <div class="neige {{~ NeigePetite ~}} position-fixe z-index-n1"></div>
-  {{~ Indentation }}  </div>
+  {%~ if Neige is not null %}
+    {{~ Indentation }}  <div>
+    {{~ Indentation }}    <div class="neige {{~ NeigeGrande ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ NeigeMoyenne ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ NeigePetite ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}  </div>
+  {%~ endif %}
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
   {{~ Indentation }}    <p class="my-5 h1 d-flex justify-content-center align-items-center">
   {{~ Indentation }}      <i class="me-4 fa-solid fa-holly-berry fa-2x text-danger"></i>
@@ -45,7 +43,7 @@
          'Zoom' : Zoom,
          'Taille' : Taille }
   -%}
-  {%~ if Zoom != 0 %}
+  {%~ if Zoom is not null %}
     {%-
     include 'modale/ZoomResultat.html.twig'
     with { 'Indentation' : Indentation ~ '    ' }
@@ -63,17 +61,17 @@
   {{~ Indentation }}  </div>
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}4-ZoomResultat.js"></script>
+    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
     {%~ if JourSpecial['Jour'] != 0 %}
-      {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}5-JourSpecial.js"></script>
+      {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '5-JourSpecial.js') }}"></script>
       {{~ Indentation }}<script>JourSpecial({{ JourSpecial['Jour'] }},{{ JourSpecial['Mois'] }});</script>
     {%~ endif %}
     {%- set Jour = "now"|date("j") -%}
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}6-JourAvant.js"></script>
+    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '6-JourAvant.js') }}"></script>
     {{~ Indentation }}<script>JourAvant({{ Jour }},{{ MoisActivation }});</script>
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}7-JourActuel.js"></script>
+    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '7-JourActuel.js') }}"></script>
     {{~ Indentation }}<script>JourActuel({{ Jour }},{{ MoisActivation }});</script>
-    {{~ Indentation }}<script src="{{ path('Accueil') }}{{ Application.getDossierScript() }}8-JourChange.js"></script>
+    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '8-JourChange.js') }}"></script>
     {{~ Indentation }}<script>setInterval(JourChange,1000,{{ Jour }});</script>
   {%~ endblock %}
   {{~ Indentation }}</body>

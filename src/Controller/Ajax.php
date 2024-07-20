@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Service\Verification;
-use App\Service\Application;
+use App\Service\Tirage;
+use App\Service\Ressource;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/Ajax')]
 class Ajax extends AbstractController
 {
-    #[Route('/Cadeau/{Id}', name: 'Cadeau', requirements: ['Id' => '\d+'], methods: ['GET'])]
+    #[Route('/Cadeau/{Id}', name: 'Cadeau', requirements: ['Id' => '^([1-9]|1[0-9]|2[0-5])$'], methods: ['GET'])]
     public function cadeau(int $Id): Response
     {
         $Verification = new Verification($this->container->get('parameter_bag'));
@@ -54,15 +55,15 @@ class Ajax extends AbstractController
                 $Zoom = 0;
         }
 
-        $Noel = $this->getParameter('Noel') == 1; //TODO : Mettre cela dans Tirage mais après Verification...
         $Pot2Miel = $this->getParameter('Pot2Miel');
+
+        $Tirage = new Tirage($this->container->get('parameter_bag'));
+        $Resultats = $Tirage->getResultats();
 
         //Pour récupérer le numéro du jour et le mois côté serveur
         $Date = new \DateTime('now');
         $Jour = $Date->format("j");
         $Mois = $Date->format("n");
-
-        $Resultats = array_slice($_ENV['Resultats'], 0, 24 + $Noel, true); /*Récupère 24 éléments sauf si noël est activé TODO : Mettre cela dans Tirage mais après Verification...*/ //phpcs:ignore Generic.Files.LineLength
 
         $Gagnant = $Pot2Miel['Gagnant'];
         $Cadeau = $Pot2Miel['Cadeau'];
@@ -71,15 +72,22 @@ class Ajax extends AbstractController
         if ($Id <= $Jour && $Mois == $_ENV['Mois'] && isset($Resultats[$Id])) {
             //Pour vérifier l'image d'illustration du cadeau
             if (isset($Resultats[$Id]['Illustration'])) {
-                $Application = new Application();
-                $Fichier = $Application->getDossierImage() . $Resultats[$Id]['Illustration'];
-                $CheminOS = $Application->getDossierPublic() . $Fichier;
-                $CheminURL = $this->generateUrl('Accueil') . $Fichier;
+                $ressources = new Ressource($this->container->get('parameter_bag'));
+                $cheminOS = $ressources->getDossier(
+                    $ressources::FORMAT_CHEMIN,
+                    'images'
+                ) . $Resultats[$Id]['Illustration'];
+                $cheminURL = $ressources->getDossier(
+                    $ressources::FORMAT_URL,
+                    'images'
+                ) . $Resultats[$Id]['Illustration'];
 
                 $Resultats[$Id]['Illustration'] = "";
-                if (file_exists($CheminOS)) {
-                    $Resultats[$Id]['Illustration'] = $CheminURL;
+                if (file_exists($cheminOS)) {
+                    $Resultats[$Id]['Illustration'] = $cheminURL;
                 }
+            } else {
+                $Resultats[$Id]['Illustration'] = "";
             }
 
             $Gagnant = $Resultats[$Id]['Gagnant'];
