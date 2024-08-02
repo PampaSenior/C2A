@@ -116,7 +116,7 @@ class Accueil extends AbstractController
                     'Texte' => $TexteModale,
                     'Type' => $TypeModale
                 ],
-                'MoisActivation' => $_ENV['Mois']
+                'MoisActivation' => $this->getParameter('kernel.environment') != "prod" ? $Date->format('n') : 12 /*Met le mois actuel en cas de développement*/ /*phpcs:ignore Generic.Files.LineLength*/
             ]
         );
     }

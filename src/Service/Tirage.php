@@ -7,7 +7,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Tirage
 {
-    private string $mode;
+    /** @var array<string> $modes */
+    private array $modes;
     private int $nb;
     private Ressource $ressources;
 
@@ -15,13 +16,13 @@ class Tirage
     {
         switch ($parametre->get('Tirage')) {
             case 1:
-                $this->mode = 'participants';
+                $this->modes = ['participants'];
                 break;
             case 2:
-                $this->mode = 'lots';
+                $this->modes = ['lots'];
                 break;
             default:
-                $this->mode = 'resultats';
+                $this->modes = ['participants', 'lots'];
         }
         $this->nb = 24 + $parametre->get('Noel');
         $this->ressources = new Ressource($parametre);
@@ -94,7 +95,7 @@ class Tirage
         $contenu = preg_split("/\R/", $contenu); /*Transforme la chaine en tableau (\R = \r\n, \n et \r)*/
         $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /*Supprimer la ligne d'entête*/
 
-        if ($this->mode === $clef) {
+        if (in_array($clef, $this->modes)) {
             shuffle($contenu);
         }
 
@@ -106,10 +107,6 @@ class Tirage
     {
         $finLigne = "\n";
         $enTete = 'Gagnant,Cadeau,Illustration' . $finLigne;
-
-        if ($this->mode === $clef) {
-            shuffle($contenu);
-        }
 
         $this->ressources->ecriture($clef, $this->ressources::CAS_ORIGINAL, $enTete . implode($finLigne, $contenu));
     }

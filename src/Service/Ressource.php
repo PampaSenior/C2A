@@ -27,29 +27,35 @@ class Ressource
             $this->dossiers[self::FORMAT_CHEMIN][$clef] = $dossierPublic . $dossier . DIRECTORY_SEPARATOR;
         }
 
-        $suffixe = '.local';
-
-        $this->fichiers[self::FORMAT_URL]['initialisation'] = [
-                self::CAS_ORIGINAL => '.env' . $suffixe,
-                self::CAS_SAUVEGARDE => '.env',
-        ];
-
-        $this->fichiers[self::FORMAT_CHEMIN]['initialisation'] = [
-                self::CAS_ORIGINAL => $dossierPrincipal . '.env' . $suffixe,
-                self::CAS_SAUVEGARDE => $dossierPrincipal . '.env',
-        ];
-
-        $prefixe = 'exemple-';
-
         foreach ($application->getFichiers() as $clef => $fichier) {
-            $this->fichiers[self::FORMAT_URL][$clef] = [
-                self::CAS_ORIGINAL => $this->getDossier(self::FORMAT_URL, 'documents') . $fichier,
-                self::CAS_SAUVEGARDE => $this->getDossier(self::FORMAT_URL, 'documents') . $prefixe . $fichier,
+            $prefixe = 'exemple-';
+
+            $url = [
+              self::CAS_ORIGINAL => $this->getDossier(self::FORMAT_URL, 'documents') . $fichier,
+              self::CAS_SAUVEGARDE => $this->getDossier(self::FORMAT_URL, 'documents') . $prefixe . $fichier,
             ];
-            $this->fichiers[self::FORMAT_CHEMIN][$clef] = [
-                self::CAS_ORIGINAL => $this->getDossier(self::FORMAT_CHEMIN, 'documents') . $fichier,
-                self::CAS_SAUVEGARDE => $this->getDossier(self::FORMAT_CHEMIN, 'documents') . $prefixe . $fichier,
+
+            $chemin = [
+              self::CAS_ORIGINAL => $this->getDossier(self::FORMAT_CHEMIN, 'documents') . $fichier,
+              self::CAS_SAUVEGARDE => $this->getDossier(self::FORMAT_CHEMIN, 'documents') . $prefixe . $fichier,
             ];
+
+            if ($clef == 'initialisation') {
+                $suffixe = '.local';
+
+                $url = [
+                  self::CAS_ORIGINAL => $fichier,
+                  self::CAS_SAUVEGARDE => str_replace($suffixe, '', $fichier),
+                ];
+
+                $chemin = [
+                  self::CAS_ORIGINAL => $dossierPrincipal . $fichier,
+                  self::CAS_SAUVEGARDE => $dossierPrincipal . str_replace($suffixe, '', $fichier),
+                ];
+            }
+
+            $this->fichiers[self::FORMAT_URL][$clef] = $url;
+            $this->fichiers[self::FORMAT_CHEMIN][$clef] = $chemin;
         }
     }
 

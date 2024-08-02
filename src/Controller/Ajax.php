@@ -69,30 +69,32 @@ class Ajax extends AbstractController
         $Cadeau = $Pot2Miel['Cadeau'];
         $Illustration = '';
 
-        if ($Id <= $Jour && $Mois == $_ENV['Mois'] && isset($Resultats[$Id])) {
+        $moisActivation = $this->getParameter('kernel.environment') != "prod" ? $Date->format('n') : 12; /*Met le mois actuel en cas de développement*/ /*phpcs:ignore Generic.Files.LineLength*/
+
+        if ($Id <= $Jour && $Mois == $moisActivation && isset($Resultats[$Id - 1])) {
             //Pour vérifier l'image d'illustration du cadeau
-            if (isset($Resultats[$Id]['Illustration'])) {
+            if (isset($Resultats[$Id - 1]['Illustration'])) {
                 $ressources = new Ressource($this->container->get('parameter_bag'));
                 $cheminOS = $ressources->getDossier(
                     $ressources::FORMAT_CHEMIN,
                     'images'
-                ) . $Resultats[$Id]['Illustration'];
+                ) . $Resultats[$Id - 1]['Illustration'];
                 $cheminURL = $ressources->getDossier(
                     $ressources::FORMAT_URL,
                     'images'
-                ) . $Resultats[$Id]['Illustration'];
+                ) . $Resultats[$Id - 1]['Illustration'];
 
-                $Resultats[$Id]['Illustration'] = "";
+                $Resultats[$Id - 1]['Illustration'] = "";
                 if (file_exists($cheminOS)) {
-                    $Resultats[$Id]['Illustration'] = $cheminURL;
+                    $Resultats[$Id - 1]['Illustration'] = $cheminURL;
                 }
             } else {
-                $Resultats[$Id]['Illustration'] = "";
+                $Resultats[$Id - 1]['Illustration'] = "";
             }
 
-            $Gagnant = $Resultats[$Id]['Gagnant'];
-            $Cadeau = $Resultats[$Id]['Cadeau'];
-            $Illustration = $Resultats[$Id]['Illustration'];
+            $Gagnant = $Resultats[$Id - 1]['Gagnant'];
+            $Cadeau = $Resultats[$Id - 1]['Cadeau'];
+            $Illustration = $Resultats[$Id - 1]['Illustration'];
         }
 
         return $this->render(

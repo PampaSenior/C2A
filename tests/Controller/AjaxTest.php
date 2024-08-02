@@ -9,7 +9,7 @@ class AjaxTest extends WebTestCase
     /**
      * Permet de vérifier la page d'api
      */
-    public function testAccueil(): void
+    public function testCadeau(): void
     {
         $client = static::createClient(); //Générer un navigateur fictif
 

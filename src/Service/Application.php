@@ -54,6 +54,7 @@ class Application
         ];
 
         $this->fichiers = [
+            'initialisation' => '.env.local',
             'resultats' => 'resultats.csv',
             'participants' => 'participants.csv',
             'lots' => 'lots.csv'

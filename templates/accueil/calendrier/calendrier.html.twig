@@ -20,7 +20,7 @@
 
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
-  {%~ if Neige is not null %}
+  {%~ if Neige != 0 %}
     {{~ Indentation }}  <div>
     {{~ Indentation }}    <div class="neige {{~ NeigeGrande ~}} position-fixe z-index-n1"></div>
     {{~ Indentation }}    <div class="neige {{~ NeigeMoyenne ~}} position-fixe z-index-n1"></div>
@@ -43,7 +43,7 @@
          'Zoom' : Zoom,
          'Taille' : Taille }
   -%}
-  {%~ if Zoom is not null %}
+  {%~ if Zoom != 0 %}
     {%-
     include 'modale/ZoomResultat.html.twig'
     with { 'Indentation' : Indentation ~ '    ' }
