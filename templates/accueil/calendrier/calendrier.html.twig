@@ -1,30 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{%~ if Neige == 1 %}
-  {% set NeigeGrande = ' neige-flocon-grand ' %}
-  {% set NeigeMoyenne = ' neige-flocon-moyen ' %}
-  {% set NeigePetite = ' neige-flocon-petit ' %}
-{%~ elseif Neige == 2 %}
-  {% set NeigeGrande = ' neige-boule-grande ' %}
-  {% set NeigeMoyenne = ' neige-boule-moyenne ' %}
-  {% set NeigePetite = ' neige-boule-petite ' %}
-{%~ endif %}
-
-{%~ if Forme == 0 %}
-  {% set Modele = 'accueil/calendrier/_forme-grille.html.twig' %}
-{%~ elseif Forme == 1 %}
-  {% set Modele = 'accueil/calendrier/_forme-losange.html.twig' %}
-{%~ else %}
-  {% set Modele = 'accueil/calendrier/_forme-sapin.html.twig' %}
-{%~ endif %}
-
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
-  {%~ if Neige != 0 %}
+  {%~ if Neige|length == 3 %}
     {{~ Indentation }}  <div>
-    {{~ Indentation }}    <div class="neige {{~ NeigeGrande ~}} position-fixe z-index-n1"></div>
-    {{~ Indentation }}    <div class="neige {{~ NeigeMoyenne ~}} position-fixe z-index-n1"></div>
-    {{~ Indentation }}    <div class="neige {{~ NeigePetite ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ Neige['grande'] ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ Neige['moyenne'] ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ Neige['petite'] ~}} position-fixe z-index-n1"></div>
     {{~ Indentation }}  </div>
   {%~ endif %}
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
@@ -34,7 +16,7 @@
   {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
   {{~ Indentation }}    </p>
   {%-
-  include Modele
+  include 'accueil/calendrier/_forme-' ~ Forme ~ '.html.twig'
   with { 'Indentation' : Indentation ~ '    ',
          'Couleur' : CouleurTexte,
          'Noel' : Noel,
@@ -43,26 +25,26 @@
          'Zoom' : Zoom,
          'Taille' : Taille }
   -%}
-  {%~ if Zoom != 0 %}
+  {%~ if Zoom != '' %}
     {%-
     include 'modale/ZoomResultat.html.twig'
     with { 'Indentation' : Indentation ~ '    ' }
     ~%}
   {%~ endif %}
-  {%~ if JourSpecial['Jour'] != 0 %}
+  {%~ if JourSpecial != [] %}
     {%-
     include 'modale/JourSpecial.html.twig'
     with { 'Indentation' : Indentation ~ '    ',
-           'Titre' : JourSpecial['Titre'],
-           'Texte' : JourSpecial['Texte'],
-           'Type' : JourSpecial['Type'] }
+           'Titre' : JourSpecial['TitreModale'],
+           'Texte' : JourSpecial['TexteModale'],
+           'Type' : JourSpecial['TypeModale'] }
     ~%}
   {%~ endif %}
   {{~ Indentation }}  </div>
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
     {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
-    {%~ if JourSpecial['Jour'] != 0 %}
+    {%~ if JourSpecial != [] %}
       {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '5-JourSpecial.js') }}"></script>
       {{~ Indentation }}<script>JourSpecial({{ JourSpecial['Jour'] }},{{ JourSpecial['Mois'] }});</script>
     {%~ endif %}

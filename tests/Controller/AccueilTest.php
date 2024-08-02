@@ -66,5 +66,17 @@ class AccueilTest extends WebTestCase
         $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\.[0-9]+/', $application->getVersion());
         $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\.[0-9]+/', $application->getVersionPHP());
         $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\.[0-9]+/', $application->getVersionSymfony());
+
+        rename('.env.local', '.env.local.save');
+        $indexation = $client->request('GET', '/');
+        $this->assertStringContainsString(
+            $indexation->filter('#fr')->text(),
+            'Un problème de configuration a été détecté. Le fichier ".env.local" n\'existe pas.'
+        );
+        $this->assertStringContainsString(
+            $indexation->filter('#en')->text(),
+            'A problem of configuration was detected. The file ".env.local" doesn\'t exists.'
+        );
+        rename('.env.local.save', '.env.local');
     }
 }

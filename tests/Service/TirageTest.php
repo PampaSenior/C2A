@@ -156,7 +156,7 @@ class TirageTest extends WebTestCase
         $this->ressources->ecriture('lots', $this->ressources::CAS_ORIGINAL, $lotsPartiel);
 
         $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
-        $this->assertEquals(array_column($resultats, 'Cadeau'), $this->bornerExtraction($lotsPartiel, 25));
+        $this->assertEquals(array_column($resultats, 'cadeau'), $this->bornerExtraction($lotsPartiel, 25));
 
         $this->nettoyage('resultats');
         $this->ressources->ecriture('lots', $this->ressources::CAS_ORIGINAL, $lotsComplet);
@@ -164,7 +164,7 @@ class TirageTest extends WebTestCase
         $_ENV['TIRAGE'] = '2'; // Lots aléatoires
         $this->majConfiguration();
         $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
-        $this->assertEquals(array_column($resultats, 'Gagnant'), $this->bornerExtraction($participants, 25));
+        $this->assertEquals(array_column($resultats, 'gagnant'), $this->bornerExtraction($participants, 25));
 
         $this->nettoyage('resultats');
         $this->nettoyage('participants');
@@ -204,7 +204,7 @@ class TirageTest extends WebTestCase
     {
         return array_map(
             function ($tableau) {
-                return $tableau['Cadeau'] . ',' . $tableau['Illustration'];
+                return $tableau['cadeau'] . ',' . $tableau['illustration'];
             },
             $tableau
         );

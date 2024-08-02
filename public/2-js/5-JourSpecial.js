@@ -9,7 +9,7 @@ function JourSpecial(J, M)
     const Clef = 'JourSpecial';
     const Valeur = Jour + '-' + Mois + '-' + Annee;
 
-    if (Jour == J && Mois == M) {
+    if (Jour == J && Mois == M - 1) { //M va de 1 à 12
         if (localStorage.getItem(Clef) == null || localStorage.getItem(Clef) != Valeur) {
             $('#' + Clef).show();
             localStorage.setItem(Clef, Valeur); //On sauvegarde ce jour en cookie

@@ -29,16 +29,21 @@ class VerificationTest extends KernelTestCase
         $this->verification($parametre, false, 'Information.Configuration.Fichier');
         $this->original('retablir', 'initialisation');
 
-        //Cas 2 sans une variable de configuration du .env.test.local (impossible à tester)
-        //$fichier = '.env.test.local';
-        //$sauvegarde = file($fichier, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-
-        //$element = array_pop($sauvegarde);
-        //file_put_contents($fichier, implode("\n", $sauvegarde), LOCK_EX);
-        //$this->verification($parametre, false, 'Information.Configuration.Variable');
-
-        //array_push($sauvegarde, $element);
-        //file_put_contents($fichier, implode("\n", $sauvegarde), LOCK_EX);
+        //Cas 2 sans une variable de configuration du .env.test.local
+        self::ensureKernelShutdown();
+        $_ENV['SYMFONY_DOTENV_VARS'] = str_replace('NOEL,', '', $_ENV['SYMFONY_DOTENV_VARS']);
+        $valeur1 = $_ENV['NOEL'];
+        $valeur2 = $_SERVER['NOEL'];
+        unset($_ENV['NOEL']);
+        unset($_SERVER['NOEL']);
+        self::bootKernel();
+        $parametre = static::getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $this->verification($parametre, false, 'Information.Configuration.Variable');
+        self::ensureKernelShutdown();
+        $_ENV['SYMFONY_DOTENV_VARS'] = $_ENV['SYMFONY_DOTENV_VARS'] . ',NOEL';
+        $_ENV['NOEL'] = $valeur1;
+        $_SERVER['NOEL'] = $valeur2;
+        self::bootKernel();
 
         //Cas 3-A sans resultats.csv (nominal car participants.csv et lots.csv)
         $this->original('sauvegarder', 'resultats');

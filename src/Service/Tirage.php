@@ -3,32 +3,21 @@
 namespace App\Service;
 
 use App\Service\Ressource;
+use App\Service\Parametre;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Tirage
 {
-    /** @var array<string> $modes */
-    private array $modes;
-    private int $nb;
     private Ressource $ressources;
+    private Parametre $parametres;
 
     public function __construct(ParameterBagInterface $parametre)
     {
-        switch ($parametre->get('Tirage')) {
-            case 1:
-                $this->modes = ['participants'];
-                break;
-            case 2:
-                $this->modes = ['lots'];
-                break;
-            default:
-                $this->modes = ['participants', 'lots'];
-        }
-        $this->nb = 24 + $parametre->get('Noel');
         $this->ressources = new Ressource($parametre);
+        $this->parametres = new Parametre($parametre);
     }
 
-    /** @return array<int, array{Gagnant: string, Cadeau: string, Illustration?: string}> */
+    /** @return array<int, array{gagnant: string, cadeau: string, illustration?: string}> */
     public function getResultats(): array
     {
         if (
@@ -51,10 +40,13 @@ class Tirage
         $participants = $this->extractionCSV('participants');
         $lots = $this->extractionCSV('lots');
 
-        if ($this->nb == count($participants) && $this->nb == count($lots)) {
+        if (
+            $this->parametres->getNb() == count($participants) &&
+            $this->parametres->getNb() == count($lots)
+        ) {
             //Génération des lignes pour le CSV
             $lignes = [];
-            for ($i = 0; $i <= $this->nb - 1; $i++) {
+            for ($i = 0; $i <= $this->parametres->getNb() - 1; $i++) {
                 $lignes[$i] = $participants[$i] . ',' . $lots[$i];
             }
 
@@ -63,7 +55,7 @@ class Tirage
         }
     }
 
-    /** @return array<int, array{Gagnant: string, Cadeau: string, Illustration?: string}> */
+    /** @return array<int, array{gagnant: string, cadeau: string, illustration?: string}> */
     private function getTirageAuSort(): array
     {
         $resultats = [];
@@ -75,12 +67,12 @@ class Tirage
 
             if (count($separation) == 2 || count($separation) == 3) {
                 $resultats[$clef] = [
-                    'Gagnant' => $separation[0],
-                    'Cadeau' => $separation[1],
+                    'gagnant' => $separation[0],
+                    'cadeau' => $separation[1],
                 ];
 
                 if (isset($separation[2]) && str_replace('"', '', $separation[2]) != "") {
-                    $resultats[$clef]['Illustration'] = str_replace('"', '', $separation[2]);
+                    $resultats[$clef]['illustration'] = str_replace('"', '', $separation[2]);
                 }
             }
         }
@@ -95,11 +87,12 @@ class Tirage
         $contenu = preg_split("/\R/", $contenu); /*Transforme la chaine en tableau (\R = \r\n, \n et \r)*/
         $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /*Supprimer la ligne d'entête*/
 
-        if (in_array($clef, $this->modes)) {
+        if (in_array($clef, $this->parametres->getTirage())) {
             shuffle($contenu);
         }
 
-        return array_slice($contenu, 0, $this->nb, false); /*On va retourner uniquement 24 à 25 lignes*/
+        /*On va retourner uniquement 24 à 25 lignes*/
+        return array_slice($contenu, 0, $this->parametres->getNb(), false);
     }
 
     /** @param array<int, string> $contenu */
