@@ -18,12 +18,8 @@ class Parametre
 
     public function getMois(): int
     {
-        //Pour récupérer le mois côté serveur
-        $date = $this->now(); //Date actuelle grâce au trait
-        $mois = $date->format("n");
-
         //Retourne le mois actuel en cas de développement sinon décembre
-        $nombre = $this->parametre->get('kernel.environment') != "prod" ? $mois : '12';
+        $nombre = $this->parametre->get('kernel.environment') != "prod" ? $this->now()->format("n") : '12';
         return (int) $nombre;
     }
 
@@ -38,93 +34,70 @@ class Parametre
     {
         switch ($this->parametre->get('Neige')) {
             case 1:
-                $neige = [
+                return [
                     'grande' => ' neige-flocon-grand ',
                     'moyenne' => ' neige-flocon-moyen ',
                     'petite' => ' neige-flocon-petit '
                 ];
-                break;
             case 2:
-                $neige = [
+                return [
                     'grande' => ' neige-boule-grande ',
                     'moyenne' => ' neige-boule-moyenne ',
                     'petite' => ' neige-boule-petite '
                 ];
-                break;
             default:
-                $neige = [];
+                return [];
         }
-
-        return $neige;
     }
 
     public function getForme(): string
     {
         switch ($this->parametre->get('Forme')) {
             case 1:
-                $placement = 'losange';
-                break;
+                return 'losange';
             case 2:
-                $placement = 'sapin';
-                break;
+                return 'sapin';
             default:
-                $placement = 'grille';
+                return 'grille';
         }
-
-        return $placement;
     }
 
     public function getBordure(): string
     {
         switch ($this->parametre->get('Bordure')) {
             case 1:
-                $bordure = 'border border-success bordure-1';
-                break;
+                return 'border border-success bordure-1';
             case 2:
-                $bordure = 'border border-success bordure-1 bordure-arrondie';
-                break;
+                return 'border border-success bordure-1 bordure-arrondie';
             case 3:
-                $bordure = 'border border-success bordure-1 rounded-circle';
-                break;
+                return 'border border-success bordure-1 rounded-circle';
             default:
-                $bordure = 'bordure-0';
+                return 'bordure-0';
         }
-
-        return $bordure;
     }
 
     public function getZoom(): string
     {
         switch ($this->parametre->get('Zoom')) {
             case 1:
-                $zoom = 'position-absolute top-0 start-0';
-                break;
+                return 'position-absolute top-0 start-0';
             case 2:
-                $zoom = 'position-absolute top-0 start-50';
-                break;
+                return 'position-absolute top-0 start-50';
             case 3:
-                $zoom = 'position-absolute top-0 start-100';
-                break;
+                return 'position-absolute top-0 start-100';
             case 4:
-                $zoom = 'position-absolute top-50 start-0';
-                break;
+                return 'position-absolute top-50 start-0';
             case 5:
-                $zoom = 'position-absolute top-50 start-100';
-                break;
+                return 'position-absolute top-50 start-100';
             case 6:
-                $zoom = 'position-absolute top-100 start-0';
-                break;
+                return 'position-absolute top-100 start-0';
             case 7:
-                $zoom = 'position-absolute top-100 start-50';
-                break;
+                return 'position-absolute top-100 start-50';
             case 8:
-                $zoom = 'position-absolute top-100 start-100';
-                break;
+                return 'position-absolute top-100 start-100';
             default:
-                $zoom = '';
+                return '';
         }
-
-        return $zoom;
     }
 
     public function getTaille(): string
@@ -142,16 +115,12 @@ class Parametre
     {
         switch ($this->parametre->get('Tirage')) {
             case 1:
-                $aleatoire = ['participants'];
-                break;
+                return ['participants'];
             case 2:
-                $aleatoire = ['lots'];
-                break;
+                return ['lots'];
             default:
-                $aleatoire = ['participants', 'lots'];
+                return ['participants', 'lots'];
         }
-
-        return $aleatoire;
     }
 
     /** @return array{gagnant: string, cadeau: string, illustration: string} */
@@ -181,48 +150,41 @@ class Parametre
     /** @return array<string, int|string> */
     public function getJourSpecial(): array
     {
-        $date = $this->now(); //Date actuelle grâce au trait
-        switch ($date->format('d-m')) {
+        switch ($this->now()->format('d-m')) {
             case '01-01':
-                $jourSpecial = [
+                return [
                     'Jour' => 1,
                     'Mois' => 1,
                     'TitreModale' => $this->parametre->get('TitreNouvelAn'),
                     'TexteModale' => $this->parametre->get('TexteNouvelAn'),
                     'TypeModale' => 'NouvelAn',
                 ];
-                break;
             case '14-02':
-                $jourSpecial = [
+                return [
                     'Jour' => 14,
                     'Mois' => 2,
                     'TitreModale' => $this->parametre->get('TitreCupidon'),
                     'TexteModale' => $this->parametre->get('TexteCupidon'),
                     'TypeModale' => 'Cupidon',
                 ];
-                break;
             case '01-04':
-                $jourSpecial = [
+                return [
                     'Jour' => 1,
                     'Mois' => 4,
                     'TitreModale' => $this->parametre->get('TitrePoisson'),
                     'TexteModale' => $this->parametre->get('TextePoisson'),
                     'TypeModale' => 'Poisson',
                 ];
-                break;
             case '25-12':
-                $jourSpecial = [
+                return [
                     'Jour' => 25,
                     'Mois' => 12,
                     'TitreModale' => $this->parametre->get('TitreCadeau'),
                     'TexteModale' => $this->parametre->get('TexteCadeau'),
                     'TypeModale' => 'Cadeau',
                 ];
-                break;
             default:
-                $jourSpecial = [];
+                return [];
         }
-
-        return $jourSpecial;
     }
 }

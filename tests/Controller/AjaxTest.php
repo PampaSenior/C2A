@@ -4,11 +4,11 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Permet de vérifier la page d'api des résultats
+ */
 class AjaxTest extends WebTestCase
 {
-    /**
-     * Permet de vérifier la page d'api
-     */
     public function testResultat(): void
     {
         $client = static::createClient(); //Générer un navigateur fictif
@@ -23,6 +23,11 @@ class AjaxTest extends WebTestCase
 
             $this->assertEquals($code, $client->getResponse()->getStatusCode());
         }
+    }
+
+    public function testConfigurationKO(): void
+    {
+        $client = static::createClient(); //Générer un navigateur fictif
 
         rename('.env.local', '.env.local.save');
         $indexation = $client->request('GET', '/Ajax/Resultat/1');

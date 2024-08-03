@@ -6,20 +6,28 @@ use App\Service\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+/**
+ * Permet de vérifier la page d'accueil
+ */
 class AccueilTest extends WebTestCase
 {
-    /**
-     * Permet de vérifier la page d'accueil
-     */
     public function testAccueil(): void
     {
+        $client = static::createClient(); //Générer un navigateur fictif
+        $client->request('GET', '/');
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testRessourcesOK(): void
+    {
+        $ressources = [];
+
         $application = new Application();
 
         $client = static::createClient(); //Générer un navigateur fictif
         $parametre = $client->getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
         $indexation = $client->request('GET', '/');
-
-        $ressources = [];
 
         // Ne marche pas en cas de route avec alias.
         // Cependant un alias dépend du serveur et pas de symfony
@@ -66,6 +74,11 @@ class AccueilTest extends WebTestCase
         $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\.[0-9]+/', $application->getVersion());
         $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\.[0-9]+/', $application->getVersionPHP());
         $this->assertMatchesRegularExpression('/[0-9]+\.[0-9]+\.[0-9]+/', $application->getVersionSymfony());
+    }
+
+    public function testConfigurationKO(): void
+    {
+        $client = static::createClient(); //Générer un navigateur fictif
 
         rename('.env.local', '.env.local.save');
         $indexation = $client->request('GET', '/');

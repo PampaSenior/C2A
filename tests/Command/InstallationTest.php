@@ -8,14 +8,14 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
+/**
+ * Permet de vérifier la fonctionnalité d'installation automatique de l'application
+ */
 class InstallationTest extends KernelTestCase
 {
     private Ressource $ressources;
     private string $suffixe;
 
-    /**
-     * Permet de vérifier la fonctionnalité d'installation automatique de l'application
-     */
     public function testInstallation(): void
     {
         $noyau = self::bootKernel();

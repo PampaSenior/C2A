@@ -7,13 +7,13 @@ use App\Service\Verification;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+/**
+ * Permet de vérifier la fonctionnalité de vérification de la configuration de l'application
+ */
 class VerificationTest extends KernelTestCase
 {
     private Ressource $ressources;
 
-    /**
-     * Permet de vérifier la fonctionnalité de vérification de l'application
-     */
     public function testVerification(): void
     {
         self::bootKernel();

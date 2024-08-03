@@ -6,6 +6,7 @@ use App\Service\Verification;
 use App\Service\Parametre;
 use App\Service\Tirage;
 use App\Service\Ressource;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,9 +35,9 @@ class Ajax extends AbstractController
         $resultats = $tirage->getResultats();
 
         //Pour récupérer le numéro du jour et le mois côté serveur
-        $date = new \DateTime('now');
-        $jour = $date->format("j");
-        $mois = $date->format("n");
+        $date = new DateTime('now');
+        $jour = (int) $date->format("j");
+        $mois = (int) $date->format("n");
 
         if ($id <= $jour && $mois == $parametres->getMois() && isset($resultats[$id - 1])) {
             $resultat['gagnant'] = $resultats[$id - 1]['gagnant'];
