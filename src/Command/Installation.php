@@ -104,17 +104,17 @@ class Installation extends Command
                     '/^#([A-Z]+.*)/m',
                     '${1}',
                     $contenu
-                ); //Supprime le caractère de commentaire
+                ); /* Supprime le caractère de commentaire */
                 $contenu = preg_replace(
                     '/^(APP_ENV=).*/m',
                     '${1}' . $option,
                     is_null($contenu) ? '' : $contenu
-                ); /*Renseigne l'environnement*/
+                ); /* Renseigne l'environnement */
                 $contenu = preg_replace(
                     '/0{32}/',
                     $this->secret(16),
                     is_null($contenu) ? '' : $contenu
-                ); //Renseigne le secret
+                ); /* Renseigne le secret */
             }
 
             $sortie = $this->ressources->ecriture(

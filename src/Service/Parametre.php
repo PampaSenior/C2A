@@ -18,14 +18,14 @@ class Parametre
 
     public function getMois(): int
     {
-        //Retourne le mois actuel en cas de développement sinon décembre
+        /* Retourne le mois actuel en cas de développement sinon décembre */
         $nombre = $this->parametre->get('kernel.environment') != "prod" ? $this->now()->format("n") : '12';
         return (int) $nombre;
     }
 
     public function getNb(): int
     {
-        //Retourne le nombre de jours à afficher dans le calendrier
+        /* Retourne le nombre de jours à afficher dans le calendrier */
         return 24 + ($this->parametre->get('Noel') == 1);
     }
 
@@ -132,7 +132,7 @@ class Parametre
             'illustration' => ''
         ];
 
-        //Pour être souple concernant l'écriture dans le .env.local
+        /* Pour être souple concernant l'écriture dans le .env.local */
         $configuration = array_change_key_case(
             $this->parametre->get('Pot2Miel'),
             CASE_LOWER

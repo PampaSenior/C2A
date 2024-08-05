@@ -44,13 +44,13 @@ class Tirage
             $this->parametres->getNb() == count($participants) &&
             $this->parametres->getNb() == count($lots)
         ) {
-            //Génération des lignes pour le CSV
+            /* Génération des lignes pour le CSV */
             $lignes = [];
             for ($i = 0; $i <= $this->parametres->getNb() - 1; $i++) {
                 $lignes[$i] = $participants[$i] . ',' . $lots[$i];
             }
 
-            //Création du fichier de résultats avec ces lignes
+            /* Création du fichier de résultats avec ces lignes */
             $this->insertionCSV('resultats', $lignes);
         }
     }
@@ -84,14 +84,14 @@ class Tirage
     private function extractionCSV(string $clef): array
     {
         $contenu = $this->ressources->lecture($clef, $this->ressources::CAS_ORIGINAL);
-        $contenu = preg_split("/\R/", $contenu); /*Transforme la chaine en tableau (\R = \r\n, \n et \r)*/
-        $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /*Supprimer la ligne d'entête*/
+        $contenu = preg_split("/\R/", $contenu); /* Transforme la chaine en tableau (\R = \r\n, \n et \r) */
+        $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /* Supprimer la ligne d'entête */
 
         if (in_array($clef, $this->parametres->getTirage())) {
             shuffle($contenu);
         }
 
-        /*On va retourner uniquement 24 à 25 lignes*/
+        /* On va retourner uniquement 24 à 25 lignes */
         return array_slice($contenu, 0, $this->parametres->getNb(), false);
     }
 
