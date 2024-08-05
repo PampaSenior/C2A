@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Service\Application;
 use App\Service\Ressource;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -12,7 +13,7 @@ class Verification
     public function __construct(ParameterBagInterface $parametre)
     {
         $this->cas = 0;
-
+        $application = new Application();
         $ressources = new Ressource($parametre); // Note : ce service n'utilise pas les paramètres du .env
 
         if (
@@ -25,26 +26,9 @@ class Verification
         }
 
         try {
-            $parametre->get('Titre');
-            $parametre->get('TitreNouvelAn');
-            $parametre->get('TexteNouvelAn');
-            $parametre->get('TitreCupidon');
-            $parametre->get('TexteCupidon');
-            $parametre->get('TitrePoisson');
-            $parametre->get('TextePoisson');
-            $parametre->get('TitreCadeau');
-            $parametre->get('TexteCadeau');
-            $parametre->get('CouleurFond');
-            $parametre->get('CouleurTexte');
-            $parametre->get('Noel');
-            $parametre->get('Neige');
-            $parametre->get('Forme');
-            $parametre->get('Style');
-            $parametre->get('Bordure');
-            $parametre->get('Zoom');
-            $parametre->get('Taille');
-            $parametre->get('Tirage');
-            $parametre->get('Pot2Miel');
+            foreach ($application->getParametres() as $clef) {
+                $parametre->get($clef);
+            }
         } catch (\Exception $pb) {
             $this->cas = 2;
             return;

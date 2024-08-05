@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Service\Application;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Ressource

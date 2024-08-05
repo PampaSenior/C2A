@@ -27,6 +27,9 @@ class Application
     /** @var array<string, string> $fichiers */
     private array $fichiers;
 
+    /** @var array<string> $parametres */
+    private array $parametres;
+
     public function __construct()
     {
         $this->prenomAuteur = "Pampa";
@@ -58,6 +61,29 @@ class Application
             'resultats' => 'resultats.csv',
             'participants' => 'participants.csv',
             'lots' => 'lots.csv'
+        ];
+
+        $this->parametres = [
+            'Titre',
+            'TitreNouvelAn',
+            'TexteNouvelAn',
+            'TitreCupidon',
+            'TexteCupidon',
+            'TitrePoisson',
+            'TextePoisson',
+            'TitreCadeau',
+            'TexteCadeau',
+            'CouleurFond',
+            'CouleurTexte',
+            'Noel',
+            'Neige',
+            'Forme',
+            'Style',
+            'Bordure',
+            'Zoom',
+            'Taille',
+            'Tirage',
+            'Pot2Miel'
         ];
     }
 
@@ -151,5 +177,11 @@ class Application
     public function getFichiers(): array
     {
         return $this->fichiers;
+    }
+
+    /** @return array<string> */
+    public function getParametres(): array
+    {
+        return $this->parametres;
     }
 }
