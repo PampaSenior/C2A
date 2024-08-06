@@ -23,6 +23,9 @@
 <details>
   <ol>
     <li>
+      <a href="#V1.0.4-fr">V1.0.4</a>
+    </li>
+    <li>
       <a href="#V1.0.3-fr">V1.0.3</a>
     </li>
     <li>
@@ -36,6 +39,38 @@
     </li>
   </ol>
 </details>
+
+<h3 id="V1.0.4-fr">V1.0.4 - 2024-08-06</h3>
+
+<h5>Ajout</h5>
+
+- Une traduction des messages de résultat
+- Un agrandissement des résultats
+- Nouveaux choix de tirage (participants et lots aléatoires, participants aléatoires, lots aléatoires)
+
+<h5>Modification</h5>
+
+- Deux urls pour obtenir les résultats (en html ou en json)
+- Nouvelle image utilisée pour le style aléatoire
+- Mise à jour en Symfony 6.4.0, jQuery 3.7.1, Boostrap 5.3.2 et FontAwesome 6.5.1
+
+<h5>Dépréciation</h5>
+
+- Aucun
+
+<h5>Suppression</h5>
+
+- Aucun
+
+<h5>Réparation</h5>
+
+- Aucun
+
+<h5>Sécurisation</h5>
+
+- Aucun
+
+<p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
 <h3 id="V1.0.3-fr">V1.0.3 - 2023-11-13</h3>
 
@@ -178,6 +213,9 @@
 <details>
   <ol>
     <li>
+      <a href="#V1.0.4-en">V1.0.4</a>
+    </li>
+    <li>
       <a href="#V1.0.3-en">V1.0.3</a>
     </li>
     <li>
@@ -191,6 +229,38 @@
     </li>
   </ol>
 </details>
+
+<h3 id="V1.0.4-en">V1.0.4 - 2024-08-06</h3>
+
+<h5>Added</h5>
+
+- A translation for result messages
+- A zoom for results
+- New drawing of lot (participants and gifts randomized, participants randomized, gifts randomized)
+
+<h5>Changed</h5>
+
+- Two urls to get results (html or json format)
+- A new image for the random style
+- Update for Symfony 6.4.0, jQuery 3.7.1, Boostrap 5.3.2 and FontAwesome 6.5.1
+
+<h5>Deprecated</h5>
+
+- Aucun
+
+<h5>Removed</h5>
+
+- Aucun
+
+<h5>Fixed</h5>
+
+- Aucun
+
+<h5>Security</h5>
+
+- Aucun
+
+<p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
 <h3 id="V1.0.3-en">V1.0.3 - 2023-11-13</h3>
 
