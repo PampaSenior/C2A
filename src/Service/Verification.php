@@ -2,70 +2,72 @@
 
 namespace App\Service;
 
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use App\Service\Application;
+use App\Service\Ressource;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Verification
-  {
-  private int $Cas;
+{
+    private int $cas;
 
-  public function __construct(ContainerBagInterface $parametre)
+    public function __construct(ParameterBagInterface $parametre)
     {
-    $this->Cas = 0;
+        $this->cas = 0;
+        $application = new Application();
+        $ressources = new Ressource($parametre); // Note : ce service n'utilise pas les paramètres du .env
 
-    if ($_ENV['Resultats'] == [])
-      {
-      $this->Cas = 3;
-      }
+        if (
+            !file_exists(
+                $ressources->getFichier($ressources::FORMAT_CHEMIN, 'initialisation', $ressources::CAS_ORIGINAL)
+            )
+        ) {
+            $this->cas = 1;
+            return;
+        }
 
-    try
-      {
-      $parametre->get('Titre');
-      $parametre->get('TitreNouvelAn');
-      $parametre->get('TexteNouvelAn');
-      $parametre->get('TitreCupidon');
-      $parametre->get('TexteCupidon');
-      $parametre->get('TitrePoisson');
-      $parametre->get('TextePoisson');
-      $parametre->get('TitreCadeau');
-      $parametre->get('TexteCadeau');
-      $parametre->get('CouleurFond');
-      $parametre->get('CouleurTexte');
-      $parametre->get('Noel');
-      $parametre->get('Neige');
-      $parametre->get('Forme');
-      $parametre->get('Style');
-      $parametre->get('Bordure');
-      $parametre->get('Taille');
-      $parametre->get('Pot2Miel');
-      }
-    catch (\Exception $Pb)
-      {
-      $this->Cas = 2;
-      }
+        try {
+            foreach ($application->getParametres() as $clef) {
+                $parametre->get($clef);
+            }
+        } catch (\Exception $pb) {
+            $this->cas = 2;
+            return;
+        }
 
-    if (!file_exists('../.env.local'))
-      {
-      $this->Cas = 1;
-      }
+        if (
+            !file_exists(
+                $ressources->getFichier($ressources::FORMAT_CHEMIN, 'resultats', $ressources::CAS_ORIGINAL)
+            ) &&
+            (
+                !file_exists(
+                    $ressources->getFichier($ressources::FORMAT_CHEMIN, 'participants', $ressources::CAS_ORIGINAL)
+                ) ||
+                !file_exists(
+                    $ressources->getFichier($ressources::FORMAT_CHEMIN, 'lots', $ressources::CAS_ORIGINAL)
+                )
+            )
+        ) {
+            $this->cas = 3;
+            return;
+        }
     }
 
-  public function isValide(): bool
+    public function isValide(): bool
     {
-    return $this->Cas === 0 ? true : false ;
+        return $this->cas === 0 ? true : false ;
     }
 
-  public function getErreur(): string
+    public function getErreur(): string
     {
-    switch ($this->Cas)
-      {
-      case 1:
-        return 'Information.Configuration.Fichier';
-      case 2:
-        return 'Information.Configuration.Variable';
-      case 3:
-        return 'Information.Configuration.Tirage';
-      default:
-        return "";
-      }
+        switch ($this->cas) {
+            case 1:
+                return 'Information.Configuration.Fichier';
+            case 2:
+                return 'Information.Configuration.Variable';
+            case 3:
+                return 'Information.Configuration.Tirage';
+            default:
+                return "";
+        }
     }
-  }
+}

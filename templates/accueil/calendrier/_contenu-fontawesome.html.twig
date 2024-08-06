@@ -1,0 +1,14 @@
+{%~ if Aleatoire == 0 -%}
+  {% set Image = 'fa-gift' %}
+{%~ else -%}
+  {%~ if Jour in JourEtoile -%}
+    {% set Image = 'fa-star' %}
+  {%~ else -%}
+    {% set Image = random(['fa-gift', 'fa-tree', 'fa-candy-cane', 'fa-holly-berry', 'fa-snowman', 'fa-snowflake', 'fa-sleigh', 'fa-igloo', 'fa-mitten', 'fa-bell']) %}
+  {%~ endif -%}
+{%~ endif -%}
+
+{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Parametres.getBordure() }} {{ Parametres.getTaille() }}" title="Jour : {{ Jour }}" data-taille="{{ Parametres.getTaille() }}" data-url="{{ path('ResultatHTML',{'id': Jour}) }}">
+{{~ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Parametres.getTaille() }}"></i>
+{{~ Indentation }}  <strong class="m-0 chiffre {{ Parametres.getTaille() }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
+{{~ Indentation }}</div>

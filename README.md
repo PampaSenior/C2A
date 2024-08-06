@@ -91,24 +91,25 @@
 Ce calendrier de l'avent a été développé afin de laisser une grande
 liberté de présentation à ceux qui souhaiteraient s'en servir.
 En effet, les choix possibles sont nombreux :
-- la forme (en grille ou en sapin);
-- le style (affichage prédéterminé ou aléatoire d'images);
+- la forme (grille, losange ou sapin);
+- le graphisme de chacun des jours;
 - la neige (absence, boule ou flocon);
 - la capacité de mettre le 25 décembre ou non;
-- la taille des éléments du calendrier;
-- le texte du titre et de l'oeuf de pâques;
+- le tirage (plusieurs façons de générer les résultats)
+- le texte du titre et les oeufs de pâques;
 - la couleur du fond et de la police du titre;
+- le format du résultat journalier en json ou html;
 
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
 <h3 id="technologies">Technologies</h3>
 
-* [Php V8.0.0](https://www.php.net/)
-* [Composer V2.1.12](https://getcomposer.org/)
-* [Symfony V5.4.0](https://symfony.com/)
-* [jQuery V3.6.0](https://jquery.com)
-* [Bootstrap V5.2.2](https://getbootstrap.com)
-* [Font Awesome V6.2.1](https://fontawesome.com/)
+* [Php V8.3.0](https://www.php.net/)
+* [Composer V2.6.6](https://getcomposer.org/)
+* [Symfony V6.4.0](https://symfony.com/)
+* [jQuery V3.7.1](https://jquery.com)
+* [Bootstrap V5.3.2](https://getbootstrap.com)
+* [Font Awesome V6.5.1](https://fontawesome.com/)
 
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
@@ -164,7 +165,9 @@ Tout se passe dans le .env.local généré pendant la phase d'installation.
 - «FORME» représente le placement des éléments du calendrier (grille, losange ou sapin)
 - «STYLE» représente l'aspect graphique des éléments du calendrier (cadeau ou image)
 - «BORDURE» représente l'aspect des bordures de chaque élément (aucune, carrée, arrondie ou ronde)
+- «ZOOM» représente la position du bouton de zoom des résultats (aucun, gauche-haut, centre-haut, droite-haut, gauche-milieu, droite-milieu, gauche-bas, centre-bas ou droite-bas)
 - «TAILLE» représente la place que doit prendre les éléments du calendrier (sm, md, lg ou xl)
+- «TIRAGE» représente quelles sont les données qui doivent être aléatoires (participants, lots ou les deux)
 - «POT_2_MIEL» représente le résultat à afficher en cas de tricherie
 
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
@@ -176,14 +179,14 @@ Il existe 2 options pour renseigner les résultats :
 optionnellement l'illustration qui se nommera «resultats.csv». On parlera ici
 de tirage externe puisque les résultats sont générés en dehors de l'application.
 - soit renseigner deux fichiers csv avec pour l'un, nommé «participants.csv»,
-la liste des participants, et dans l'autre, nommé «lots.csv»,
-les cadeaux disponibles avec optionnellement le nom de la photo qui y correspond.
+la liste des participants, et dans l'autre, nommé «lots.csv», les cadeaux
+disponibles avec optionnellement le nom de la photo qui y correspond.
 On parlera ici de tirage interne puisque c'est l'application qui se chargera de
 générer l'attribution des lots à certain participants.
 
 Peut importe l'option choisie, le ou les csv sont présents dans le dossier
 «C2A/public/5-documents». Un exemple de chaque y a été mis pour aider. Ils sont
-préfixé par le terme «exemple-» et sont téléchargeable en complétant l' url
+préfixé par le terme «exemple-» et sont téléchargeable en complétant l'url
 de la page d'accueil (celle du calendrier) par :
 - 5-documents/exemple-lots.csv
 - 5-documents/exemple-participants.csv
@@ -216,6 +219,8 @@ Exemple de lignes dans ce fichier avec image d'illustration pour le cadeau :
 Dupond Dupont,Fusée,fusee.png  
 Avril Septembre,tibia,os.png
 
+Ici on remarquera que le paramètre "Tirage" n'aura aucun effet.
+
 <p align="right">(<a href="#top-fr">retour en haut &#129045;</a>)</p>
 
 - <h4 id="interne">Tirage interne</h4>
@@ -223,6 +228,11 @@ Avril Septembre,tibia,os.png
 Dans cette seconde option, l'application se chargera de générer l'attribution
 des lots à des participants en créant «resultats.csv» lors du premier accès à
 l'application grâce aux fichiers «participants.csv» et «lots.csv».
+
+Suivant le paramètre "Tirage", l'aléatoire sera fait sur les données des deux
+fichiers ou bien sur un seul. Si un fichier ne doit pas être aléatoire et qu'il
+contient plus d'éléments que les 24 ou 25 jours (dépendant du parametre "Noel"),
+alors les 24 ou 25 premiers éléments seront récupérés dans leur ordre d'apparition.
 
 Le csv «participants.csv» ne doit contenir qu'une colonne sans limite sur le nombre
 de ligne et chacune représentera un participant
@@ -413,24 +423,25 @@ Tutoriel pour les feux d'artifices [FR] :
 
 This advent calendar was developed in order to let you a hudge liberty of customisation.
 Hence, your have plenty of choices :
-- shape (grid or christmas tree);
-- style (font static, font random or picture for gifts);
+- shape (grid, lozenge or christmas tree);
+- style for every day of the calendar;
 - snow (none, snowball, snowflake);
 - adding the christmas day or not;
-- size of the calendar;
-- string for the title and the easter egg;
+- draw (lot of choices of drawing)
+- string for the title and the easter eggs;
 - background color and font color for the title;
+- day result in json or html format;
 
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
 <h3 id="dependencies">Dependencies</h3>
 
-* [Php V8.0.0](https://www.php.net/)
-* [Composer V2.1.12](https://getcomposer.org/)
-* [Symfony V5.4.0](https://symfony.com/)
-* [jQuery V3.6.0](https://jquery.com)
-* [Bootstrap V5.2.2](https://getbootstrap.com)
-* [Font Awesome V6.2.1](https://fontawesome.com/)
+* [Php V8.3.0](https://www.php.net/)
+* [Composer V2.6.6](https://getcomposer.org/)
+* [Symfony V6.4.0](https://symfony.com/)
+* [jQuery V3.7.1](https://jquery.com)
+* [Bootstrap V5.3.2](https://getbootstrap.com)
+* [Font Awesome V6.5.1](https://fontawesome.com/)
 
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
@@ -486,7 +497,9 @@ All you need is to configure the .env.local generate during the installation.
 - «FORME» is for the shape of the calendar (grid, lozenge or christmas tree)
 - «STYLE» is for the days graphism in the calendar (font or picture)
 - «BORDURE» is for the border for every day (none, square, rounded or circle)
+- «ZOOM» is for the position of the results zoom button (none, left-top, center-top, right-top, left-middle, right-middle, left-bottom, center-bottom or right-bottom)
 - «TAILLE» is the size of the calendar (sm, md, lg or xl)
+- «TIRAGE» is for the datas which must be randomized (participants, gifts or both)
 - «POT_2_MIEL» is an honeypot for hacker
 
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
@@ -533,6 +546,8 @@ Exemple of lines in this file with an image for illustrate the gift :
 Dupond Dupont,Rocket,rocket.png  
 April September,shinbone,bone.png
 
+Here, we can notice that the paramater "Tirage" will be useless.
+
 <p align="right">(<a href="#top-en">back to the top &#129045;</a>)</p>
 
 - <h4 id="interne">Internal drawing of lot</h4>
@@ -540,6 +555,11 @@ April September,shinbone,bone.png
 In this second option, the application will associate gifts to participants by generating
 the «resultats.csv» file using «participants.csv» and «lots.csv» ones during the first
 access by the web browser.
+
+According to the parameter "Tirage", the fate will be on the datas for the both files
+or only on one. If a file must not be randomized and contains more elements than 24 or
+25 days (depends on the parameter "Noel"), then the 24 or 25 first elements will be
+picked up in the order of appearance.
 
 The csv «participants.csv» must contain only one column without any limit for the line
 number and everyone account for a participant.

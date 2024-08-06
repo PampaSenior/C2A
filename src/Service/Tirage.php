@@ -2,141 +2,105 @@
 
 namespace App\Service;
 
-use App\Service\Application;
+use App\Service\Ressource;
+use App\Service\Parametre;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Tirage
-  {
-  private Application $Application;
-  private array $Chemins;
+{
+    private Ressource $ressources;
+    private Parametre $parametres;
 
-  public function __construct()
+    public function __construct(ParameterBagInterface $parametre)
     {
-    $this->Application = new Application();
-    $Dossier = '../public/'.$this->Application->getDossierDocument();
+        $this->ressources = new Ressource($parametre);
+        $this->parametres = new Parametre($parametre);
+    }
 
-    $Fichiers = [
-                'Resultats' => 'resultats.csv',
-                'Participants' => 'participants.csv',
-                'Lots' => 'lots.csv'
+    /** @return array<int, array{gagnant: string, cadeau: string, illustration?: string}> */
+    public function getResultats(): array
+    {
+        if (
+            !file_exists(
+                $this->ressources->getFichier(
+                    $this->ressources::FORMAT_CHEMIN,
+                    'resultats',
+                    $this->ressources::CAS_ORIGINAL
+                )
+            )
+        ) {
+            $this->setTirageAuSort();
+        }
+
+        return $this->getTirageAuSort();
+    }
+
+    private function setTirageAuSort(): void
+    {
+        $participants = $this->extractionCSV('participants');
+        $lots = $this->extractionCSV('lots');
+
+        if (
+            $this->parametres->getNb() == count($participants) &&
+            $this->parametres->getNb() == count($lots)
+        ) {
+            /* Génération des lignes pour le CSV */
+            $lignes = [];
+            for ($i = 0; $i <= $this->parametres->getNb() - 1; $i++) {
+                $lignes[$i] = $participants[$i] . ',' . $lots[$i];
+            }
+
+            /* Création du fichier de résultats avec ces lignes */
+            $this->insertionCSV('resultats', $lignes);
+        }
+    }
+
+    /** @return array<int, array{gagnant: string, cadeau: string, illustration?: string}> */
+    private function getTirageAuSort(): array
+    {
+        $resultats = [];
+
+        $contenu = $this->extractionCSV('resultats');
+
+        foreach ($contenu as $clef => $ligne) {
+            $separation = explode(",", $ligne);
+
+            if (count($separation) == 2 || count($separation) == 3) {
+                $resultats[$clef] = [
+                    'gagnant' => $separation[0],
+                    'cadeau' => $separation[1],
                 ];
-    foreach ($Fichiers as $Clef => $Fichier)
-      {
-      $this->Chemins[$Clef] = $Dossier.$Fichier;
-      }
-    }
 
-  public function getResultats(): array
-    {
-    $Fichier = $this->Chemins['Resultats'];
-
-    if (!file_exists($Fichier))
-      {
-      $this->TirageAuSort();
-      }
-
-    return $this->ChargementResultats();
-    }
-
-  private function TirageAuSort(): void
-    {
-    $Contenu = $this->LectureCSV($this->Chemins['Participants']);
-    $Participants = array_slice($Contenu,1,null,true); //Suppression uniquement de la 1ere ligne d'entête
-
-    $Contenu = $this->LectureCSV($this->Chemins['Lots']);
-    $Lots = array_slice($Contenu,1,25,true); //Suppression de la 1ere ligne d'entête et on borne à 25 jours donc lignes
-
-    if ($Participants != [] && $Lots != [])
-      {
-      $NbElements = min(count($Participants),count($Lots));
-
-      $Gagnants = $Participants;
-      $Cadeaux = $Lots;
-      $Cas = 0;
-
-      if (count($Participants)>count($Lots))
-        {
-        $Gagnants = array_rand($Participants,$NbElements);
-        $Cas = 1;
-        }
-      elseif (count($Participants)<count($Lots))
-        {
-        $Cadeaux = array_rand($Lots,$NbElements);
-        $Cas = 2;
+                if (isset($separation[2]) && str_replace('"', '', $separation[2]) != "") {
+                    $resultats[$clef]['illustration'] = str_replace('"', '', $separation[2]);
+                }
+            }
         }
 
-      $Tableau = [];
-      for ($i = 1; $i <= min($NbElements,25); $i++)
-        {
-        switch ($Cas)
-          {
-          case 0 :
-            $Tableau[$i] = $Gagnants[$i].','.$Cadeaux[$i];
-            break;
-          case 1 :
-            $Tableau[$i] = $Participants[$Gagnants[$i-1]].','.$Cadeaux[$i];
-            break;
-          case 2 :
-            $Tableau[$i] = $Gagnants[$i].','.$Lots[$Cadeaux[$i-1]];
-            break;
-          }
+        return $resultats;
+    }
+
+    /** @return array<int, string> */
+    private function extractionCSV(string $clef): array
+    {
+        $contenu = $this->ressources->lecture($clef, $this->ressources::CAS_ORIGINAL);
+        $contenu = preg_split("/\R/", $contenu); /* Transforme la chaine en tableau (\R = \r\n, \n et \r) */
+        $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /* Supprimer la ligne d'entête */
+
+        if (in_array($clef, $this->parametres->getTirage())) {
+            shuffle($contenu);
         }
 
-      shuffle($Tableau);
-
-      $Resultats = 'Gagnant,Cadeau,Illustration';
-      foreach ($Tableau as $Element)
-        {
-        $Resultats = $Resultats."\n".$Element;
-        }
-
-      $this->EcritureCSV($this->Chemins['Resultats'],$Resultats);
-
-      }
-
+        /* On va retourner uniquement 24 à 25 lignes */
+        return array_slice($contenu, 0, $this->parametres->getNb(), false);
     }
 
-  private function ChargementResultats(): array
+    /** @param array<int, string> $contenu */
+    private function insertionCSV(string $clef, array $contenu): void
     {
-    $Resultats = [];
+        $finLigne = "\n";
+        $enTete = 'Gagnant,Cadeau,Illustration' . $finLigne;
 
-    $Contenu = $this->LectureCSV($this->Chemins['Resultats']);
-    $Contenu = array_slice($Contenu,1,25,true); //Suppression de la 1ere ligne d'entête et on borne à 25 jours donc lignes
-
-    foreach ($Contenu as $Clef => $Ligne)
-      {
-      $Separation = explode(",",$Ligne);
-
-      if (count($Separation) == 2 || count($Separation) == 3)
-        {
-        $Resultats[$Clef] = [
-                            'Gagnant' => $Separation[0],
-                            'Cadeau' => $Separation[1],
-                            ];
-
-        if (isset($Separation[2]) && str_replace('"','',$Separation[2]) != "")
-          {
-          $Resultats[$Clef]['Illustration'] = str_replace('"','',$Separation[2]);
-          }
-        }
-      }
-
-    return $Resultats;
+        $this->ressources->ecriture($clef, $this->ressources::CAS_ORIGINAL, $enTete . implode($finLigne, $contenu));
     }
-
-  private function LectureCSV(string $Chemin): array
-    {
-    $Resultat = [];
-
-    if (file_exists($Chemin))
-      {
-      $Resultat = file($Chemin,FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-      }
-
-    return $Resultat;
-    }
-
-  private function EcritureCSV(string $Chemin, string $Contenu): void
-    {
-    file_put_contents($Chemin,$Contenu,LOCK_EX);
-    }
-  }
+}

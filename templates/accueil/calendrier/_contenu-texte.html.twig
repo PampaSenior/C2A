@@ -1,0 +1,29 @@
+{%~ if Parametres.getTaille() == 'sm' %}
+  {% set TexteGagnant = 'Resultat.Gagnant.sm'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.sm'|trans({},'messages') %}
+{%~ elseif Parametres.getTaille() == 'md' %}
+  {% set TexteGagnant = 'Resultat.Gagnant.md'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.md'|trans({},'messages') %}
+{%~ elseif Parametres.getTaille() == 'lg' %}
+  {% set TexteGagnant = 'Resultat.Gagnant.lg'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.lg'|trans({},'messages') %}
+{%~ else %}
+  {% set TexteGagnant = 'Resultat.Gagnant.xl'|trans({},'messages') %}
+  {% set TexteCadeau = 'Resultat.Cadeau.xl'|trans({},'messages') %}
+{%~ endif %}
+
+{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Parametres.getBordure() }} {{ Parametres.getTaille() }} position-relative" title="{{ TexteGagnant }}{{ Resultat['gagnant'] }}{{ '\n' }}{{ TexteCadeau }}{{ Resultat['cadeau'] }}" data-taille="{{ Parametres.getTaille() }}" {%~ if Resultat['illustration'] != '' %} style="background-image: url('{{ Resultat['illustration'] }}');background-size: cover"{% endif ~%}>
+{{~ Indentation }}  <span class="d-block text-danger text-truncate">
+{{~ Indentation }}    {% if TexteGagnant != '' %}<p class="m-0">{{ TexteGagnant }}</p>{%~ endif %}
+{{~ Indentation }}    <p class="m-0">{{ Resultat['gagnant'] }}</p>
+{{~ Indentation }}    {% if TexteCadeau != '' %}<p class="m-0">{{ TexteCadeau }}</p>{%~ endif %}
+{{~ Indentation }}    <p class="m-0">{{ Resultat['cadeau'] }}</p>
+{{~ Indentation }}  </span>
+{%~ if Parametres.getZoom() != '' %}
+  {{~ Indentation }}  <div>
+  {{~ Indentation }}    <button type="button" class="py-2 {{ Parametres.getZoom() }} translate-middle badge bg-danger border-0" data-gagnant="{{ Resultat['gagnant'] }}" data-cadeau="{{ Resultat['cadeau'] }}" {%~ if Resultat['illustration'] != '' %} data-photo="{{ Resultat['illustration'] }}" {% else %} {% endif ~%} onclick="ClicLoupe()">
+  {{~ Indentation }}      <i class="fa-solid fa-magnifying-glass"></i>
+  {{~ Indentation }}    </button>
+  {{~ Indentation }}  </div>
+{%~ endif %}
+{{~ Indentation }}</div>
