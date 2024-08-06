@@ -33,26 +33,19 @@ class AjaxTest extends WebTestCase
     {
         $client = static::createClient(); //Générer un navigateur fictif
 
+        $messages = [
+            'fr' => 'Un problème de configuration a été détecté. Le fichier ".env.local" n\'existe pas.',
+            'en' => 'A problem of configuration was detected. The file ".env.local" doesn\'t exists.',
+        ];
+
         rename('.env.local', '.env.local.sauver');
 
         $indexation = $client->request('GET', '/Ajax/HTML/Resultat/1');
-        $this->assertStringContainsString(
-            $indexation->filter('#fr')->text(),
-            'Un problème de configuration a été détecté. Le fichier ".env.local" n\'existe pas.'
-        );
-        $this->assertStringContainsString(
-            $indexation->filter('#en')->text(),
-            'A problem of configuration was detected. The file ".env.local" doesn\'t exists.'
-        );
+        $this->assertStringContainsString($indexation->filter('#fr')->text(), $messages['fr']);
+        $this->assertStringContainsString($indexation->filter('#en')->text(), $messages['en']);
 
         $client->request('GET', '/Ajax/JSON/Resultat/1');
-        $reponse = json_encode(
-            [
-                'fr' => 'Un problème de configuration a été détecté. Le fichier ".env.local" n\'existe pas.',
-                'en' => 'A problem of configuration was detected. The file ".env.local" doesn\'t exists.'
-            ],
-            JSON_HEX_QUOT | JSON_HEX_APOS
-        );
+        $reponse = json_encode($messages, JSON_HEX_QUOT | JSON_HEX_APOS);
         $this->assertEquals($client->getResponse()->getContent(), $reponse);
 
         rename('.env.local.sauver', '.env.local');
