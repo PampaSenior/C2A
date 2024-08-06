@@ -5,26 +5,33 @@ namespace App\Controller;
 use App\Service\Verification;
 use App\Service\Parametre;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class Accueil extends AbstractController
 {
+    private Verification $verification;
+    private Parametre $parametres;
+
+    public function __construct(ParameterBagInterface $parametre)
+    {
+        $this->verification = new Verification($parametre);
+        $this->parametres = new Parametre($parametre);
+    }
+
     #[Route('/', name: 'Accueil', methods: ['GET'])]
     public function accueil(): Response
     {
-        $verification = new Verification($this->container->get('parameter_bag'));
-        if (!$verification->isValide()) {
+        if (!$this->verification->isValide()) {
             return $this->render(
                 'message/information.html.twig',
                 [
                     'Indentation' => '  ',
-                    'Message' => $verification->getErreur()
+                    'Message' => $this->verification->getErreur()
                 ]
             );
         }
-
-        $parametres = new Parametre($this->container->get('parameter_bag'));
 
         return $this->render(
             'accueil/calendrier/calendrier.html.twig',
@@ -33,15 +40,15 @@ class Accueil extends AbstractController
                 'Titre' => $this->getParameter('Titre'),
                 'CouleurFond' => $this->getParameter('CouleurFond'),
                 'CouleurTexte' => $this->getParameter('CouleurTexte'),
-                'Noel' => $parametres->getNb(),
-                'Neige' => $parametres->getNeige(),
-                'Forme' => $parametres->getForme(),
+                'Noel' => $this->parametres->getNb(),
+                'Neige' => $this->parametres->getNeige(),
+                'Forme' => $this->parametres->getForme(),
                 'Style' => $this->getParameter('Style'),
-                'Bordure' => $parametres->getBordure(),
-                'Zoom' => $parametres->getZoom(),
-                'Taille' => $parametres->getTaille(),
-                'JourSpecial' => $parametres->getJourSpecial(),
-                'MoisActivation' => $parametres->getMois()
+                'Bordure' => $this->parametres->getBordure(),
+                'Zoom' => $this->parametres->getZoom(),
+                'Taille' => $this->parametres->getTaille(),
+                'JourSpecial' => $this->parametres->getJourSpecial(),
+                'MoisActivation' => $this->parametres->getMois()
             ]
         );
     }

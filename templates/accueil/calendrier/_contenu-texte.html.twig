@@ -12,7 +12,7 @@
   {% set TexteCadeau = 'Resultat.Cadeau.xl'|trans({},'messages') %}
 {%~ endif %}
 
-{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Bordure }} {{ Taille }} position-relative" title="{{ TexteGagnant }}{{ Resultat['gagnant'] }}{{ '\n' }}{{ TexteCadeau }}{{ Resultat['cadeau'] }}" data-taille="{{ Taille }}" {%~ if Resultat['illustration'] != '' %} style="background-image: url('{{ Resultat['illustration'] }}');background-size: cover"{%~ endif %}>
+{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Bordure }} {{ Taille }} position-relative" title="{{ TexteGagnant }}{{ Resultat['gagnant'] }}{{ '\n' }}{{ TexteCadeau }}{{ Resultat['cadeau'] }}" data-taille="{{ Taille }}" {%~ if Resultat['illustration'] != '' %} style="background-image: url('{{ Resultat['illustration'] }}');background-size: cover"{% endif ~%}>
 {{~ Indentation }}  <span class="d-block text-danger text-truncate">
 {{~ Indentation }}    {% if TexteGagnant != '' %}<p class="m-0">{{ TexteGagnant }}</p>{%~ endif %}
 {{~ Indentation }}    <p class="m-0">{{ Resultat['gagnant'] }}</p>
@@ -21,7 +21,7 @@
 {{~ Indentation }}  </span>
 {%~ if Zoom != '' %}
   {{~ Indentation }}  <div>
-  {{~ Indentation }}    <button type="button" class="py-2 {{ Zoom }} translate-middle badge bg-danger border-0" data-gagnant="{{ Resultat['gagnant'] }}" data-cadeau="{{ Resultat['cadeau'] }}" {%~ if Resultat['illustration'] != '' %} data-photo="{{ Resultat['illustration'] }}" {% endif ~%} onclick="ClicLoupe()">
+  {{~ Indentation }}    <button type="button" class="py-2 {{ Zoom }} translate-middle badge bg-danger border-0" data-gagnant="{{ Resultat['gagnant'] }}" data-cadeau="{{ Resultat['cadeau'] }}" {%~ if Resultat['illustration'] != '' %} data-photo="{{ Resultat['illustration'] }}" {% else %} {% endif ~%} onclick="ClicLoupe()">
   {{~ Indentation }}      <i class="fa-solid fa-magnifying-glass"></i>
   {{~ Indentation }}    </button>
   {{~ Indentation }}  </div>

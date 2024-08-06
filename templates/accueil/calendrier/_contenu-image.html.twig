@@ -1,3 +1,3 @@
-{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc" title="Jour : {{ Jour }}" data-bordure="{{ Bordure }}" data-taille="{{ Taille }}" data-url="{{ path('Resultat',{'id': Jour}) }}">
+{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc" title="Jour : {{ Jour }}" data-bordure="{{ Bordure }}" data-taille="{{ Taille }}" data-url="{{ path('ResultatHTML',{'id': Jour}) }}">
 {{~ Indentation }}  <img class="bloc {{ Bordure }} {{ Taille }}" src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'images') ~ 'J' ~ Jour) }}.png">
 {{~ Indentation }}</div>

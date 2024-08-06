@@ -8,7 +8,7 @@
   {%~ endif -%}
 {%~ endif -%}
 
-{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Bordure }} {{ Taille }}" title="Jour : {{ Jour }}" data-taille="{{ Taille }}" data-url="{{ path('Resultat',{'id': Jour}) }}">
+{{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Bordure }} {{ Taille }}" title="Jour : {{ Jour }}" data-taille="{{ Taille }}" data-url="{{ path('ResultatHTML',{'id': Jour}) }}">
 {{~ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Taille }}"></i>
 {{~ Indentation }}  <strong class="m-0 chiffre {{ Taille }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
 {{~ Indentation }}</div>
