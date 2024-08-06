@@ -2,30 +2,30 @@
 {{ Indentation }}  <div class="modal-dialog modal-dialog-centered">
 {{ Indentation }}    <div class="modal-content border border-success border-2">
 {{ Indentation }}      <div class="modal-header border-success border-2 z-index-1">
-{{ Indentation }}        <p class="m-0 h2 modal-title text-danger">{{ Titre }}</p>
+{{ Indentation }}        <p class="m-0 h2 modal-title text-danger">{{ Parametres.getJourSpecial()['TitreModale'] }}</p>
 {{ Indentation }}        <button class="btn border border-success border-2" onclick="$('#JourSpecial').hide();" aria-label="Fermer" title="Fermer">
 {{ Indentation }}          <i class="fas fa-times fa-2x"></i>
 {{ Indentation }}        </button>
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-body">
-{{ Indentation }}        <p class="m-0 h3 text-success">{{ Texte }}</p>
+{{ Indentation }}        <p class="m-0 h3 text-success">{{ Parametres.getJourSpecial()['TexteModale'] }}</p>
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-footer border-success border-2 z-index-1">
 {{ Indentation }}        <div class="mx-auto">
-{%~ if Type == 'NouvelAn' %}
+{%~ if Parametres.getJourSpecial()['TypeModale'] == 'NouvelAn' %}
   {{~ Indentation }}          <i class="fa-solid fa-champagne-glasses fa-2x text-primary"></i>
   {{~ Indentation }}          <i class="fa-solid fa-handshake fa-2x text-danger"></i>
   {{~ Indentation }}          <i class="fa-solid fa-martini-glass fa-2x text-success"></i>
-{%~ elseif Type == 'Cupidon' %}
+{%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Cupidon' %}
   {{~ Indentation }}          <i class="fa-solid fa-user fa-2x text-primary"></i>
   {{~ Indentation }}          <i class="fa-solid fa-heart fa-beat fa-2x text-danger"></i>
   {{~ Indentation }}          <i class="fa-solid fa-venus-mars fa-2x text-secondary"></i>
-{%~ elseif Type == 'Poisson' %}
+{%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Poisson' %}
   {{~ Indentation }}          <i class="fa-solid fa-fish fa-2x text-danger"></i>
   {{~ Indentation }}          <i class="fa-solid fa-face-grin-squint-tears fa-2x text-success"></i>
   {{~ Indentation }}          <i class="fa-solid fa-face-grin-tears fa-2x text-warning"></i>
   {{~ Indentation }}          <i class="fa-solid fa-fish-fins fa-2x fa-rotate-180 text-info"></i>
-{%~ elseif Type == 'Cadeau' %}
+{%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Cadeau' %}
   {{~ Indentation }}          <i class="fas fa-holly-berry fa-2x text-danger"></i>
   {{~ Indentation }}          <i class="fas fa-gifts fa-2x text-info"></i>
   {{~ Indentation }}          <i class="fas fa-candy-cane fa-2x text-success"></i>

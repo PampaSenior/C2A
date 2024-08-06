@@ -12,8 +12,6 @@
     {%~
     include 'accueil/calendrier/_contenu-image.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
-           'Bordure': Bordure,
-           'Taille' : Taille,
            'Jour': Jour }
     ~%}
   {%- endif %}
@@ -21,9 +19,6 @@
   {%~
   include 'accueil/calendrier/_contenu-texte.html.twig'
   with { 'Indentation' : Indentation ~ '  ',
-         'Bordure': Bordure,
-         'Zoom': Zoom,
-         'Taille' : Taille,
          'Jour': Jour,
          'Resultat': Resultat }
   ~%}

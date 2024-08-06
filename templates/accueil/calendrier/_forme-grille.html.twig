@@ -1,4 +1,4 @@
-{%~ if Noel == 24 %}
+{%~ if Parametres.getNb() == 24 %}
   {% set MaxBoucle1 = 3 %}
   {% set MaxBoucle2 = 5 %}
   {% set JourEtoile = [24] %}
@@ -18,10 +18,6 @@
     include 'accueil/calendrier/_jour.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
            'Style' : Style,
-           'Bordure' : Bordure,
-           'Zoom' : Zoom,
-           'Taille' : Taille,
-           'Couleur' : Couleur,
            'JourEtoile' : JourEtoile,
            'Jour' : Compteur }
     ~%}

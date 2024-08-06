@@ -2,11 +2,11 @@
 
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
-  {%~ if Neige|length == 3 %}
+  {%~ if Parametres.getNeige()|length == 3 %}
     {{~ Indentation }}  <div>
-    {{~ Indentation }}    <div class="neige {{~ Neige['grande'] ~}} position-fixe z-index-n1"></div>
-    {{~ Indentation }}    <div class="neige {{~ Neige['moyenne'] ~}} position-fixe z-index-n1"></div>
-    {{~ Indentation }}    <div class="neige {{~ Neige['petite'] ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['grande'] ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['moyenne'] ~}} position-fixe z-index-n1"></div>
+    {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['petite'] ~}} position-fixe z-index-n1"></div>
     {{~ Indentation }}  </div>
   {%~ endif %}
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
@@ -16,44 +16,37 @@
   {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
   {{~ Indentation }}    </p>
   {%-
-  include 'accueil/calendrier/_forme-' ~ Forme ~ '.html.twig'
+  include 'accueil/calendrier/_forme-' ~ Parametres.getForme() ~ '.html.twig'
   with { 'Indentation' : Indentation ~ '    ',
          'Couleur' : CouleurTexte,
-         'Noel' : Noel,
-         'Style' : Style,
-         'Bordure' : Bordure,
-         'Zoom' : Zoom,
-         'Taille' : Taille }
+         'Style' : Style }
   -%}
-  {%~ if Zoom != '' %}
+  {%~ if Parametres.getZoom() != '' %}
     {%-
     include 'modale/ZoomResultat.html.twig'
     with { 'Indentation' : Indentation ~ '    ' }
     ~%}
   {%~ endif %}
-  {%~ if JourSpecial != [] %}
+  {%~ if Parametres.getJourSpecial() != [] %}
     {%-
     include 'modale/JourSpecial.html.twig'
-    with { 'Indentation' : Indentation ~ '    ',
-           'Titre' : JourSpecial['TitreModale'],
-           'Texte' : JourSpecial['TexteModale'],
-           'Type' : JourSpecial['TypeModale'] }
+    with { 'Indentation' : Indentation ~ '    ' }
     ~%}
   {%~ endif %}
   {{~ Indentation }}  </div>
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
-    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
-    {%~ if JourSpecial != [] %}
-      {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '5-JourSpecial.js') }}"></script>
-      {{~ Indentation }}<script>JourSpecial({{ JourSpecial['Jour'] }},{{ JourSpecial['Mois'] }});</script>
+    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
+    {%~ if Parametres.getJourSpecial() != [] %}
+      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '5-JourSpecial.js') }}"></script>
+      {{~ Indentation }}<script>JourSpecial({{ Parametres.getJourSpecial()['Jour'] }},{{ Parametres.getJourSpecial()['Mois'] }});</script>
     {%~ endif %}
     {%- set Jour = "now"|date("j") -%}
-    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '6-JourAvant.js') }}"></script>
-    {{~ Indentation }}<script>JourAvant({{ Jour }},{{ MoisActivation }});</script>
-    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '7-JourActuel.js') }}"></script>
-    {{~ Indentation }}<script>JourActuel({{ Jour }},{{ MoisActivation }});</script>
-    {{~ Indentation }}<script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '8-JourChange.js') }}"></script>
+    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '6-JourAvant.js') }}"></script>
+    {{~ Indentation }}<script>JourAvant({{ Jour }},{{ Parametres.getMois() }});</script>
+    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '7-JourActuel.js') }}"></script>
+    {{~ Indentation }}<script>JourActuel({{ Jour }},{{ Parametres.getMois() }});</script>
+    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '8-JourChange.js') }}"></script>
     {{~ Indentation }}<script>setInterval(JourChange,1000,{{ Jour }});</script>
   {%~ endblock %}
   {{~ Indentation }}</body>

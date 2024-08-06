@@ -57,9 +57,6 @@ class Ajax extends AbstractController
                 'Indentation' => '    ',
                 'Jour' => $id,
                 'Couleur' => $this->getParameter('CouleurTexte'),
-                'Bordure' => $this->parametres->getBordure(),
-                'Zoom' => $this->parametres->getZoom(),
-                'Taille' => $this->parametres->getTaille(),
                 'Resultat' => $this->getResultat($id),
             ]
         );

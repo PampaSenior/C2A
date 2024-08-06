@@ -2,7 +2,8 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
         Application: '@App\Service\Application'
-        Ressource: '@App\Service\Ressource'
+        Ressources: '@App\Service\Ressource'
+        Parametres: '@App\Service\Parametre'
 
 when@test:
     twig:

@@ -18,15 +18,15 @@
     {%~ endblock %}
     </title>
     {%~ block stylesheets %}
-    <link rel="icon" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'images') ~ Application.getIcone()) }}"> {% if app.environment != 'prod' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
-    <link rel="stylesheet" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'styles') ~ '1-Bootstrap_V5.3.2.css') }}" type="text/css" title="Jour"> {% if app.environment != 'prod' %}<!-- Permet d'utiliser le thème bootstrap -->{% endif %} 
-    <link rel="stylesheet" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'styles') ~ '2-Font_Awesome_V6.5.1.css') }}" type="text/css"> {% if app.environment != 'prod' %}<!-- Permet d'utiliser la banque d'icones -->{% endif %} 
-    <link rel="stylesheet" href="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'styles') ~ '3-Calendrier.css') }}" type="text/css"> {% if app.environment != 'prod' %}<!-- Permet de rajouter du style sur la page du calendrier -->{% endif %} 
+    <link rel="icon" href="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'images') ~ Application.getIcone()) }}"> {% if app.environment != 'prod' %}<!-- Permet d'afficher une icône dans l'onglet -->{% endif %} 
+    <link rel="stylesheet" href="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'styles') ~ '1-Bootstrap_V5.3.2.css') }}" type="text/css" title="Jour"> {% if app.environment != 'prod' %}<!-- Permet d'utiliser le thème bootstrap -->{% endif %} 
+    <link rel="stylesheet" href="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'styles') ~ '2-Font_Awesome_V6.5.1.css') }}" type="text/css"> {% if app.environment != 'prod' %}<!-- Permet d'utiliser la banque d'icones -->{% endif %} 
+    <link rel="stylesheet" href="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'styles') ~ '3-Calendrier.css') }}" type="text/css"> {% if app.environment != 'prod' %}<!-- Permet de rajouter du style sur la page du calendrier -->{% endif %} 
     {%~ endblock %}
     {%~ block javascripts %}
-    <script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '1-jQuery_V3.7.1.js') }}"></script>
-    <script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '2-Bootstrap_V5.3.2.js') }}"></script>
-    <script src="{{ asset(Ressource.getDossier(constant('FORMAT_URL', Ressource), 'scriptes') ~ '3-Font_Awesome_V6.5.1.js') }}"></script>
+    <script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '1-jQuery_V3.7.1.js') }}"></script>
+    <script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '2-Bootstrap_V5.3.2.js') }}"></script>
+    <script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '3-Font_Awesome_V6.5.1.js') }}"></script>
     {%~ endblock %}
   </head>
   {%~ block body %}
