@@ -114,7 +114,13 @@ class InstallationTest extends KernelTestCase
                 $this->ressources::CAS_ORIGINAL
             )
         );
-        $this->assertStringContainsString('APP_ENV=' . $environnement, $contenu === false ? '' : $contenu);
-        $this->assertMatchesRegularExpression('/^APP_SECRET=[0-9a-f]{32}$/m', $contenu === false ? '' : $contenu);
+        $this->assertMatchesRegularExpression(
+            '/^APP_ENV=' . $environnement . '/m',
+            $contenu === false ? '' : $contenu
+        );
+        $this->assertMatchesRegularExpression(
+            '/^APP_SECRET=[0-9a-f]{32}/m',
+            $contenu === false ? '' : $contenu
+        );
     }
 }

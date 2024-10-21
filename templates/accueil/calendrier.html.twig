@@ -16,7 +16,7 @@
   {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
   {{~ Indentation }}    </p>
   {%-
-  include 'accueil/calendrier/_forme-' ~ Parametres.getForme() ~ '.html.twig'
+  include 'accueil/_forme-' ~ Parametres.getForme() ~ '.html.twig'
   with { 'Indentation' : Indentation ~ '    ',
          'Couleur' : CouleurTexte,
          'Style' : Style }

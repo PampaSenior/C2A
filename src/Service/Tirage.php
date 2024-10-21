@@ -46,7 +46,7 @@ class Tirage
         ) {
             /* Génération des lignes pour le CSV */
             $lignes = [];
-            for ($i = 0; $i <= $this->parametres->getNb() - 1; $i++) {
+            for ($i = 0; $i < $this->parametres->getNb(); $i++) {
                 $lignes[$i] = $participants[$i] . ',' . $lots[$i];
             }
 

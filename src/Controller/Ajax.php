@@ -52,7 +52,7 @@ class Ajax extends AbstractController
         }
 
         return $this->render(
-            'accueil/calendrier/_jour.html.twig',
+            'accueil/_jour.html.twig',
             [
                 'Indentation' => '    ',
                 'Jour' => $id,

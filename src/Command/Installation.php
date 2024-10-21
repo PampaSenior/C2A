@@ -101,18 +101,18 @@ class Installation extends Command
 
             if ($clef == 'initialisation') {
                 $contenu = preg_replace(
-                    '/^#([A-Z]+.*)/m',
+                    '/^#([A-Z].*)$/m',
                     '${1}',
                     $contenu
                 ); /* Supprime le caractère de commentaire */
                 $contenu = preg_replace(
-                    '/^(APP_ENV=).*/m',
+                    '/^(APP_ENV=).*$/m',
                     '${1}' . $option,
                     is_null($contenu) ? '' : $contenu
                 ); /* Renseigne l'environnement */
                 $contenu = preg_replace(
-                    '/0{32}/',
-                    $this->secret(16),
+                    '/^(APP_SECRET=).*$/m',
+                    '${1}' . $this->secret(16),
                     is_null($contenu) ? '' : $contenu
                 ); /* Renseigne le secret */
             }

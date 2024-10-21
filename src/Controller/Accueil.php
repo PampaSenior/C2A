@@ -31,9 +31,9 @@ class Accueil extends AbstractController
         }
 
         return $this->render(
-            'accueil/calendrier/calendrier.html.twig',
+            'accueil/calendrier.html.twig',
             [
-                'Indentation' => '    ',
+                'Indentation' => '  ',
                 'Titre' => $this->getParameter('Titre'),
                 'CouleurFond' => $this->getParameter('CouleurFond'),
                 'CouleurTexte' => $this->getParameter('CouleurTexte'),

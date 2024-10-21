@@ -1,7 +1,7 @@
 {%~ if Style is defined %}
   {%~ if Style in 0..1 %}
     {%~
-    include 'accueil/calendrier/_contenu-fontawesome.html.twig'
+    include 'accueil/_contenu-fontawesome.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
            'Couleur' : Couleur,
            'Aleatoire': Style,
@@ -10,14 +10,14 @@
     ~%}
   {%- else %}
     {%~
-    include 'accueil/calendrier/_contenu-image.html.twig'
+    include 'accueil/_contenu-image.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
            'Jour': Jour }
     ~%}
   {%- endif %}
 {%~ else %}
   {%~
-  include 'accueil/calendrier/_contenu-texte.html.twig'
+  include 'accueil/_contenu-texte.html.twig'
   with { 'Indentation' : Indentation ~ '  ',
          'Jour': Jour,
          'Resultat': Resultat }

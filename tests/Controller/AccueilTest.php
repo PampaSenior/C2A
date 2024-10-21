@@ -2,7 +2,7 @@
 
 namespace App\Tests;
 
-use App\Service\Application;
+use App\Entity\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 

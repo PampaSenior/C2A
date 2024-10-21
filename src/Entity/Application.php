@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Entity;
 
 /** @SuppressWarnings(PHPMD.TooManyFields) */
 class Application
@@ -60,7 +60,7 @@ class Application
             'initialisation' => '.env.local',
             'resultats' => 'resultats.csv',
             'participants' => 'participants.csv',
-            'lots' => 'lots.csv'
+            'lots' => 'lots.csv',
         ];
 
         $this->parametres = [
@@ -83,7 +83,7 @@ class Application
             'Zoom',
             'Taille',
             'Tirage',
-            'Pot2Miel'
+            'Pot2Miel',
         ];
     }
 
