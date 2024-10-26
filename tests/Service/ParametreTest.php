@@ -130,19 +130,32 @@ class ParametreTest extends WebTestCase
             'NouvelAn' => '2000-01-01',
             'Cupidon' => '2000-02-14',
             'Poisson' => '2000-04-01',
+            'Horreur' => '2000-10-31',
             'Cadeau' => '2000-12-25'
         ];
 
         foreach ($dates as $clef => $date) {
-            $horloge = static::mockTime($date);
-
             $this->majConfiguration();
 
+            $horloge = static::mockTime($date);
             $this->parametres->setClock($horloge);
             $infos = $this->parametres->getJourSpecial();
 
             $this->assertEquals($clef, $infos['TypeModale']);
         }
+    }
+
+    public function testTriche(): void
+    {
+        $this->majConfiguration();
+
+        $horloge = static::mockTime('-1 month');
+        $this->parametres->setClock($horloge);
+
+        $client = static::createClient(); // Générer un navigateur fictif
+        $client->request('GET', '/Ajax/JSON/Resultat/1'); // On est sur un mois non autorisé
+
+        $this->assertEquals((array) json_decode($client->getResponse()->getContent()), $this->parametres->getTriche());
     }
 
     private function majConfiguration(): void

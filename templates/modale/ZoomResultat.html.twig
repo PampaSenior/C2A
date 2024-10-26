@@ -1,16 +1,23 @@
-{{ Indentation }}<div id="ZoomResultat" class="modal" tabindex="-1">
+{% set Fermer = 'Modale.Fermer'|trans({},'messages') -%}
+{% set Titre = 'Modale.Zoom.Titre'|trans({},'messages') -%}
+{% set Gagnant = 'Modale.Zoom.Gagnant'|trans({},'messages') -%}
+{% set Cadeau = 'Modale.Zoom.Cadeau'|trans({},'messages') -%}
+
+{{ Indentation }}<div id="ZoomResultat" class="text-center modal" tabindex="-1">
 {{ Indentation }}  <div class="modal-dialog modal-dialog-centered">
 {{ Indentation }}    <div class="modal-content border border-success border-2">
 {{ Indentation }}      <div class="modal-header border-success border-2 z-index-1">
-{{ Indentation }}        <p class="m-0 h2 modal-title text-danger">{{ 'Resultat.Modale.Titre'|trans({},'messages') }}<span id="jour"></span></p>
-{{ Indentation }}        <button type="button" class="btn border border-success border-2" onclick="$('#ZoomResultat').hide();" aria-label="Fermer" title="Fermer">
+{{ Indentation }}        <p class="m-0 h2 modal-title text-danger">
+{{ Indentation }}          {{ Titre }}<span id="jour"></span>
+{{ Indentation }}        </p>
+{{ Indentation }}        <button type="button" class="btn border border-success border-2" onclick="$('#ZoomResultat').hide();" aria-label="{{ Fermer }}" title="{{ Fermer }}">
 {{ Indentation }}          <i class="fas fa-times fa-2x"></i>
 {{ Indentation }}        </button>
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-body">
-{{ Indentation }}        <p class="m-0">{{ 'Resultat.Modale.Gagnant'|trans({},'messages') }}</p>
+{{ Indentation }}        <p class="m-0">{{ Gagnant }}</p>
 {{ Indentation }}        <p id="gagnant" class="m-0"></p>
-{{ Indentation }}        <p class="m-0">{{ 'Resultat.Modale.Cadeau'|trans({},'messages') }}</p>
+{{ Indentation }}        <p class="m-0">{{ Cadeau }}</p>
 {{ Indentation }}        <p id="cadeau" class="m-0"></p>
 {{ Indentation }}        <img id="photo" class="d-none" src="">
 {{ Indentation }}      </div>

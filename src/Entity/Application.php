@@ -71,6 +71,8 @@ class Application
             'TexteCupidon',
             'TitrePoisson',
             'TextePoisson',
+            'TitreHorreur',
+            'TexteHorreur',
             'TitreCadeau',
             'TexteCadeau',
             'CouleurFond',

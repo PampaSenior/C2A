@@ -1,9 +1,11 @@
-{{ Indentation }}<div id="JourSpecial" class="modal" tabindex="-1">
+{% set Fermer = 'Modale.Fermer'|trans({},'messages') -%}
+
+{{ Indentation }}<div id="JourSpecial" class="text-center modal" tabindex="-1">
 {{ Indentation }}  <div class="modal-dialog modal-dialog-centered">
 {{ Indentation }}    <div class="modal-content border border-success border-2">
 {{ Indentation }}      <div class="modal-header border-success border-2 z-index-1">
 {{ Indentation }}        <p class="m-0 h2 modal-title text-danger">{{ Parametres.getJourSpecial()['TitreModale'] }}</p>
-{{ Indentation }}        <button class="btn border border-success border-2" onclick="$('#JourSpecial').hide();" aria-label="Fermer" title="Fermer">
+{{ Indentation }}        <button class="btn border border-success border-2" onclick="$('#JourSpecial').hide();" aria-label="{{ Fermer }}" title="{{ Fermer }}">
 {{ Indentation }}          <i class="fas fa-times fa-2x"></i>
 {{ Indentation }}        </button>
 {{ Indentation }}      </div>
@@ -25,6 +27,10 @@
   {{~ Indentation }}          <i class="fa-solid fa-face-grin-squint-tears fa-2x text-success"></i>
   {{~ Indentation }}          <i class="fa-solid fa-face-grin-tears fa-2x text-warning"></i>
   {{~ Indentation }}          <i class="fa-solid fa-fish-fins fa-2x fa-rotate-180 text-info"></i>
+{%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Horreur' %}
+  {{~ Indentation }}          <i class="fa-solid fa-wand-sparkles fa-2x text-success"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-book-skull fa-2x text-warning"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-hat-wizard fa-2x text-info"></i>
 {%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Cadeau' %}
   {{~ Indentation }}          <i class="fas fa-holly-berry fa-2x text-danger"></i>
   {{~ Indentation }}          <i class="fas fa-gifts fa-2x text-info"></i>

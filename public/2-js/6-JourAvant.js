@@ -16,7 +16,7 @@ function ClicJour()
     }
 
     let Succes = function (Reponse) {
-        Widget.replaceWith(Reponse);
+        Widget.replaceWith(Reponse.trim());
     }
 
     let Echec = function (Erreur) {

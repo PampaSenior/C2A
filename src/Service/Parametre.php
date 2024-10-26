@@ -175,6 +175,14 @@ class Parametre
                     'TexteModale' => $this->parametre->get('TextePoisson'),
                     'TypeModale' => 'Poisson',
                 ];
+            case '31-10':
+                return [
+                    'Jour' => 31,
+                    'Mois' => 10,
+                    'TitreModale' => $this->parametre->get('TitreHorreur'),
+                    'TexteModale' => $this->parametre->get('TexteHorreur'),
+                    'TypeModale' => 'Horreur',
+                ];
             case '25-12':
                 return [
                     'Jour' => 25,

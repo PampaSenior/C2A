@@ -26,7 +26,7 @@ class VerificationTest extends KernelTestCase
 
         //Cas 1 sans le .env.local
         $this->original('sauvegarder', 'initialisation');
-        $this->verification($parametre, false, 'Information.Configuration.Fichier');
+        $this->verification($parametre, false, 'Verification.Erreur.Fichier');
         $this->original('retablir', 'initialisation');
 
         //Cas 2 sans une variable de configuration du .env.test.local
@@ -38,7 +38,7 @@ class VerificationTest extends KernelTestCase
         unset($_SERVER['NOEL']);
         self::bootKernel();
         $parametre = static::getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
-        $this->verification($parametre, false, 'Information.Configuration.Variable');
+        $this->verification($parametre, false, 'Verification.Erreur.Variable');
         self::ensureKernelShutdown();
         $_ENV['SYMFONY_DOTENV_VARS'] = $_ENV['SYMFONY_DOTENV_VARS'] . ',NOEL';
         $_ENV['NOEL'] = $valeur1;
@@ -67,17 +67,17 @@ class VerificationTest extends KernelTestCase
 
         //Cas 3-E sans resultats.csv et participants.csv
         $this->originaux('sauvegarder', ['resultats', 'participants']);
-        $this->verification($parametre, false, 'Information.Configuration.Tirage');
+        $this->verification($parametre, false, 'Verification.Erreur.Tirage');
         $this->originaux('retablir', ['resultats', 'participants']);
 
         //Cas 3-F sans resultats.csv et lots.csv
         $this->originaux('sauvegarder', ['resultats', 'lots']);
-        $this->verification($parametre, false, 'Information.Configuration.Tirage');
+        $this->verification($parametre, false, 'Verification.Erreur.Tirage');
         $this->originaux('retablir', ['resultats', 'lots']);
 
         //Cas 3-G sans aucun fichier pour le tirage
         $this->originaux('sauvegarder', ['resultats', 'participants', 'lots']);
-        $this->verification($parametre, false, 'Information.Configuration.Tirage');
+        $this->verification($parametre, false, 'Verification.Erreur.Tirage');
         $this->originaux('retablir', ['resultats', 'participants', 'lots']);
     }
 

@@ -1,14 +1,16 @@
 Langue: "Langue française"
-Information:
-  Configuration:
+Verification:
+  Erreur:
     Fichier: 'Un problème de configuration a été détecté. Le fichier ".env.local" n''existe pas.'
     Variable: 'Un problème de configuration a été détecté. Une des variables est mal écrite ou absente dans le ".env.local".'
     Tirage: 'Aucun gagnant n''est renseigné. Le fichier "resultats.csv" n''existe pas ou est mal écrit. Vérifiez aussi "participants.csv" et "lots.csv" si vous avez effectué un tirage au sort avec cette application.'
-Resultat:
-  Modale :
+Modale :
+  Fermer: 'Fermer'
+  Zoom:
     Titre: 'Résultat du jour : '
     Gagnant: 'Le gagnant est : '
     Cadeau: 'Le cadeau est : '
+Resultat:
   Gagnant:
     sm: ''
     md: 'Gagnant : '
@@ -19,3 +21,4 @@ Resultat:
     md: 'Cadeau : '
     lg: 'Le cadeau : '
     xl: 'Le cadeau est : '
+  Loupe: 'Agrandir'

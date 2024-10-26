@@ -21,22 +21,24 @@
          'Couleur' : CouleurTexte,
          'Style' : Style }
   -%}
+  {{~ Indentation }}  </div>
   {%~ if Parametres.getZoom() != '' %}
-    {%-
+    {%~
     include 'modale/ZoomResultat.html.twig'
-    with { 'Indentation' : Indentation ~ '    ' }
+    with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}
   {%~ if Parametres.getJourSpecial() != [] %}
-    {%-
+    {%~
     include 'modale/JourSpecial.html.twig'
-    with { 'Indentation' : Indentation ~ '    ' }
+    with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}
-  {{~ Indentation }}  </div>
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
-    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
+    {%~ if Parametres.getZoom() != '' %}
+      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
+    {%~ endif %}
     {%~ if Parametres.getJourSpecial() != [] %}
       {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '5-JourSpecial.js') }}"></script>
       {{~ Indentation }}<script>JourSpecial({{ Parametres.getJourSpecial()['Jour'] }},{{ Parametres.getJourSpecial()['Mois'] }});</script>

@@ -1,14 +1,16 @@
 Langue: "English language"
-Information:
-  Configuration:
+Verification:
+  Erreur:
     Fichier: 'A problem of configuration was detected. The file ".env.local" doesn''t exists.'
     Variable: 'A problem of configuration was detected. At least one variable is misspelling or missing in the ".env.local".'
     Tirage: 'No winner is listed. The file "resultats.csv" doesn''t exist or misswritten. Check also "participants.csv" and "lots.csv" if you have done a draw of lot with this application.'
-Resultat:
-  Modale :
+Modale :
+  Fermer: 'Close'
+  Zoom:
     Titre: 'Day result : '
     Gagnant: 'The winner is : '
     Cadeau: 'The gift is : '
+Resultat:
   Gagnant:
     sm: ''
     md: 'Winner : '
@@ -19,3 +21,4 @@ Resultat:
     md: 'Gift : '
     lg: 'The gift : '
     xl: 'The gift is : '
+  Loupe: 'Zoom'

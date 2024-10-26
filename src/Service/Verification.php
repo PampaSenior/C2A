@@ -61,11 +61,11 @@ class Verification
     {
         switch ($this->cas) {
             case 1:
-                return 'Information.Configuration.Fichier';
+                return 'Verification.Erreur.Fichier';
             case 2:
-                return 'Information.Configuration.Variable';
+                return 'Verification.Erreur.Variable';
             case 3:
-                return 'Information.Configuration.Tirage';
+                return 'Verification.Erreur.Tirage';
             default:
                 return "";
         }
