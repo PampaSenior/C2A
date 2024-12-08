@@ -73,8 +73,8 @@ class Ajax extends AbstractController
         if (!$this->verification->isValide()) {
             return new JsonResponse(
                 [
-                'fr' => $this->traducteur->trans($this->verification->getErreur(), [], 'messages', 'fr'),
-                'en' => $this->traducteur->trans($this->verification->getErreur(), [], 'messages', 'en')
+                    'fr' => $this->traducteur->trans($this->verification->getErreur(), [], 'messages', 'fr'),
+                    'en' => $this->traducteur->trans($this->verification->getErreur(), [], 'messages', 'en')
                 ]
             );
         }

@@ -11,8 +11,10 @@ class Ressource
     public const FORMAT_CHEMIN = 'chemin';
     public const CAS_ORIGINAL = 'original';
     public const CAS_SAUVEGARDE = 'sauvegarde';
+
     /** @var array{url: array<string, string>, chemin: array<string, string>} $dossiers */
     private array $dossiers;
+
     /** @var array{url: array<string, array{original: string, sauvegarde: string}>, chemin: array<string, array{original: string, sauvegarde: string}>} $fichiers */
     private array $fichiers;
 

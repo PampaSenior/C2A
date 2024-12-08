@@ -4,12 +4,17 @@ Verification:
     Fichier: 'Un problème de configuration a été détecté. Le fichier ".env.local" n''existe pas.'
     Variable: 'Un problème de configuration a été détecté. Une des variables est mal écrite ou absente dans le ".env.local".'
     Tirage: 'Aucun gagnant n''est renseigné. Le fichier "resultats.csv" n''existe pas ou est mal écrit. Vérifiez aussi "participants.csv" et "lots.csv" si vous avez effectué un tirage au sort avec cette application.'
-Modale :
-  Fermer: 'Fermer'
-  Zoom:
-    Titre: 'Résultat du jour : '
-    Gagnant: 'Le gagnant est : '
-    Cadeau: 'Le cadeau est : '
+Administration:
+  Titre:
+    Outils: 'Outils'
+    Graphismes: 'Graphismes'
+    Oeufs: 'Œufs de Pâques'
+    Fichiers: 'Fichiers'
+  Description:
+    Outils: 'Permet de configurer le fonctionnement.'
+    Graphismes: 'Permet de configurer l''aspect graphique.'
+    Oeufs: 'Permet de configurer les modales surprises des jours spéciaux.'
+    Fichiers: 'Permet de télécharger ou d''insérer les fichiers liés au tirage au sort.'
 Resultat:
   Gagnant:
     sm: ''
@@ -22,3 +27,9 @@ Resultat:
     lg: 'Le cadeau : '
     xl: 'Le cadeau est : '
   Loupe: 'Agrandir'
+Modale:
+  Fermer: 'Fermer'
+  Zoom:
+    Titre: 'Résultat du jour : '
+    Gagnant: 'Le gagnant est : '
+    Cadeau: 'Le cadeau est : '

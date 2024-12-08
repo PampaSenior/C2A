@@ -4,13 +4,15 @@
 {{ Indentation }}  <div class="modal-dialog modal-dialog-centered">
 {{ Indentation }}    <div class="modal-content border border-success border-2">
 {{ Indentation }}      <div class="modal-header border-success border-2 z-index-1">
-{{ Indentation }}        <p class="m-0 h2 modal-title text-danger">{{ Parametres.getJourSpecial()['TitreModale'] }}</p>
+{{ Indentation }}        <h2 class="mb-0 modal-title text-danger fw-bold">
+{{ Indentation }}          {{ Parametres.getJourSpecial()['TitreModale'] }}
+{{ Indentation }}        </h2>
 {{ Indentation }}        <button class="btn border border-success border-2" onclick="$('#JourSpecial').hide();" aria-label="{{ Fermer }}" title="{{ Fermer }}">
 {{ Indentation }}          <i class="fas fa-times fa-2x"></i>
 {{ Indentation }}        </button>
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-body">
-{{ Indentation }}        <p class="m-0 h3 text-success">{{ Parametres.getJourSpecial()['TexteModale'] }}</p>
+{{ Indentation }}        <p class="mb-0 h5 text-success fw-bold">{{ Parametres.getJourSpecial()['TexteModale'] }}</p>
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-footer border-success border-2 z-index-1">
 {{ Indentation }}        <div class="mx-auto">

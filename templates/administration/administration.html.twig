@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  {{~ Indentation }}<body class="vh-100 d-flex">
+  {{~ Indentation }}  <div class="m-auto">
+  {%~ for Cadre in Cadres %}
+    {%~ if loop.index is odd %}
+      {{~ Indentation }}    <div class="mx-auto d-flex justify-content-center">
+    {%~ endif %}
+    {%~
+    include 'administration/_carte.html.twig'
+    with { 'Indentation' : Indentation ~ '      ',
+           'Cadre' : Cadre }
+    ~%}
+    {%~ if loop.index is even %}
+      {{~ Indentation }}    </div>
+    {%~ endif %}
+  {%~ endfor %}
+  {{~ Indentation }}  </div>
+  {{~ Indentation }}</body>
+{% endblock %}

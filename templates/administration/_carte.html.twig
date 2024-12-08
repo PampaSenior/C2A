@@ -1,0 +1,14 @@
+{{ Indentation }}<div class="card carte">
+{{ Indentation }}  <div class="card-header text-center">
+{{ Indentation }}    <i class="mx-auto my-2 fa-solid {{ Cadre['icone'] }} fa-2x"></i>
+{{ Indentation }}  </div>
+{{ Indentation }}  <div class="card-body">
+{{ Indentation }}    <h5 class="card-title">{{ Cadre['titre']|trans({},'messages') }} :</h5>
+{{ Indentation }}    <p class="card-text">{{ Cadre['description']|trans({},'messages') }}</p>
+{{ Indentation }}    <div class="text-center">
+{{ Indentation }}      <a href=" {{ Cadre['lien'] }} " class="btn btn-primary">
+{{ Indentation }}        <i class="fa-solid fa-circle-arrow-right"></i>
+{{ Indentation }}      </a>
+{{ Indentation }}    </div>
+{{ Indentation }}  </div>
+{{ Indentation }}</div>

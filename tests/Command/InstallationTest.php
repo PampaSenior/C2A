@@ -122,5 +122,9 @@ class InstallationTest extends KernelTestCase
             '/^APP_SECRET=[0-9a-f]{32}/m',
             $contenu === false ? '' : $contenu
         );
+        $this->assertMatchesRegularExpression(
+            '/^MOT_2_PASSE="[0-9A-z<>,;:!%_@\^\.\|\?\*\+\-\[\]]{15}"/m',
+            $contenu === false ? '' : $contenu
+        );
     }
 }

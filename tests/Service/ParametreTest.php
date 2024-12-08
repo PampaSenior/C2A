@@ -36,9 +36,14 @@ class ParametreTest extends WebTestCase
         $tests = [
             'NOEL' => [
                 'getNb' => [
+                    ['false', 24],
+                    ['true', 25],
+                    ['off', 24],
+                    ['on', 25],
+                    ['no', 24],
+                    ['yes', 25],
                     [0, 24],
                     [1, 25],
-                    [2, 24],
                 ]
             ],
             'NEIGE' => [

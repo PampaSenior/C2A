@@ -26,7 +26,7 @@ class Verification
         }
 
         try {
-            foreach ($application->getParametres() as $clef) {
+            foreach (array_keys($application->getParametres()) as $clef) {
                 $parametre->get($clef);
             }
         } catch (\Exception $pb) {

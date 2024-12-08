@@ -4,12 +4,17 @@ Verification:
     Fichier: 'A problem of configuration was detected. The file ".env.local" doesn''t exists.'
     Variable: 'A problem of configuration was detected. At least one variable is misspelling or missing in the ".env.local".'
     Tirage: 'No winner is listed. The file "resultats.csv" doesn''t exist or misswritten. Check also "participants.csv" and "lots.csv" if you have done a draw of lot with this application.'
-Modale :
-  Fermer: 'Close'
-  Zoom:
-    Titre: 'Day result : '
-    Gagnant: 'The winner is : '
-    Cadeau: 'The gift is : '
+Administration:
+  Titre:
+    Outils: 'Tools'
+    Graphismes: 'Graphics'
+    Oeufs: 'Easter eggs'
+    Fichiers: 'Files'
+  Description:
+    Outils: 'In order to configure how working.'
+    Graphismes: 'In order to configure aspect of graphics.'
+    Oeufs: 'In order to configure surprise modals of special days.'
+    Fichiers: 'In order to download or upload files linked to the draw.'
 Resultat:
   Gagnant:
     sm: ''
@@ -22,3 +27,9 @@ Resultat:
     lg: 'The gift : '
     xl: 'The gift is : '
   Loupe: 'Zoom'
+Modale:
+  Fermer: 'Close'
+  Zoom:
+    Titre: 'Day result : '
+    Gagnant: 'The winner is : '
+    Cadeau: 'The gift is : '

@@ -10,5 +10,5 @@
 
 {{~ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Parametres.getBordure() }} {{ Parametres.getTaille() }}" title="Jour : {{ Jour }}" data-taille="{{ Parametres.getTaille() }}" data-url="{{ path('ResultatHTML',{'id': Jour}) }}">
 {{~ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Parametres.getTaille() }}"></i>
-{{~ Indentation }}  <strong class="m-0 chiffre {{ Parametres.getTaille() }}" style="color:{{ Couleur }}">{{ Jour }}</strong>
+{{~ Indentation }}  <span class="chiffre contour {{ Parametres.getTaille() }}" style="color:{{ Couleur }}">{{ Jour }}</span>
 {{~ Indentation }}</div>

@@ -4,5 +4,7 @@
   {%~ else -%}
     {% set Defaut = '' %}
   {%~ endif -%}
-  {{~ Indentation }}<div class="p-2 tab-pane fade{{ Defaut }}" id="{{ Clef }}" role="tabpanel">{{ Message|trans({},'messages',Clef) }}</div>
+  {{~ Indentation }}<div id="{{ Clef }}" class="tab-pane fade{{ Defaut }}" role="tabpanel">
+  {{~ Indentation }}  <p class="mb-0 p-2">{{ Message|trans({},'messages',Clef) }}</p>
+  {{~ Indentation }}</div>
 {% endfor %}

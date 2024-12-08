@@ -53,7 +53,7 @@ function JourAvant(J,M)
 
     if (Mois == M - 1) { //Si on est le bon mois
         for (var i = 0; i <= JourMax - 1; i++) { //Attention les indices de Jours vont de 0 à JourMax - 1
-            $(Jours[i]).on('click',ClicJour); //Mise en place du clic de révélation jusqu'à aujourd'hui
+            $(Jours[i]).on('click', ClicJour); //Mise en place du clic de révélation jusqu'à aujourd'hui
 
             if (i < JourMax - 1 || J > Jours.length) { //Utilisation de la révélation jusqu'à la veille ou sur tous si on dépasse le dernier jour
                 Jours[i].click();

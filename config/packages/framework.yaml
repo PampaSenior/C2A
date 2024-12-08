@@ -1,28 +1,4 @@
 # see https://symfony.com/doc/current/reference/configuration/framework.html
-parameters:
-    Titre: '%env(string:TITRE)%'
-    TitreNouvelAn: '%env(string:TITRE_NOUVEL_AN)%'
-    TexteNouvelAn: '%env(string:TEXTE_NOUVEL_AN)%'
-    TitreCupidon: '%env(string:TITRE_CUPIDON)%'
-    TexteCupidon: '%env(string:TEXTE_CUPIDON)%'
-    TitrePoisson: '%env(string:TITRE_POISSON)%'
-    TextePoisson: '%env(string:TEXTE_POISSON)%'
-    TitreHorreur: '%env(string:TITRE_HORREUR)%'
-    TexteHorreur: '%env(string:TEXTE_HORREUR)%'
-    TitreCadeau: '%env(string:TITRE_CADEAU)%'
-    TexteCadeau: '%env(string:TEXTE_CADEAU)%'
-    CouleurFond: '%env(string:COULEUR_FOND)%'
-    CouleurTexte: '%env(string:COULEUR_TEXTE)%'
-    Noel: '%env(int:NOEL)%'
-    Neige: '%env(int:NEIGE)%'
-    Forme: '%env(int:FORME)%'
-    Style: '%env(int:STYLE)%'
-    Bordure: '%env(int:BORDURE)%'
-    Zoom: '%env(int:ZOOM)%'
-    Taille: '%env(string:TAILLE)%'
-    Tirage: '%env(int:TIRAGE)%'
-    Pot2Miel: '%env(json:POT_2_MIEL)%'
-
 framework:
     secret: '%env(APP_SECRET)%'
     #csrf_protection: true

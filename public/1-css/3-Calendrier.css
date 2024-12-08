@@ -34,13 +34,13 @@ body{
   user-select: none;
 }
 
-p{
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-
 #Titre{
   font-family: "Kingthings Christmas";
   font-size: 2em;
+}
+
+#Message{
+  min-width: 320px;
 }
 
 .z-index-1{
@@ -70,6 +70,10 @@ p{
 
 .position-absolue{
   position: absolute;
+}
+
+.text-tertiary{
+  color: #fd7e14;
 }
 
 .neige{
@@ -157,7 +161,6 @@ p{
 
 .chiffre{
   font-family: "Kingthings Christmas";
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   display: block;
   position: relative;
   top: var(--top-chiffre);
@@ -168,4 +171,13 @@ p{
   position: relative;
   top: var(--top-texte);
   font-size: var(--font-texte);
+}
+
+.carte{
+  min-width: 260px;
+  max-width: 260px;
+}
+
+.contour{
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }

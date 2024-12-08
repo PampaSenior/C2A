@@ -26,7 +26,7 @@ class Parametre
     public function getNb(): int
     {
         /* Retourne le nombre de jours à afficher dans le calendrier */
-        return 24 + ($this->parametre->get('Noel') == 1);
+        return 24 + ($this->parametre->get('Noel') === true);
     }
 
     /** @return array<string, string> */

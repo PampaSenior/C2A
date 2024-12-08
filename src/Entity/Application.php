@@ -27,7 +27,7 @@ class Application
     /** @var array<string, string> $fichiers */
     private array $fichiers;
 
-    /** @var array<string> $parametres */
+    /** @var array<string, array{'type': string, 'nom': string}> $parametres */
     private array $parametres;
 
     public function __construct()
@@ -64,28 +64,29 @@ class Application
         ];
 
         $this->parametres = [
-            'Titre',
-            'TitreNouvelAn',
-            'TexteNouvelAn',
-            'TitreCupidon',
-            'TexteCupidon',
-            'TitrePoisson',
-            'TextePoisson',
-            'TitreHorreur',
-            'TexteHorreur',
-            'TitreCadeau',
-            'TexteCadeau',
-            'CouleurFond',
-            'CouleurTexte',
-            'Noel',
-            'Neige',
-            'Forme',
-            'Style',
-            'Bordure',
-            'Zoom',
-            'Taille',
-            'Tirage',
-            'Pot2Miel',
+            'Mot2Passe' => ['type' => 'string', 'nom' => 'MOT_2_PASSE'],
+            'Titre' => ['type' => 'string', 'nom' =>  'TITRE'],
+            'TitreNouvelAn' => ['type' => 'string', 'nom' =>  'TITRE_NOUVEL_AN'],
+            'TexteNouvelAn' => ['type' => 'string', 'nom' =>  'TEXTE_NOUVEL_AN'],
+            'TitreCupidon' => ['type' => 'string', 'nom' =>  'TITRE_CUPIDON'],
+            'TexteCupidon' => ['type' => 'string', 'nom' =>  'TEXTE_CUPIDON'],
+            'TitrePoisson' => ['type' => 'string', 'nom' =>  'TITRE_POISSON'],
+            'TextePoisson' => ['type' => 'string', 'nom' =>  'TEXTE_POISSON'],
+            'TitreHorreur' => ['type' => 'string', 'nom' =>  'TITRE_HORREUR'],
+            'TexteHorreur' => ['type' => 'string', 'nom' =>  'TEXTE_HORREUR'],
+            'TitreCadeau' => ['type' => 'string', 'nom' =>  'TITRE_CADEAU'],
+            'TexteCadeau' => ['type' => 'string', 'nom' =>  'TEXTE_CADEAU'],
+            'CouleurFond' => ['type' => 'string', 'nom' =>  'COULEUR_FOND'],
+            'CouleurTexte' => ['type' => 'string', 'nom' =>  'COULEUR_TEXTE'],
+            'Noel' => ['type' => 'bool', 'nom' =>  'NOEL'],
+            'Neige' => ['type' => 'int', 'nom' =>  'NEIGE'],
+            'Forme' => ['type' => 'int', 'nom' =>  'FORME'],
+            'Style' => ['type' => 'int', 'nom' =>  'STYLE'],
+            'Bordure' => ['type' => 'int', 'nom' =>  'BORDURE'],
+            'Zoom' => ['type' => 'int', 'nom' =>  'ZOOM'],
+            'Taille' => ['type' => 'string', 'nom' =>  'TAILLE'],
+            'Tirage' => ['type' => 'int', 'nom' =>  'TIRAGE'],
+            'Pot2Miel' => ['type' => 'json', 'nom' =>  'POT_2_MIEL'],
         ];
     }
 
@@ -181,7 +182,7 @@ class Application
         return $this->fichiers;
     }
 
-    /** @return array<string> */
+    /** @return array<string, array{'type': string, 'nom': string}> */
     public function getParametres(): array
     {
         return $this->parametres;

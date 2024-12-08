@@ -20,12 +20,16 @@ use Symfony\Component\Console\Helper\ProgressBar;
 class Installation extends Command
 {
     private Ressource $ressources;
+    private string $secret;
+    private string $mot2passe;
 
     public function __construct(ParameterBagInterface $parametre)
     {
         parent::__construct();
 
         $this->ressources = new Ressource($parametre);
+        $this->secret = $this->genererSecret(16);
+        $this->mot2passe = $this->genererMdp(15);
     }
 
     protected function configure(): void
@@ -79,13 +83,52 @@ class Installation extends Command
 
         $avancement->finish();
 
+        $sortie->writeln('');
+        $sortie->writeln('-----Mot de passe/Password-----');
+        $sortie->writeln($this->mot2passe);
+
         return $etat;
     }
 
-    private function secret(int $taille): string
+    private function genererSecret(int $taille): string
     {
         $chaine = random_bytes(max(1, $taille));
         return bin2hex($chaine);
+    }
+
+    private function genererMdp(int $taille): string
+    {
+        $chiffres = '0123456789';
+        $minuscules = 'abcdefghijklmnopqrstuvwxyz';
+        $majuscules = strtoupper($minuscules);
+        /* Éviter {}() et $ pour empêcher ${} ou $() dans une chaine en "" */
+        /* Les caractères €£°µàâäéèêëîïôöùûÿçÀÂÄÉÈÊËÎÏÔÖÙÛŸÇ nécessitent mb_{fonction} */
+        $speciaux = '<>,;:!%_@^.|?*+-[]';
+
+        $mdpaleatoire = '';
+        for ($i = 0; $i < max(1, $taille); $i++) {
+            $categorie = random_int(0, 3);
+            switch ($categorie) {
+                case 0:
+                    $position = random_int(0, strlen($chiffres) - 1);
+                    $mdpaleatoire .= substr($chiffres, $position, 1);
+                    break;
+                case 1:
+                    $position = random_int(0, strlen($minuscules) - 1);
+                    $mdpaleatoire .= substr($minuscules, $position, 1);
+                    break;
+                case 2:
+                    $position = random_int(0, strlen($majuscules) - 1);
+                    $mdpaleatoire .= substr($majuscules, $position, 1);
+                    break;
+                case 3:
+                    $position = random_int(0, strlen($speciaux) - 1);
+                    $mdpaleatoire .= substr($speciaux, $position, 1);
+                    break;
+            }
+        }
+
+        return str_shuffle($mdpaleatoire);
     }
 
     /** @param array{original: string, sauvegarde: string} $fichier */
@@ -112,9 +155,14 @@ class Installation extends Command
                 ); /* Renseigne l'environnement */
                 $contenu = preg_replace(
                     '/^(APP_SECRET=).*$/m',
-                    '${1}' . $this->secret(16),
+                    '${1}' . $this->secret,
                     is_null($contenu) ? '' : $contenu
                 ); /* Renseigne le secret */
+                $contenu = preg_replace(
+                    '/^(MOT_2_PASSE=).*$/m',
+                    '${1}' . '"' . $this->mot2passe . '"',
+                    is_null($contenu) ? '' : $contenu
+                ); /* Renseigne le mot de passe */
             }
 
             $sortie = $this->ressources->ecriture(
