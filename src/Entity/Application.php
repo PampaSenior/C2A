@@ -54,6 +54,7 @@ class Application
             'images' => '3-images',
             'polices' => '4-polices',
             'documents' => '5-documents',
+            'musiques' => '6-musiques',
         ];
 
         $this->fichiers = [
@@ -79,6 +80,7 @@ class Application
             'CouleurFond' => ['type' => 'string', 'nom' =>  'COULEUR_FOND'],
             'CouleurTexte' => ['type' => 'string', 'nom' =>  'COULEUR_TEXTE'],
             'Noel' => ['type' => 'bool', 'nom' =>  'NOEL'],
+            'Audio' => ['type' => 'bool', 'nom' =>  'AUDIO'],
             'Neige' => ['type' => 'int', 'nom' =>  'NEIGE'],
             'Forme' => ['type' => 'int', 'nom' =>  'FORME'],
             'Style' => ['type' => 'int', 'nom' =>  'STYLE'],

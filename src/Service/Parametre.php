@@ -29,6 +29,12 @@ class Parametre
         return 24 + ($this->parametre->get('Noel') === true);
     }
 
+    public function getAudio(): bool
+    {
+        /* Retourne l'activation ou non d'un son lors du clic sur le gagnant du jour */
+        return ($this->parametre->get('Audio') === true);
+    }
+
     /** @return array<string, string> */
     public function getNeige(): array
     {

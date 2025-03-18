@@ -2,6 +2,11 @@
 
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
+  {%~ if Parametres.getAudio() %}
+    {{~ Indentation }}  <audio id="son" preload="auto">
+    {{~ Indentation }}    <source src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'musiques') ~ 'clic.ogg') }}" type="audio/ogg"></source>
+    {{~ Indentation }}  </audio>
+  {%~ endif %}
   {%~ if Parametres.getNeige()|length == 3 %}
     {{~ Indentation }}  <div>
     {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['grande'] ~}} position-fixe z-index-n1"></div>

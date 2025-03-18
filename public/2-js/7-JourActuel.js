@@ -16,6 +16,10 @@ function JourActuel(J, M)
     if (J <= JourMax && Mois == M - 1) { //Si on est le bon mois mais au maximum le 24/25
         if (localStorage.getItem(Clef) == null || localStorage.getItem(Clef) != Valeur) {
             $(Jours[J - 1]).on('click', function () {
+                son = document.getElementById('son');
+                if (son) {
+                    son.play();
+                }
                 localStorage.setItem(Clef, Valeur); //Mise en place du clic de sauvegarde de la révélation
             });
             $(Jours[J - 1]).addClass('AnimationOuvrable');
