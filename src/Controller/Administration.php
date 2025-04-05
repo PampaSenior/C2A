@@ -51,4 +51,19 @@ class Administration extends AbstractController
             ]
         );
     }
+
+    #[Route(
+        '/Administration/Fichier',
+        name: 'Fichier',
+        methods: ['GET']
+    )]
+    public function fichier(): Response
+    {
+        return $this->render(
+            'administration/telechargement.html.twig',
+            [
+                'Indentation' => '  ',
+            ]
+        );
+    }
 }
