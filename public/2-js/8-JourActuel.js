@@ -8,9 +8,9 @@ function JourActuel(IdJour)
         $(Jour).addClass('AnimationOuvrable');
         $(Jour).on('click', function () {
             joue_son();
-            localStorage.setItem(Clef, Valeur); // Mise en place du clic de sauvegarde de la révélation
+            localStorage.setItem(Clef, Valeur); /* Mise en place du clic de sauvegarde de la révélation */
         });
     } else {
-        Jour.click(); // Utilisation de la révélation
+        Jour.click(); /* Utilisation de la révélation */
     }
 }

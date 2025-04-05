@@ -9,7 +9,7 @@ function ClicJour()
     let Debut = function () {
         Widget.prop('disabled',true);
         Widget.removeClass('AnimationOuvrable');
-        if (Bordure) { // 0, false, undefined, null et "" sont considérés comme faux
+        if (Bordure) { /* 0, false, undefined, null et "" sont considérés comme faux */
             Widget.addClass('bloc ' + Bordure + ' ' + Taille);
         }
         Widget.html('<i class="fa-solid fa-spinner fa-spin ' + Couleur + ' cherche ' + Taille + '"></i>');
@@ -31,7 +31,7 @@ function ClicJour()
         Widget.off('click');
     }
 
-    if (URL) { // 0, false, undefined, null et "" sont considérés comme faux
+    if (URL) { /* 0, false, undefined, null et "" sont considérés comme faux */
         $.ajax({
             url: URL,
             method: 'GET',
@@ -53,13 +53,13 @@ function JourAvant()
     const {Jour, Mois} = date_du_jour();
     const Jours = $('[data-taille]');
 
-    // Pour contraindre Id de 1 à nb de jours
+    /* Pour contraindre Id de 1 à nb de jours */
     const JourMax = Math.min(Jour, Jours.length);
 
-    for (var i = 0; i <= JourMax - 1; i++) { // Attention les indices de Jours vont de 0 à JourMax - 1
-        $(Jours[i]).on('click', ClicJour); // Mise en place du clic de révélation jusqu'à aujourd'hui
+    for (var i = 0; i <= JourMax - 1; i++) { /* Attention les indices de Jours vont de 0 à JourMax - 1 */
+        $(Jours[i]).on('click', ClicJour); /* Mise en place du clic de révélation jusqu'à aujourd'hui */
 
-        if (i < JourMax - 1 || Jour > Jours.length) { // Utilisation de la révélation jusqu'à la veille ou sur tous si on dépasse le dernier jour
+        if (i < JourMax - 1 || Jour > Jours.length) { /* Utilisation de la révélation jusqu'à la veille ou sur tous si on dépasse le dernier jour */
             Jours[i].click();
         }
     }

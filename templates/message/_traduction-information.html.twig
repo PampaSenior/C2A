@@ -5,6 +5,6 @@
     {% set Defaut = '' %}
   {%~ endif -%}
   {{~ Indentation }}<div id="{{ Clef }}" class="tab-pane fade{{ Defaut }}" role="tabpanel">
-  {{~ Indentation }}  <p class="mb-0 p-2">{{ Message|trans({},'messages',Clef) }}</p>
+  {{~ Indentation }}  <p class="mb-0 p-2">{{ Message|trans({}, 'messages', Clef) }}</p>
   {{~ Indentation }}</div>
 {% endfor %}

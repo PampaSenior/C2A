@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Application;
 use App\Service\Verification;
 use App\Service\Ressource;
 use App\Service\Parametre;
@@ -17,20 +18,46 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/Ajax')]
 class Ajax extends AbstractController
 {
+    private Application $application;
     private Verification $verification;
     private Ressource $ressources;
     private Parametre $parametres;
     private Tirage $tirage;
     private TranslatorInterface $traducteur;
 
-    public function __construct(ParameterBagInterface $parametre, TranslatorInterface $traducteur)
-    {
+    public function __construct(
+        Application $application,
+        ParameterBagInterface $parametre,
+        TranslatorInterface $traducteur
+    ) {
+        $this->application = $application;
+
         $this->verification = new Verification($parametre);
         $this->ressources = new Ressource($parametre);
         $this->parametres = new Parametre($parametre);
         $this->tirage = new Tirage($parametre);
 
         $this->traducteur = $traducteur;
+    }
+
+    #[Route(
+        '/CSV/{clef}',
+        name: 'FichierCSV',
+        requirements: ['clef' => '^(lots|participants|resultats)$'],
+        methods: ['GET']
+    )]
+    public function resultatCSV(string $clef): Response
+    {
+        $nom = (new DateTime('now'))->format('Y-m-d_H-i-s') . '_' . $this->application->getFichiers()[$clef];
+
+        $contenu = $this->ressources->lecture($clef, $this->ressources::CAS_SAUVEGARDE);
+
+        $reponse = new Response($contenu, 200);
+        $reponse->headers->set('Content-Type', 'text/csv;charset=utf-8');
+        $reponse->headers->set('Content-Length', (string) strlen($contenu));
+        $reponse->headers->set('Content-Disposition', 'attachement; filename=' . $nom);
+
+        return $reponse;
     }
 
     #[Route(
@@ -85,7 +112,7 @@ class Ajax extends AbstractController
     /** @return array{gagnant: string, cadeau: string, illustration: string} */
     private function getResultat(int $id): array
     {
-        //Pour récupérer le numéro du jour et le mois côté serveur
+        /* Pour récupérer le numéro du jour et le mois côté serveur */
         $date = new DateTime('now');
         $jour = (int) $date->format("j");
         $mois = (int) $date->format("n");
@@ -99,7 +126,7 @@ class Ajax extends AbstractController
                 'illustration' => '',
             ];
 
-            //Pour vérifier l'image d'illustration du cadeau
+            /* Pour vérifier l'image d'illustration du cadeau */
             if (isset($resultats[$id - 1]['illustration'])) {
                 $cheminURL = $this->ressources->getDossier(
                     $this->ressources::FORMAT_URL,

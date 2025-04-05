@@ -21,25 +21,25 @@ class Administration extends AbstractController
                 'icone' => 'fa-tools text-danger',
                 'titre' => 'Administration.Titre.Outils',
                 'description' => 'Administration.Description.Outils',
-                'lien' => '#'
+                'lien' => '#',
             ],
             [
                 'icone' => 'fa-palette text-warning',
                 'titre' => 'Administration.Titre.Graphismes',
                 'description' => 'Administration.Description.Graphismes',
-                'lien' => '#'
+                'lien' => '#',
             ],
             [
                 'icone' => 'fa-egg text-tertiary',
                 'titre' => 'Administration.Titre.Oeufs',
                 'description' => 'Administration.Description.Oeufs',
-                'lien' => '#'
+                'lien' => '#',
             ],
             [
                 'icone' => 'fa-file-csv text-success',
                 'titre' => 'Administration.Titre.Fichiers',
                 'description' => 'Administration.Description.Fichiers',
-                'lien' => '#'
+                'lien' => $this->generateUrl('Fichier'),
             ],
         ];
 

@@ -15,6 +15,10 @@ Administration:
     Graphismes: 'Permet de configurer l''aspect graphique.'
     Oeufs: 'Permet de configurer les modales surprises des jours spéciaux.'
     Fichiers: 'Permet de télécharger ou d''insérer les fichiers liés au tirage au sort.'
+  Bouton:
+    Aller: 'Aller sur la page dédiée'
+    Revenir: 'Revenir sur la page précédente'
+    Telecharger: 'Télécharger le fichier'
 Resultat:
   Gagnant:
     sm: ''

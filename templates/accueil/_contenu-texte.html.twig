@@ -1,15 +1,15 @@
 {%~ if Parametres.getTaille() == 'sm' -%}
-  {%~ set TexteGagnant = 'Resultat.Gagnant.sm'|trans({},'messages') %}
-  {%~ set TexteCadeau = 'Resultat.Cadeau.sm'|trans({},'messages') %}
+  {%~ set TexteGagnant = 'Resultat.Gagnant.sm'|trans({}, 'messages') %}
+  {%~ set TexteCadeau = 'Resultat.Cadeau.sm'|trans({}, 'messages') %}
 {%~ elseif Parametres.getTaille() == 'md' -%}
-  {%~ set TexteGagnant = 'Resultat.Gagnant.md'|trans({},'messages') %}
-  {%~ set TexteCadeau = 'Resultat.Cadeau.md'|trans({},'messages') %}
+  {%~ set TexteGagnant = 'Resultat.Gagnant.md'|trans({}, 'messages') %}
+  {%~ set TexteCadeau = 'Resultat.Cadeau.md'|trans({}, 'messages') %}
 {%~ elseif Parametres.getTaille() == 'lg' -%}
-  {%~ set TexteGagnant = 'Resultat.Gagnant.lg'|trans({},'messages') %}
-  {%~ set TexteCadeau = 'Resultat.Cadeau.lg'|trans({},'messages') %}
+  {%~ set TexteGagnant = 'Resultat.Gagnant.lg'|trans({}, 'messages') %}
+  {%~ set TexteCadeau = 'Resultat.Cadeau.lg'|trans({}, 'messages') %}
 {%~ else -%}
-  {%~ set TexteGagnant = 'Resultat.Gagnant.xl'|trans({},'messages') %}
-  {%~ set TexteCadeau = 'Resultat.Cadeau.xl'|trans({},'messages') %}
+  {%~ set TexteGagnant = 'Resultat.Gagnant.xl'|trans({}, 'messages') %}
+  {%~ set TexteCadeau = 'Resultat.Cadeau.xl'|trans({}, 'messages') %}
 {%~ endif -%}
 
 {% set Loupe = 'Resultat.Loupe'|trans({},'messages') -%}

@@ -15,6 +15,10 @@ Administration:
     Graphismes: 'In order to configure aspect of graphics.'
     Oeufs: 'In order to configure surprise modals of special days.'
     Fichiers: 'In order to download or upload files linked to the draw.'
+  Bouton:
+    Aller: 'Go to the dedicated page'
+    Revenir: 'Back to the previous page'
+    Telecharger: 'Download the file'
 Resultat:
   Gagnant:
     sm: ''

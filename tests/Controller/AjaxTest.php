@@ -2,16 +2,33 @@
 
 namespace App\Tests;
 
+use App\Entity\Application;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Permet de vérifier la page d'api des résultats
+ * Permet de vérifier la page d'api
  */
 class AjaxTest extends WebTestCase
 {
+    public function testTelechargement(): void
+    {
+        $client = static::createClient(); /* Générer un navigateur fictif */
+
+        $fichiers = (new Application())->getFichiers();
+        array_shift($fichiers); /* Supprimer le 1er élément */
+
+        $clefs = array_keys($fichiers);
+
+        foreach ($clefs as $clef) {
+            $client->request('GET', '/Ajax/CSV/' . $clef);
+
+            $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        }
+    }
+
     public function testResultat(): void
     {
-        $client = static::createClient(); //Générer un navigateur fictif
+        $client = static::createClient(); /* Générer un navigateur fictif */
 
         $liens = ['HTML','JSON'];
 
@@ -31,7 +48,7 @@ class AjaxTest extends WebTestCase
 
     public function testConfigurationKO(): void
     {
-        $client = static::createClient(); //Générer un navigateur fictif
+        $client = static::createClient(); /* Générer un navigateur fictif */
 
         $messages = [
             'fr' => 'Un problème de configuration a été détecté. Le fichier ".env.local" n\'existe pas.',
