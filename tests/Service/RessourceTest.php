@@ -13,12 +13,12 @@ class RessourceTest extends WebTestCase
 {
     public function testRessource(): void
     {
-        $client = static::createClient(); //Générer un navigateur fictif
-        $parametre = $client->getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $client = static::createClient(); /* Générer un navigateur fictif */
+        $parametre = $client->getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
 
         $ressources = new Ressource($parametre);
 
-        //Pour vérifier les fonctions sur les dossiers
+        /* Pour vérifier les fonctions sur les dossiers */
         foreach ($ressources->getDossiers($ressources::FORMAT_CHEMIN) as $dossier) {
             $this->assertFileExists($dossier);
         }
@@ -27,7 +27,7 @@ class RessourceTest extends WebTestCase
         $this->assertSame($ressources->getDossier('echec', 'initialisation'), '');
         $this->assertSame($ressources->getDossier($ressources::FORMAT_CHEMIN, 'echec'), '');
 
-        //Pour vérifier les fonctions sur les fichiers
+        /* Pour vérifier les fonctions sur les fichiers */
         foreach ($ressources->getFichiers($ressources::FORMAT_CHEMIN) as $fichiers) {
             foreach ($fichiers as $fichier) {
                 $this->assertFileExists($fichier);

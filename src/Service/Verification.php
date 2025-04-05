@@ -14,7 +14,7 @@ class Verification
     {
         $this->cas = 0;
         $application = new Application();
-        $ressources = new Ressource($parametre); // Note : ce service n'utilise pas les paramètres du .env
+        $ressources = new Ressource($parametre); /* Note : ce service n'utilise pas les paramètres du .env */
 
         if (
             !file_exists(

@@ -18,18 +18,18 @@ class VerificationTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $parametre = static::getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $parametre = static::getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
         $this->ressources = new Ressource($parametre);
 
-        //Cas nominal
+        /* Cas nominal */
         $this->verification($parametre, true, '');
 
-        //Cas 1 sans le .env.local
+        /* Cas 1 sans le .env.local */
         $this->original('sauvegarder', 'initialisation');
         $this->verification($parametre, false, 'Verification.Erreur.Fichier');
         $this->original('retablir', 'initialisation');
 
-        //Cas 2 sans une variable de configuration du .env.test.local
+        /* Cas 2 sans une variable de configuration du .env.test.local */
         self::ensureKernelShutdown();
         $_ENV['SYMFONY_DOTENV_VARS'] = str_replace('NOEL,', '', $_ENV['SYMFONY_DOTENV_VARS']);
         $valeur1 = $_ENV['NOEL'];
@@ -37,7 +37,7 @@ class VerificationTest extends KernelTestCase
         unset($_ENV['NOEL']);
         unset($_SERVER['NOEL']);
         self::bootKernel();
-        $parametre = static::getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $parametre = static::getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
         $this->verification($parametre, false, 'Verification.Erreur.Variable');
         self::ensureKernelShutdown();
         $_ENV['SYMFONY_DOTENV_VARS'] = $_ENV['SYMFONY_DOTENV_VARS'] . ',NOEL';
@@ -45,37 +45,37 @@ class VerificationTest extends KernelTestCase
         $_SERVER['NOEL'] = $valeur2;
         self::bootKernel();
 
-        //Cas 3-A sans resultats.csv (nominal car participants.csv et lots.csv)
+        /* Cas 3-A sans resultats.csv (nominal car participants.csv et lots.csv) */
         $this->original('sauvegarder', 'resultats');
         $this->verification($parametre, true, '');
         $this->original('retablir', 'resultats');
 
-        //Cas 3-B sans participants.csv (nominal car resultats.csv)
+        /* Cas 3-B sans participants.csv (nominal car resultats.csv) */
         $this->original('sauvegarder', 'participants');
         $this->verification($parametre, true, '');
         $this->original('retablir', 'participants');
 
-        //Cas 3-C sans lots.csv (nominal car resultats.csv)
+        /* Cas 3-C sans lots.csv (nominal car resultats.csv) */
         $this->original('sauvegarder', 'lots');
         $this->verification($parametre, true, '');
         $this->original('retablir', 'lots');
 
-        //Cas 3-D sans participants.csv et lots.csv (nominal car resultats.csv)
+        /* Cas 3-D sans participants.csv et lots.csv (nominal car resultats.csv) */
         $this->originaux('sauvegarder', ['participants', 'lots']);
         $this->verification($parametre, true, '');
         $this->originaux('retablir', ['participants', 'lots']);
 
-        //Cas 3-E sans resultats.csv et participants.csv
+        /* Cas 3-E sans resultats.csv et participants.csv */
         $this->originaux('sauvegarder', ['resultats', 'participants']);
         $this->verification($parametre, false, 'Verification.Erreur.Tirage');
         $this->originaux('retablir', ['resultats', 'participants']);
 
-        //Cas 3-F sans resultats.csv et lots.csv
+        /* Cas 3-F sans resultats.csv et lots.csv */
         $this->originaux('sauvegarder', ['resultats', 'lots']);
         $this->verification($parametre, false, 'Verification.Erreur.Tirage');
         $this->originaux('retablir', ['resultats', 'lots']);
 
-        //Cas 3-G sans aucun fichier pour le tirage
+        /* Cas 3-G sans aucun fichier pour le tirage */
         $this->originaux('sauvegarder', ['resultats', 'participants', 'lots']);
         $this->verification($parametre, false, 'Verification.Erreur.Tirage');
         $this->originaux('retablir', ['resultats', 'participants', 'lots']);
@@ -99,7 +99,7 @@ class VerificationTest extends KernelTestCase
         );
         $source = $cible . $suffixe;
 
-        if (strtolower($sens) == 'sauvegarder') { //Permet d'autoriser "Sauvegarder" et "sauvegarder"
+        if (strtolower($sens) == 'sauvegarder') { /* Permet d'autoriser "Sauvegarder" et "sauvegarder" */
             $source = $this->ressources->getFichier(
                 $this->ressources::FORMAT_CHEMIN,
                 $clef,

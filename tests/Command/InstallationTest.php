@@ -20,7 +20,7 @@ class InstallationTest extends KernelTestCase
     {
         $noyau = self::bootKernel();
 
-        $parametre = static::getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $parametre = static::getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
         $this->ressources = new Ressource($parametre);
 
         $this->suffixe = '.sauver';
@@ -29,20 +29,20 @@ class InstallationTest extends KernelTestCase
         $command = $application->find('app:Installation');
         $commandTester = new CommandTester($command);
 
-        //Sauvegarde des fichiers générés par l'installation déjà présents
+        /* Sauvegarde des fichiers générés par l'installation déjà présents */
         $this->originaux('sauvegarder');
 
-        //Cas avec l'argument pour de la production
+        /* Cas avec l'argument pour de la production */
         $commandTester->execute(['--dev' => false]);
         $this->verification($commandTester, 0, 'prod');
         $this->nettoyage();
 
-        //Cas avec l'argument pour du developpement
+        /* Cas avec l'argument pour du developpement */
         $commandTester->execute(['--dev' => true]);
         $this->verification($commandTester, 0, 'dev');
         $this->nettoyage();
 
-        //Cas d'un fichier source absent
+        /* Cas d'un fichier source absent */
         foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $fichier) {
             $affichageEchec = 'Installation : '
                 . $fichier[$this->ressources::CAS_SAUVEGARDE]
@@ -51,7 +51,7 @@ class InstallationTest extends KernelTestCase
                 . PHP_EOL
                 . "FR: Installation du fichier échouée.\nEN : File installation failed.";
 
-            //Sauvegarde du fichier original
+            /* Sauvegarde du fichier original */
             $this->original('sauvegarder', $fichier[$this->ressources::CAS_SAUVEGARDE]);
 
             $commandTester->execute([]);
@@ -59,11 +59,11 @@ class InstallationTest extends KernelTestCase
             $this->assertStringContainsString($affichageEchec, $commandTester->getDisplay());
             $this->nettoyage();
 
-            //Rétablissement du fichier original
+            /* Rétablissement du fichier original */
             $this->original('retablir', $fichier['sauvegarde']);
         }
 
-        //Rétablissement des fichiers générés par l'installation déjà présents
+        /* Rétablissement des fichiers générés par l'installation déjà présents */
         $this->originaux('retablir');
     }
 
@@ -88,7 +88,7 @@ class InstallationTest extends KernelTestCase
         $cible = $fichier;
         $source = $cible . $this->suffixe;
 
-        if (strtolower($sens) == 'sauvegarder') { //Permet d'autoriser "Sauvegarder" et "sauvegarder"
+        if (strtolower($sens) == 'sauvegarder') { /* Permet d'autoriser "Sauvegarder" et "sauvegarder" */
             $source = $fichier;
             $cible = $source . $this->suffixe;
         }
@@ -100,13 +100,13 @@ class InstallationTest extends KernelTestCase
 
     private function verification(CommandTester $commande, int $sortie, string $environnement): void
     {
-        //Vérification de la sortie de la commande
+        /* Vérification de la sortie de la commande */
         $this->assertSame($commande->getStatusCode(), $sortie);
-        //Vérification de la génération des fichiers
+        /* Vérification de la génération des fichiers */
         foreach ($this->ressources->getFichiers($this->ressources::FORMAT_CHEMIN) as $fichier) {
             $this->assertFileExists($fichier[$this->ressources::CAS_ORIGINAL]);
         }
-        //Vérification du contenu de .env.local
+        /* Vérification du contenu de .env.local */
         $contenu = file_get_contents(
             $this->ressources->getFichier(
                 $this->ressources::FORMAT_CHEMIN,

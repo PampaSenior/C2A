@@ -17,7 +17,11 @@ class Accueil extends AbstractController
         $this->verification = new Verification($parametre);
     }
 
-    #[Route('/', name: 'Accueil', methods: ['GET'])]
+    #[Route(
+        '/',
+        name: 'Accueil',
+        methods: ['GET']
+    )]
     public function accueil(): Response
     {
         if (!$this->verification->isValide()) {

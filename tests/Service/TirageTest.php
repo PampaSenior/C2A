@@ -45,7 +45,7 @@ class TirageTest extends WebTestCase
             foreach ($cas as $info) {
                 $_ENV[$clef] = $info[0];
                 $this->majConfiguration();
-                $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
+                $resultats = $this->tirage->getResultats(); /* Génère le fichier de résultats */
                 $this->assertFileExists(
                     $this->ressources->getFichier(
                         $this->ressources::FORMAT_CHEMIN,
@@ -59,9 +59,9 @@ class TirageTest extends WebTestCase
             }
         }
 
-        $_ENV['TIRAGE'] = '1'; // Participants aléatoires
+        $_ENV['TIRAGE'] = '1'; /* Participants aléatoires */
         $this->majConfiguration();
-        $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
+        $resultats = $this->tirage->getResultats(); /* Génère le fichier de résultats */
         $this->assertEquals(
             $this->assemblerTableau(array_column($resultats, 'cadeau'), array_column($resultats, 'illustration')),
             $this->bornerExtraction($lotsComplet, 25)
@@ -70,21 +70,21 @@ class TirageTest extends WebTestCase
         $this->nettoyage('resultats');
         $this->ressources->ecriture('lots', $this->ressources::CAS_ORIGINAL, $lotsPartiel);
 
-        $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
+        $resultats = $this->tirage->getResultats(); /* Génère le fichier de résultats */
         $this->assertEquals(array_column($resultats, 'cadeau'), $this->bornerExtraction($lotsPartiel, 25));
 
         $this->nettoyage('resultats');
         $this->ressources->ecriture('lots', $this->ressources::CAS_ORIGINAL, $lotsComplet);
 
-        $_ENV['TIRAGE'] = '2'; // Lots aléatoires
+        $_ENV['TIRAGE'] = '2'; /* Lots aléatoires */
         $this->majConfiguration();
-        $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
+        $resultats = $this->tirage->getResultats(); /* Génère le fichier de résultats */
         $this->assertEquals(array_column($resultats, 'gagnant'), $this->bornerExtraction($participants, 25));
 
         $this->nettoyage('resultats');
         $this->nettoyage('participants');
 
-        $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
+        $resultats = $this->tirage->getResultats(); /* Génère le fichier de résultats */
         $this->assertFileDoesNotExist(
             $this->ressources->getFichier(
                 $this->ressources::FORMAT_CHEMIN,
@@ -98,7 +98,7 @@ class TirageTest extends WebTestCase
 
         $this->nettoyage('lots');
 
-        $resultats = $this->tirage->getResultats(); // Génère le fichier de résultats
+        $resultats = $this->tirage->getResultats(); /* Génère le fichier de résultats */
         $this->assertFileDoesNotExist(
             $this->ressources->getFichier(
                 $this->ressources::FORMAT_CHEMIN,
@@ -179,7 +179,7 @@ class TirageTest extends WebTestCase
         $cible = $fichier;
         $source = $cible . $suffixe;
 
-        if (strtolower($sens) == 'sauvegarder') { //Permet d'être indépendant à la casse pour la clef
+        if (strtolower($sens) == 'sauvegarder') { /* Permet d'être indépendant à la casse pour la clef */
             $source = $fichier;
             $cible = $source . $suffixe;
         }
@@ -191,8 +191,8 @@ class TirageTest extends WebTestCase
 
     private function majConfiguration(): void
     {
-        $client = static::createClient(); //Générer un navigateur fictif
-        $parametre = $client->getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $client = static::createClient(); /* Générer un navigateur fictif */
+        $parametre = $client->getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
 
         $this->ressources = new Ressource($parametre);
         $this->tirage = new Tirage($parametre);

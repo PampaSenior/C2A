@@ -11,7 +11,7 @@ class AdministrationTest extends WebTestCase
 {
     public function testAdministration(): void
     {
-        $client = static::createClient(); //Générer un navigateur fictif
+        $client = static::createClient(); /* Générer un navigateur fictif */
         $client->request('GET', '/Administration');
 
         $this->assertResponseIsSuccessful();

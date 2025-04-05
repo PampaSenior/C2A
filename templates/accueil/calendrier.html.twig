@@ -1,18 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{%- set Jour = "now"|date("j") -%}
+{%- set Mois = "now"|date("m") -%}
+{%- set EstActif = Parametres.getMois() == Mois -%}
+
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
-  {%~ if Parametres.getAudio() %}
-    {{~ Indentation }}  <audio id="son" preload="auto">
-    {{~ Indentation }}    <source src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'musiques') ~ 'clic.ogg') }}" type="audio/ogg"></source>
-    {{~ Indentation }}  </audio>
-  {%~ endif %}
   {%~ if Parametres.getNeige()|length == 3 %}
     {{~ Indentation }}  <div>
     {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['grande'] ~}} position-fixe z-index-n1"></div>
     {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['moyenne'] ~}} position-fixe z-index-n1"></div>
     {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['petite'] ~}} position-fixe z-index-n1"></div>
     {{~ Indentation }}  </div>
+  {%~ endif %}
+  {%~ if EstActif and Parametres.getAudio() %}
+    {{~ Indentation }}  <audio id="son" preload="auto">
+    {{~ Indentation }}    <source src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'musiques') ~ 'clic.ogg') }}" type="audio/ogg"/>
+    {{~ Indentation }}  </audio>
   {%~ endif %}
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
   {{~ Indentation }}    <p class="my-5 h1 d-flex justify-content-center align-items-center">
@@ -27,34 +31,35 @@
          'Style' : Style }
   -%}
   {{~ Indentation }}  </div>
-  {%~ if Parametres.getZoom() != '' %}
-    {%~
-    include 'modale/ZoomResultat.html.twig'
-    with { 'Indentation' : Indentation ~ '  ' }
-    ~%}
-  {%~ endif %}
   {%~ if Parametres.getJourSpecial() != [] %}
     {%~
     include 'modale/JourSpecial.html.twig'
     with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}
+  {%~ if EstActif and Parametres.getZoom() != '' %}
+    {%~
+    include 'modale/ZoomResultat.html.twig'
+    with { 'Indentation' : Indentation ~ '  ' }
+    ~%}
+  {%~ endif %}
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}
-    {%~ if Parametres.getZoom() != '' %}
-      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '4-ZoomResultat.js') }}"></script>
-    {%~ endif %}
+    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '5-JourChange.js') }}"></script>
+    {{~ Indentation }}<script>setInterval(JourChange, 1000, {{ Jour }});</script>
     {%~ if Parametres.getJourSpecial() != [] %}
-      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '5-JourSpecial.js') }}"></script>
-      {{~ Indentation }}<script>JourSpecial({{ Parametres.getJourSpecial()['Jour'] }},{{ Parametres.getJourSpecial()['Mois'] }});</script>
+      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '6-JourSpecial.js') }}"></script>
+      {{~ Indentation }}<script>JourSpecial({{ Parametres.getJourSpecial()['Jour'] }}, {{ Parametres.getJourSpecial()['Mois'] }});</script>
     {%~ endif %}
-    {%- set Jour = "now"|date("j") -%}
-    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '6-JourAvant.js') }}"></script>
-    {{~ Indentation }}<script>JourAvant({{ Jour }},{{ Parametres.getMois() }});</script>
-    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '7-JourActuel.js') }}"></script>
-    {{~ Indentation }}<script>JourActuel({{ Jour }},{{ Parametres.getMois() }});</script>
-    {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '8-JourChange.js') }}"></script>
-    {{~ Indentation }}<script>setInterval(JourChange,1000,{{ Jour }});</script>
+    {%~ if EstActif %}
+      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '7-JourAvant.js') }}"></script>
+      {{~ Indentation }}<script>JourAvant();</script>
+      {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '8-JourActuel.js') }}"></script>
+      {{~ Indentation }}<script>JourActuel({{ Jour }});</script>
+      {%~ if Parametres.getZoom() != '' %}
+        {{~ Indentation }}<script src="{{ asset(Ressources.getDossier(constant('FORMAT_URL', Ressources), 'scriptes') ~ '9-ZoomResultat.js') }}"></script>
+      {%~ endif %}
+    {%~ endif %}
   {%~ endblock %}
   {{~ Indentation }}</body>
 {% endblock %}

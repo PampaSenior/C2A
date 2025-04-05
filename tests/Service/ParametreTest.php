@@ -18,11 +18,11 @@ class ParametreTest extends WebTestCase
 
     public function testEnvironnements(): void
     {
-        //Pour récupérer le mois côté serveur
+        /* Pour récupérer le mois côté serveur */
         $horloge = static::mockTime();
-        $mois = (int) $horloge->now()->format("n"); // Mois actuel
+        $mois = (int) $horloge->now()->format("n"); /* Mois actuel */
 
-        $_SERVER['APP_ENV'] = 'test'; // Mois actuel pour autre chose que prod
+        $_SERVER['APP_ENV'] = 'test'; /* Mois actuel pour autre chose que prod */
         $this->majConfiguration();
         $this->assertEquals($mois, $this->parametres->getMois());
 
@@ -157,16 +157,16 @@ class ParametreTest extends WebTestCase
         $horloge = static::mockTime('-1 month');
         $this->parametres->setClock($horloge);
 
-        $client = static::createClient(); // Générer un navigateur fictif
-        $client->request('GET', '/Ajax/JSON/Resultat/1'); // On est sur un mois non autorisé
+        $client = static::createClient(); /* Générer un navigateur fictif */
+        $client->request('GET', '/Ajax/JSON/Resultat/1'); /* On est sur un mois non autorisé*/
 
         $this->assertEquals((array) json_decode($client->getResponse()->getContent()), $this->parametres->getTriche());
     }
 
     private function majConfiguration(): void
     {
-        $client = static::createClient(); //Générer un navigateur fictif
-        $parametre = $client->getContainer()->get(ParameterBagInterface::class); // Récupération d'un service
+        $client = static::createClient(); /* Générer un navigateur fictif */
+        $parametre = $client->getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
 
         $this->parametres = new Parametre($parametre);
 
