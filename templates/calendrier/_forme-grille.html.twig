@@ -15,7 +15,7 @@
   {%~ for j in 0..MaxBoucle2 %}
     {%~ set Compteur = Compteur + 1 %}
     {%~
-    include 'accueil/_jour.html.twig'
+    include 'calendrier/_jour.html.twig'
     with { 'Indentation' : Indentation ~ '  ',
            'Style' : Style,
            'JourEtoile' : JourEtoile,

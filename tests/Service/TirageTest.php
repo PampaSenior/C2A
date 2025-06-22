@@ -20,7 +20,7 @@ class TirageTest extends WebTestCase
     {
         $this->fichiers = ['participants','lots','resultats'];
 
-        $chemin = 'tests' . DIRECTORY_SEPARATOR . 'Data' . DIRECTORY_SEPARATOR . 'resultats.csv';
+        $chemin = 'tests' . DIRECTORY_SEPARATOR . 'Annexe' . DIRECTORY_SEPARATOR . 'resultats.csv';
 
         $contenu = array_map('str_getcsv', file($chemin));
         $participants = implode("\n", array_column($contenu, 0));

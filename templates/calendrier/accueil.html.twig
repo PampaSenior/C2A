@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{%- set Jour = "now"|date("j") -%}
-{%- set Mois = "now"|date("m") -%}
-{%- set EstActif = Parametres.getMois() == Mois -%}
+{% set Jour = "now"|date("j") %}
+{% set Mois = "now"|date("m") %}
+{% set EstActif = Parametres.getMois() == Mois %}
 
 {% block body %}
   {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
@@ -25,7 +25,7 @@
   {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
   {{~ Indentation }}    </p>
   {%-
-  include 'accueil/_forme-' ~ Parametres.getForme() ~ '.html.twig'
+  include 'calendrier/_forme-' ~ Parametres.getForme() ~ '.html.twig'
   with { 'Indentation' : Indentation ~ '    ',
          'Couleur' : CouleurTexte,
          'Style' : Style }
@@ -33,13 +33,13 @@
   {{~ Indentation }}  </div>
   {%~ if Parametres.getJourSpecial() != [] %}
     {%~
-    include 'modale/JourSpecial.html.twig'
+    include 'modale/jour-special.html.twig'
     with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}
   {%~ if EstActif and Parametres.getZoom() != '' %}
     {%~
-    include 'modale/ZoomResultat.html.twig'
+    include 'modale/zoom-resultat.html.twig'
     with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}

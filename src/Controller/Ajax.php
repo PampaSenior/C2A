@@ -79,7 +79,7 @@ class Ajax extends AbstractController
         }
 
         return $this->render(
-            'accueil/_jour.html.twig',
+            'calendrier/_jour.html.twig',
             [
                 'Indentation' => '        ',
                 'Jour' => $id,
@@ -117,35 +117,43 @@ class Ajax extends AbstractController
         $jour = (int) $date->format("j");
         $mois = (int) $date->format("n");
 
+        /* Pour vérifier l'usage de l'image d'illustration du cadeau */
+        $accesImage = function (array $resultat): string {
+            if (isset($resultat['illustration'])) {
+                $cheminURL = $this->ressources->getDossier(
+                    $this->ressources::FORMAT_URL,
+                    'images'
+                ) . $resultat['illustration'];
+
+                $cheminOS = $this->ressources->getDossier(
+                    $this->ressources::FORMAT_CHEMIN,
+                    'images'
+                ) . $resultat['illustration'];
+
+                if (file_exists($cheminOS)) {
+                    return $cheminURL;
+                }
+            }
+
+            return '';
+        };
+
         if ($id <= $jour && $mois == $this->parametres->getMois()) {
             $resultats = $this->tirage->getResultats();
 
             $resultat = [
                 'gagnant' => $resultats[$id - 1]['gagnant'],
                 'cadeau' => $resultats[$id - 1]['cadeau'],
-                'illustration' => '',
+                'illustration' => $accesImage($resultats[$id - 1]), /* Retourne '' ou l'url de l'image */
             ];
-
-            /* Pour vérifier l'image d'illustration du cadeau */
-            if (isset($resultats[$id - 1]['illustration'])) {
-                $cheminURL = $this->ressources->getDossier(
-                    $this->ressources::FORMAT_URL,
-                    'images'
-                ) . $resultats[$id - 1]['illustration'];
-
-                $cheminOS = $this->ressources->getDossier(
-                    $this->ressources::FORMAT_CHEMIN,
-                    'images'
-                ) . $resultats[$id - 1]['illustration'];
-
-                if (file_exists($cheminOS)) {
-                    $resultat['illustration'] = $cheminURL;
-                }
-            }
 
             return $resultat;
         }
 
-        return $this->parametres->getTriche();
+        $resultat = $this->parametres->getTriche();
+
+        $resultat['illustration'] = $accesImage($resultat);
+
+        return $resultat;
     }
 }

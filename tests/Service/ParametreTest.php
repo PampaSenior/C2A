@@ -31,6 +31,7 @@ class ParametreTest extends WebTestCase
         //$this->assertEquals(12, $this->parametres->getMois());
     }
 
+    /** @SuppressWarnings(PHPMD.ExcessiveMethodLength) */
     public function testAffichages(): void
     {
         $tests = [
@@ -44,6 +45,18 @@ class ParametreTest extends WebTestCase
                     ['yes', 25],
                     [0, 24],
                     [1, 25],
+                ]
+            ],
+            'AUDIO' => [
+                'getAudio' => [
+                    ['false', false],
+                    ['true', true],
+                    ['off', false],
+                    ['on', true],
+                    ['no', false],
+                    ['yes', true],
+                    [0, false],
+                    [1, true],
                 ]
             ],
             'NEIGE' => [
@@ -150,17 +163,44 @@ class ParametreTest extends WebTestCase
         }
     }
 
-    public function testTriche(): void
+    public function testTricheSansIllustration(): void
     {
-        $this->majConfiguration();
-
         $horloge = static::mockTime('-1 month');
-        $this->parametres->setClock($horloge);
 
         $client = static::createClient(); /* Générer un navigateur fictif */
         $client->request('GET', '/Ajax/JSON/Resultat/1'); /* On est sur un mois non autorisé*/
 
-        $this->assertEquals((array) json_decode($client->getResponse()->getContent()), $this->parametres->getTriche());
+        $parametre = $client->getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
+        $this->parametres = new Parametre($parametre);
+        $this->parametres->setClock($horloge);
+
+        $pot2miel = $this->parametres->getTriche();
+        $pot2miel['illustration'] = '';
+
+        $this->assertEquals((array) json_decode($client->getResponse()->getContent()), $pot2miel);
+    }
+
+    public function testTricheAvecIllustration(): void
+    {
+        $horloge = static::mockTime('-1 month');
+
+        $source = 'tests' . DIRECTORY_SEPARATOR . 'Annexe' . DIRECTORY_SEPARATOR . 'tricheur.png';
+        $cible = 'public' . DIRECTORY_SEPARATOR . '3-images' . DIRECTORY_SEPARATOR . 'tricheur.png';
+        copy($source, $cible);
+
+        $client = static::createClient(); /* Générer un navigateur fictif */
+        $client->request('GET', '/Ajax/JSON/Resultat/1'); /* On est sur un mois non autorisé*/
+
+        $parametre = $client->getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
+        $this->parametres = new Parametre($parametre);
+        $this->parametres->setClock($horloge);
+
+        $pot2miel = $this->parametres->getTriche();
+        $pot2miel['illustration'] = '3-images/' . $pot2miel['illustration'];
+
+        $this->assertEquals((array) json_decode($client->getResponse()->getContent()), $pot2miel);
+
+        unlink($cible);
     }
 
     private function majConfiguration(): void

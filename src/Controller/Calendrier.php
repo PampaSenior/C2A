@@ -8,7 +8,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class Accueil extends AbstractController
+#[Route('/')]
+class Calendrier extends AbstractController
 {
     private Verification $verification;
 
@@ -18,8 +19,8 @@ class Accueil extends AbstractController
     }
 
     #[Route(
-        '/',
-        name: 'Accueil',
+        '',
+        name: 'Calendrier',
         methods: ['GET']
     )]
     public function accueil(): Response
@@ -35,7 +36,7 @@ class Accueil extends AbstractController
         }
 
         return $this->render(
-            'accueil/calendrier.html.twig',
+            'calendrier/accueil.html.twig',
             [
                 'Indentation' => '  ',
                 'Titre' => $this->getParameter('Titre'),

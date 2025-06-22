@@ -6,14 +6,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/Administration')]
 class Administration extends AbstractController
 {
     #[Route(
-        '/Administration',
+        '',
         name: 'Administration',
         methods: ['GET']
     )]
-    public function administration(): Response
+    public function accueil(): Response
     {
         /** @var array<array{'icone': string, 'titre': string, 'description': string, 'lien': string}> $cadres */
         $cadres = [
@@ -44,7 +45,7 @@ class Administration extends AbstractController
         ];
 
         return $this->render(
-            'administration/administration.html.twig',
+            'administration/accueil.html.twig',
             [
                 'Indentation' => '  ',
                 'Cadres' => $cadres,
@@ -53,7 +54,7 @@ class Administration extends AbstractController
     }
 
     #[Route(
-        '/Administration/Fichier',
+        '/Fichier',
         name: 'Fichier',
         methods: ['GET']
     )]

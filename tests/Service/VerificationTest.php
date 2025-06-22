@@ -31,18 +31,20 @@ class VerificationTest extends KernelTestCase
 
         /* Cas 2 sans une variable de configuration du .env.test.local */
         self::ensureKernelShutdown();
+        $_SERVER['SYMFONY_DOTENV_VARS'] = str_replace('NOEL,', '', $_SERVER['SYMFONY_DOTENV_VARS']);
         $_ENV['SYMFONY_DOTENV_VARS'] = str_replace('NOEL,', '', $_ENV['SYMFONY_DOTENV_VARS']);
-        $valeur1 = $_ENV['NOEL'];
-        $valeur2 = $_SERVER['NOEL'];
-        unset($_ENV['NOEL']);
+        $valeur1 = $_SERVER['NOEL'];
+        $valeur2 = $_ENV['NOEL'];
         unset($_SERVER['NOEL']);
+        unset($_ENV['NOEL']);
         self::bootKernel();
         $parametre = static::getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
         $this->verification($parametre, false, 'Verification.Erreur.Variable');
         self::ensureKernelShutdown();
+        $_SERVER['SYMFONY_DOTENV_VARS'] = $_SERVER['SYMFONY_DOTENV_VARS'] . ',NOEL';
         $_ENV['SYMFONY_DOTENV_VARS'] = $_ENV['SYMFONY_DOTENV_VARS'] . ',NOEL';
-        $_ENV['NOEL'] = $valeur1;
-        $_SERVER['NOEL'] = $valeur2;
+        $_SERVER['NOEL'] = $valeur1;
+        $_ENV['NOEL'] = $valeur2;
         self::bootKernel();
 
         /* Cas 3-A sans resultats.csv (nominal car participants.csv et lots.csv) */

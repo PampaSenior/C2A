@@ -9,11 +9,9 @@ class Parametre
 {
     use ClockAwareTrait;
 
-    private ParameterBagInterface $parametre;
-
-    public function __construct(ParameterBagInterface $parametre)
-    {
-        $this->parametre = $parametre;
+    public function __construct(
+        private ParameterBagInterface $parametre
+    ) {
     }
 
     public function getMois(): int
@@ -139,14 +137,14 @@ class Parametre
         ];
 
         /* Pour être souple concernant l'écriture dans le .env.local */
-        $configuration = array_change_key_case(
+        $pot2miel = array_change_key_case(
             $this->parametre->get('Pot2Miel'),
             CASE_LOWER
         );
 
         foreach (array_keys($triche) as $clef) {
-            if (array_key_exists($clef, $configuration)) {
-                $triche[$clef] = $configuration[$clef];
+            if (array_key_exists($clef, $pot2miel)) {
+                $triche[$clef] = $pot2miel[$clef];
             }
         }
 
