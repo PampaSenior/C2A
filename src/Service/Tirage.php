@@ -13,7 +13,7 @@ class Tirage
 
     public function __construct(ParameterBagInterface $parametre)
     {
-        $this->ressources = new Ressource($parametre);
+        $this->ressources = new Ressource($parametre); /* Note : ce service n'utilise pas les paramètres du .env */
         $this->parametres = new Parametre($parametre);
     }
 

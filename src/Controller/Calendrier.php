@@ -39,10 +39,6 @@ class Calendrier extends AbstractController
             'calendrier/accueil.html.twig',
             [
                 'Indentation' => '  ',
-                'Titre' => $this->getParameter('Titre'),
-                'CouleurFond' => $this->getParameter('CouleurFond'),
-                'CouleurTexte' => $this->getParameter('CouleurTexte'),
-                'Style' => $this->getParameter('Style'),
             ]
         );
     }

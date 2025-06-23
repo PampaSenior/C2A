@@ -2,41 +2,56 @@
 
 namespace App\Service;
 
+use App\Entity\Application;
 use Symfony\Component\Clock\ClockAwareTrait;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\DependencyInjection\Exception\EnvNotFoundException;
 
 class Parametre
 {
     use ClockAwareTrait;
 
-    public function __construct(
-        private ParameterBagInterface $parametre
-    ) {
+    /** @var array<string, mixed> $configuration */
+    private array $configuration;
+
+    public function __construct(ParameterBagInterface $parametre)
+    {
+        $application = new Application();
+
+        try {
+            $this->configuration['environnement'] = $parametre->get('kernel.environment');
+
+            foreach (array_keys($application->getParametres()) as $clef) {
+                $this->configuration[$clef] = $parametre->get($clef);
+            }
+        } catch (EnvNotFoundException) {
+            $this->configuration = [];
+        }
     }
 
     public function getMois(): int
     {
         /* Retourne le mois actuel en cas de développement sinon décembre */
-        $nombre = $this->parametre->get('kernel.environment') != "prod" ? $this->now()->format("n") : '12';
+        $nombre = $this->getTexte('environnement') != "prod" ? $this->now()->format("n") : '12';
         return (int) $nombre;
     }
 
     public function getNb(): int
     {
         /* Retourne le nombre de jours à afficher dans le calendrier */
-        return 24 + ($this->parametre->get('Noel') === true);
+        return 24 + ($this->getBooleen('Noel') === true);
     }
 
     public function getAudio(): bool
     {
         /* Retourne l'activation ou non d'un son lors du clic sur le gagnant du jour */
-        return ($this->parametre->get('Audio') === true);
+        return ($this->getBooleen('Audio') === true);
     }
 
     /** @return array<string, string> */
     public function getNeige(): array
     {
-        switch ($this->parametre->get('Neige')) {
+        switch ($this->getEntier('Neige')) {
             case 1:
                 return [
                     'grande' => ' neige-flocon-grand ',
@@ -56,7 +71,7 @@ class Parametre
 
     public function getForme(): string
     {
-        switch ($this->parametre->get('Forme')) {
+        switch ($this->getEntier('Forme')) {
             case 1:
                 return 'losange';
             case 2:
@@ -68,7 +83,7 @@ class Parametre
 
     public function getBordure(): string
     {
-        switch ($this->parametre->get('Bordure')) {
+        switch ($this->getEntier('Bordure')) {
             case 1:
                 return 'border border-success bordure-1';
             case 2:
@@ -82,7 +97,7 @@ class Parametre
 
     public function getZoom(): string
     {
-        switch ($this->parametre->get('Zoom')) {
+        switch ($this->getEntier('Zoom')) {
             case 1:
                 return 'position-absolute top-0 start-0';
             case 2:
@@ -106,7 +121,7 @@ class Parametre
 
     public function getTaille(): string
     {
-        $taille = strtolower($this->parametre->get('Taille'));
+        $taille = strtolower($this->getTexte('Taille'));
         if (!in_array($taille, ['sm', 'md', 'lg', 'xl'])) {
             $taille = 'xl';
         }
@@ -117,7 +132,7 @@ class Parametre
     /** @return array<string> */
     public function getTirage(): array
     {
-        switch ($this->parametre->get('Tirage')) {
+        switch ($this->getEntier('Tirage')) {
             case 1:
                 return ['participants'];
             case 2:
@@ -138,7 +153,7 @@ class Parametre
 
         /* Pour être souple concernant l'écriture dans le .env.local */
         $pot2miel = array_change_key_case(
-            $this->parametre->get('Pot2Miel'),
+            $this->getTableau('Pot2Miel'),
             CASE_LOWER
         );
 
@@ -159,44 +174,93 @@ class Parametre
                 return [
                     'Jour' => 1,
                     'Mois' => 1,
-                    'TitreModale' => $this->parametre->get('TitreNouvelAn'),
-                    'TexteModale' => $this->parametre->get('TexteNouvelAn'),
+                    'TitreModale' => $this->getTexte('TitreNouvelAn'),
+                    'TexteModale' => $this->getTexte('TexteNouvelAn'),
                     'TypeModale' => 'NouvelAn',
                 ];
             case '14-02':
                 return [
                     'Jour' => 14,
                     'Mois' => 2,
-                    'TitreModale' => $this->parametre->get('TitreCupidon'),
-                    'TexteModale' => $this->parametre->get('TexteCupidon'),
+                    'TitreModale' => $this->getTexte('TitreCupidon'),
+                    'TexteModale' => $this->getTexte('TexteCupidon'),
                     'TypeModale' => 'Cupidon',
                 ];
             case '01-04':
                 return [
                     'Jour' => 1,
                     'Mois' => 4,
-                    'TitreModale' => $this->parametre->get('TitrePoisson'),
-                    'TexteModale' => $this->parametre->get('TextePoisson'),
+                    'TitreModale' => $this->getTexte('TitrePoisson'),
+                    'TexteModale' => $this->getTexte('TextePoisson'),
                     'TypeModale' => 'Poisson',
                 ];
             case '31-10':
                 return [
                     'Jour' => 31,
                     'Mois' => 10,
-                    'TitreModale' => $this->parametre->get('TitreHorreur'),
-                    'TexteModale' => $this->parametre->get('TexteHorreur'),
+                    'TitreModale' => $this->getTexte('TitreHorreur'),
+                    'TexteModale' => $this->getTexte('TexteHorreur'),
                     'TypeModale' => 'Horreur',
                 ];
             case '25-12':
                 return [
                     'Jour' => 25,
                     'Mois' => 12,
-                    'TitreModale' => $this->parametre->get('TitreCadeau'),
-                    'TexteModale' => $this->parametre->get('TexteCadeau'),
+                    'TitreModale' => $this->getTexte('TitreCadeau'),
+                    'TexteModale' => $this->getTexte('TexteCadeau'),
                     'TypeModale' => 'Cadeau',
                 ];
             default:
                 return [];
         }
+    }
+
+    /** @return array<string, mixed> */
+    public function getConfiguration(): array
+    {
+        return $this->configuration;
+    }
+
+    private function getBooleen(string $clef): bool
+    {
+        $parametre = $this->configuration[$clef];
+
+        settype($parametre, 'bool');
+
+        return $parametre;
+    }
+
+    private function getEntier(string $clef): int
+    {
+        $parametre = $this->configuration[$clef];
+
+        settype($parametre, 'int');
+
+        return $parametre;
+    }
+
+    private function getTexte(string $clef): string
+    {
+        $parametre = $this->configuration[$clef];
+
+        settype($parametre, 'string');
+
+        return $parametre;
+    }
+
+    /** @return array<string, string> */
+    private function getTableau(string $clef): array
+    {
+        $parametres = $this->configuration[$clef];
+
+        settype($parametres, 'array');
+
+        foreach ($parametres as $clef => $valeur) {
+            settype($valeur, 'string');
+
+            $parametres[$clef] = $valeur;
+        }
+
+        return $parametres;
     }
 }

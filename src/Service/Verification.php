@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use App\Entity\Application;
 use App\Service\Ressource;
+use App\Service\Parametre;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class Verification
@@ -13,8 +13,8 @@ class Verification
     public function __construct(ParameterBagInterface $parametre)
     {
         $this->cas = 0;
-        $application = new Application();
         $ressources = new Ressource($parametre); /* Note : ce service n'utilise pas les paramètres du .env */
+        $parametres = new Parametre($parametre);
 
         if (
             !file_exists(
@@ -25,11 +25,7 @@ class Verification
             return;
         }
 
-        try {
-            foreach (array_keys($application->getParametres()) as $clef) {
-                $parametre->get($clef);
-            }
-        } catch (\Exception $pb) {
+        if ($parametres->getConfiguration() === []) { // S'il n'y a pas eu de chargement de la configuration
             $this->cas = 2;
             return;
         }

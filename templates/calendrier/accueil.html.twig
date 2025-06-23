@@ -5,7 +5,7 @@
 {% set EstActif = Parametres.getMois() == Mois %}
 
 {% block body %}
-  {{~ Indentation }}<body style="background-color:{{ CouleurFond }}">
+  {{~ Indentation }}<body style="background-color:{{ Parametres.getConfiguration()['CouleurFond'] }}">
   {%~ if Parametres.getNeige()|length == 3 %}
     {{~ Indentation }}  <div>
     {{~ Indentation }}    <div class="neige {{~ Parametres.getNeige()['grande'] ~}} position-fixe z-index-n1"></div>
@@ -21,14 +21,13 @@
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
   {{~ Indentation }}    <p class="my-5 h1 d-flex justify-content-center align-items-center">
   {{~ Indentation }}      <i class="me-4 fa-solid fa-holly-berry fa-2x text-danger"></i>
-  {{~ Indentation }}      <span id="Titre" class="contour" style="color:{{ CouleurTexte }}">{{ Titre }}</span>
+  {{~ Indentation }}      <span id="Titre" class="contour" style="color:{{ Parametres.getConfiguration()['CouleurTexte'] }}">{{ Parametres.getConfiguration()['Titre'] }}</span>
   {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
   {{~ Indentation }}    </p>
   {%-
   include 'calendrier/_forme-' ~ Parametres.getForme() ~ '.html.twig'
   with { 'Indentation' : Indentation ~ '    ',
-         'Couleur' : CouleurTexte,
-         'Style' : Style }
+         'Style' : Parametres.getConfiguration()['Style'] }
   -%}
   {{~ Indentation }}  </div>
   {%~ if Parametres.getJourSpecial() != [] %}

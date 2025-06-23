@@ -83,7 +83,6 @@ class Ajax extends AbstractController
             [
                 'Indentation' => '        ',
                 'Jour' => $id,
-                'Couleur' => $this->getParameter('CouleurTexte'),
                 'Resultat' => $this->getResultat($id),
             ]
         );
