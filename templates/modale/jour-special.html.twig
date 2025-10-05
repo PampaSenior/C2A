@@ -4,11 +4,11 @@
 {{ Indentation }}  <div class="modal-dialog modal-dialog-centered">
 {{ Indentation }}    <div class="modal-content border border-success border-2">
 {{ Indentation }}      <div class="modal-header border-success border-2 z-index-1">
-{{ Indentation }}        <h2 class="mb-0 modal-title text-danger fw-bold">
+{{ Indentation }}        <h2 class="modal-title text-danger fw-bold">
 {{ Indentation }}          {{ Parametres.getJourSpecial()['TitreModale'] }}
 {{ Indentation }}        </h2>
 {{ Indentation }}        <button class="btn border border-success border-2" onclick="$('#JourSpecial').hide();" aria-label="{{ Fermer }}" title="{{ Fermer }}">
-{{ Indentation }}          <i class="fas fa-times fa-2x"></i>
+{{ Indentation }}          <i class="fa-solid fa-times fa-2x fa-fw"></i>
 {{ Indentation }}        </button>
 {{ Indentation }}      </div>
 {{ Indentation }}      <div class="modal-body">
@@ -17,26 +17,26 @@
 {{ Indentation }}      <div class="modal-footer border-success border-2 z-index-1">
 {{ Indentation }}        <div class="mx-auto">
 {%~ if Parametres.getJourSpecial()['TypeModale'] == 'NouvelAn' %}
-  {{~ Indentation }}          <i class="fa-solid fa-champagne-glasses fa-2x text-primary"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-handshake fa-2x text-danger"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-martini-glass fa-2x text-success"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-champagne-glasses fa-2x fa-fw text-primary"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-handshake fa-2x fa-fw text-danger"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-martini-glass fa-2x fa-fw text-success"></i>
 {%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Cupidon' %}
-  {{~ Indentation }}          <i class="fa-solid fa-user fa-2x text-primary"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-heart fa-beat fa-2x text-danger"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-venus-mars fa-2x text-secondary"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-user fa-2x fa-fw text-primary"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-heart fa-beat fa-2x fa-fw text-danger"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-venus-mars fa-2x fa-fw text-secondary"></i>
 {%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Poisson' %}
-  {{~ Indentation }}          <i class="fa-solid fa-fish fa-2x text-danger"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-face-grin-squint-tears fa-2x text-success"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-face-grin-tears fa-2x text-warning"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-fish-fins fa-2x fa-rotate-180 text-info"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-fish fa-2x fa-fw text-danger"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-face-grin-squint-tears fa-2x fa-fw text-success"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-face-grin-tears fa-2x fa-fw text-warning"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-fish-fins fa-2x fa-fw fa-rotate-180 text-info"></i>
 {%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Horreur' %}
-  {{~ Indentation }}          <i class="fa-solid fa-wand-sparkles fa-2x text-success"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-book-skull fa-2x text-warning"></i>
-  {{~ Indentation }}          <i class="fa-solid fa-hat-wizard fa-2x text-info"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-wand-sparkles fa-2x fa-fw text-success"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-book-skull fa-2x fa-fw text-warning"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-hat-wizard fa-2x fa-fw text-info"></i>
 {%~ elseif Parametres.getJourSpecial()['TypeModale'] == 'Cadeau' %}
-  {{~ Indentation }}          <i class="fas fa-holly-berry fa-2x text-danger"></i>
-  {{~ Indentation }}          <i class="fas fa-gifts fa-2x text-info"></i>
-  {{~ Indentation }}          <i class="fas fa-candy-cane fa-2x text-success"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-holly-berry fa-2x fa-fw text-danger"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-gifts fa-2x fa-fw text-info"></i>
+  {{~ Indentation }}          <i class="fa-solid fa-candy-cane fa-2x fa-fw text-success"></i>
 {%~ endif %}
 {{ Indentation }}        </div>
 {{ Indentation }}      </div>

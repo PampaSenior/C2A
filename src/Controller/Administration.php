@@ -12,7 +12,7 @@ class Administration extends AbstractController
     #[Route(
         '',
         name: 'Administration',
-        methods: ['GET']
+        methods: [ 'GET' ]
     )]
     public function accueil(): Response
     {
@@ -22,25 +22,25 @@ class Administration extends AbstractController
                 'icone' => 'fa-tools text-danger',
                 'titre' => 'Administration.Titre.Outils',
                 'description' => 'Administration.Description.Outils',
-                'lien' => '#',
+                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Outil' ]),
             ],
             [
                 'icone' => 'fa-palette text-warning',
                 'titre' => 'Administration.Titre.Graphismes',
                 'description' => 'Administration.Description.Graphismes',
-                'lien' => '#',
+                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Graphisme' ]),
             ],
             [
                 'icone' => 'fa-egg text-tertiary',
                 'titre' => 'Administration.Titre.Oeufs',
                 'description' => 'Administration.Description.Oeufs',
-                'lien' => '#',
+                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Surprise' ]),
             ],
             [
                 'icone' => 'fa-file-csv text-success',
                 'titre' => 'Administration.Titre.Fichiers',
                 'description' => 'Administration.Description.Fichiers',
-                'lien' => $this->generateUrl('Fichier'),
+                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Fichier' ]),
             ],
         ];
 
@@ -54,16 +54,18 @@ class Administration extends AbstractController
     }
 
     #[Route(
-        '/Fichier',
-        name: 'Fichier',
-        methods: ['GET']
+        '/Configuration/{cas}',
+        name: 'Configuration2',
+        methods: [ 'GET', 'POST' ],
+        requirements: [ 'cas' => '^(Outil|Graphisme|Surprise|Fichier)$' ]
     )]
-    public function fichier(): Response
+    public function configuration(string $cas): Response
     {
         return $this->render(
-            'administration/telechargement.html.twig',
+            'configuration/configuration.html.twig',
             [
                 'Indentation' => '  ',
+                'Type' => strtolower($cas),
             ]
         );
     }

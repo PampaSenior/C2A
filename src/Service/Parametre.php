@@ -19,7 +19,7 @@ class Parametre
         $application = new Application();
 
         try {
-            $this->configuration['environnement'] = $parametre->get('kernel.environment');
+            $this->configuration['Environnement'] = $parametre->get('kernel.environment');
 
             foreach (array_keys($application->getParametres()) as $clef) {
                 $this->configuration[$clef] = $parametre->get($clef);
@@ -32,7 +32,7 @@ class Parametre
     public function getMois(): int
     {
         /* Retourne le mois actuel en cas de développement sinon décembre */
-        $nombre = $this->getTexte('environnement') != "prod" ? $this->now()->format("n") : '12';
+        $nombre = $this->getTexte('Environnement') != "prod" ? $this->now()->format("n") : '12';
         return (int) $nombre;
     }
 

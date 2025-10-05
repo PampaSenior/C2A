@@ -17,11 +17,21 @@ class AdministrationTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    public function testFichier(): void
+    public function testConfiguration(): void
     {
-        $client = static::createClient(); /* Générer un navigateur fictif */
-        $client->request('GET', '/Administration/Fichier');
+        $lesCas = ['Outil' , 'Graphisme', 'Surprise', 'Fichier'];
 
-        $this->assertResponseIsSuccessful();
+        $client = static::createClient(); /* Générer un navigateur fictif */
+
+        foreach ($lesCas as $cas) {
+            $client->request('GET', '/Administration/Configuration/' . $cas);
+
+            $this->assertResponseIsSuccessful();
+        }
+
+        // Pour tester le "requirements" de la route
+        $client->request('GET', '/Administration/Configuration/Test');
+
+        $this->assertResponseStatusCodeSame(404);
     }
 }

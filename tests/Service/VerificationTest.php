@@ -39,7 +39,7 @@ class VerificationTest extends KernelTestCase
         unset($_ENV['NOEL']);
         self::bootKernel();
         $parametre = static::getContainer()->get(ParameterBagInterface::class); /* Récupération d'un service */
-        $this->verification($parametre, false, 'Verification.Erreur.Variable');
+        $this->verification($parametre, false, 'Verification.Erreur.Configuration');
         self::ensureKernelShutdown();
         $_SERVER['SYMFONY_DOTENV_VARS'] = $_SERVER['SYMFONY_DOTENV_VARS'] . ',NOEL';
         $_ENV['SYMFONY_DOTENV_VARS'] = $_ENV['SYMFONY_DOTENV_VARS'] . ',NOEL';

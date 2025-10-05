@@ -1,0 +1,20 @@
+{{ Indentation }}<div class="mx-auto border rounded carte">
+{% for Clef, Nom in Application.getFichiers() %}
+  {#~ Il faut éliminer le fichier de paramètres #}
+  {%~ if not loop.first %}
+    {{~ Indentation }}  <div class="mx-auto my-2 col-11 d-flex">
+    {{~ Indentation }}    <div class="ms-2 my-auto col-9">{{ Nom }}</div>
+    {%~
+    include 'bouton/_bouton-telechargement.html.twig'
+    with { 'Indentation' : Indentation ~ '    ',
+           'Lien': path('FichierCSV', {'clef': Clef}),
+           'Titre': 'Administration.Bouton.Telecharger'|trans({}, 'messages') ~ ' : ' ~  Nom }
+    ~%}
+    {{~ Indentation }}  </div>
+    {#~ Il faut mettre une séparation en cas de suite #}
+    {%~ if not loop.last %}
+      {{~ Indentation }}  <hr class="mx-auto my-0 col-11" />
+    {%~ endif %}
+  {%~ endif %}
+{% endfor %}
+{{ Indentation }}</div>

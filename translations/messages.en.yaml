@@ -2,7 +2,7 @@ Langue: "English language"
 Verification:
   Erreur:
     Fichier: 'A problem of configuration was detected. The file ".env.local" doesn''t exists.'
-    Variable: 'A problem of configuration was detected. At least one variable is misspelling or missing in the ".env.local".'
+    Configuration: 'A problem of configuration was detected. At least one variable is misspelling or missing in the ".env.local".'
     Tirage: 'No winner is listed. The file "resultats.csv" doesn''t exist or misswritten. Check also "participants.csv" and "lots.csv" if you have done a draw of lot with this application.'
 Administration:
   Titre:
@@ -19,6 +19,7 @@ Administration:
     Aller: 'Go to the dedicated page'
     Revenir: 'Back to the previous page'
     Telecharger: 'Download the file'
+    Question: 'Field description'
 Resultat:
   Gagnant:
     sm: ''
@@ -37,3 +38,99 @@ Modale:
     Titre: 'Day result : '
     Gagnant: 'The winner is : '
     Cadeau: 'The gift is : '
+  Information :
+    Titre: 'Information'
+Formulaire:
+  Configuration:
+    Etiquette:
+      Environnement: 'Application environment'
+      Mot2Passe: 'Password'
+      Titre: 'Calendar title'
+      TitreNouvelAn: 'Title for the 1st january'
+      TexteNouvelAn: 'Message for the 1st january'
+      TitreCupidon: 'Title for the 14th february'
+      TexteCupidon: 'Message for the 14th february'
+      TitrePoisson: 'Title for the 1st april'
+      TextePoisson: 'Message for the 1st april'
+      TitreHorreur: 'Title for the 31th october'
+      TexteHorreur: 'Message for the 31th october'
+      TitreCadeau: 'Title for the 25th december'
+      TexteCadeau: 'Message for the 25th december'
+      CouleurFond: 'Color for background'
+      CouleurTexte: 'Color for text'
+      Noel: 'Christmas'
+      Audio: 'Sound'
+      Neige: 'Snow'
+      Forme: 'Shapa'
+      Style: 'Style'
+      Bordure: 'Border'
+      Zoom: 'Zoom'
+      Taille: 'Size'
+      Tirage: 'Draw'
+      Pot2Miel: 'HoneyPot'
+    Indication:
+      Environnement: 'This field represents the run environment for the application'
+      Mot2Passe: 'This field represents the administrator password created during the installation'
+      Titre: 'This field represents the text above the calendar'
+      TitreNouvelAn: 'This field represents the title for the surprise popup of the New year'
+      TexteNouvelAn: 'This field represents the text for the surprise popup of the New year'
+      TitreCupidon: 'This field represents the title for the surprise popup of the Valentine''s day'
+      TexteCupidon: 'This field represents the text for the surprise popup of the Valentine''s day'
+      TitrePoisson: 'This field represents the title for the surprise popup of the april Fool''s day'
+      TextePoisson: 'This field represents the text for the surprise popup of the april Fool''s day'
+      TitreHorreur: 'This field represents the title for the surprise popup of Halloween'
+      TexteHorreur: 'This field represents the text for the surprise popup of Halloween'
+      TitreCadeau: 'This field represents the title for the surprise popup of Christmas'
+      TexteCadeau: 'This field represents the text for the surprise popup of Christmas'
+      CouleurFond: 'This field represents the color of the calendar background'
+      CouleurTexte: 'This field represents the color of the calendar title and numbers'
+      Noel: 'This field is to show or not the Christmas day'
+      Audio: 'This field is to play a sound during the winner of the day'
+      Neige: 'This field is to select the kind of snow'
+      Forme: 'This field is to select the position of the calendar blocks'
+      Style: 'This field is to select the graphism of the calendar block'
+      Bordure: 'This field is to select the kind of border for the calendar block'
+      Zoom: 'This field is to select the position of the button that zoom the result of a calendar block'
+      Taille: 'This field is to select the size of the calendar block'
+      Tirage: 'This field is to select the draw mode for the results'
+      Pot2Miel: 'This field is to define the informations to show in case of cheating'
+    Choix:
+      Aucun: 'None'
+      Environnement:
+        Production: 'Production'
+        Developpement: 'Development'
+      Neige:
+        Flocon: 'Snowflake'
+        Boule: 'Snowball'
+      Forme:
+        Grille: 'Grid'
+        Losange: 'Lozenge'
+        Sapin: 'Tree'
+      Style:
+        PoliceUnique: 'FontAwesome (gift)'
+        PoliceAleatoire: 'FontAwesome (random)'
+        Dessin: 'Customize images'
+      Bordure:
+        Carre: 'Square'
+        Arrondie: 'Rounded'
+        Ronde: 'Circle'
+      Zoom:
+        GaucheHaut: 'Top-Left'
+        CentreHaut: 'Top-Center'
+        DroiteHaut: 'Top-Right'
+        GaucheMilieu: 'Middle-Left'
+        DroiteMilieu: 'Middle-Right'
+        GaucheBas: 'Bottom-Left'
+        CentreBas: 'Bottom-Center'
+        DroiteBas: 'Bottom-Right'
+      Taille:
+        Petit: 'Small'
+        Moyen: 'Medium'
+        Large: 'Large'
+        Grand: 'Tall'
+      Tirage:
+        ParticipantLot: 'Participants & gifts'
+        Participant: 'Participants'
+        Lot: 'Gifts'
+    Bouton:
+      Soumettre: 'Send'

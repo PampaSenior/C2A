@@ -21,7 +21,7 @@ class Calendrier extends AbstractController
     #[Route(
         '',
         name: 'Calendrier',
-        methods: ['GET']
+        methods: [ 'GET' ]
     )]
     public function accueil(): Response
     {

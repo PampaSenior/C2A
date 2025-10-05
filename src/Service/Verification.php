@@ -59,7 +59,7 @@ class Verification
             case 1:
                 return 'Verification.Erreur.Fichier';
             case 2:
-                return 'Verification.Erreur.Variable';
+                return 'Verification.Erreur.Configuration';
             case 3:
                 return 'Verification.Erreur.Tirage';
             default:

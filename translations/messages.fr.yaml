@@ -2,7 +2,7 @@ Langue: "Langue française"
 Verification:
   Erreur:
     Fichier: 'Un problème de configuration a été détecté. Le fichier ".env.local" n''existe pas.'
-    Variable: 'Un problème de configuration a été détecté. Une des variables est mal écrite ou absente dans le ".env.local".'
+    Configuration: 'Un problème de configuration a été détecté. Une des variables est mal écrite ou absente dans le ".env.local".'
     Tirage: 'Aucun gagnant n''est renseigné. Le fichier "resultats.csv" n''existe pas ou est mal écrit. Vérifiez aussi "participants.csv" et "lots.csv" si vous avez effectué un tirage au sort avec cette application.'
 Administration:
   Titre:
@@ -19,6 +19,7 @@ Administration:
     Aller: 'Aller sur la page dédiée'
     Revenir: 'Revenir sur la page précédente'
     Telecharger: 'Télécharger le fichier'
+    Question: 'Description du champ'
 Resultat:
   Gagnant:
     sm: ''
@@ -37,3 +38,99 @@ Modale:
     Titre: 'Résultat du jour : '
     Gagnant: 'Le gagnant est : '
     Cadeau: 'Le cadeau est : '
+  Information :
+    Titre: 'Information'
+Formulaire:
+  Configuration:
+    Etiquette:
+      Environnement: 'Environnement applicatif'
+      Mot2Passe: 'Mot de passe'
+      Titre: 'Titre du calendrier'
+      TitreNouvelAn: 'Titre du 1er janvier'
+      TexteNouvelAn: 'Message du 1er janvier'
+      TitreCupidon: 'Titre du 14 février'
+      TexteCupidon: 'Message du 14 février'
+      TitrePoisson: 'Titre du 1er avril'
+      TextePoisson: 'Message du 1er avril'
+      TitreHorreur: 'Titre du 31 octobre'
+      TexteHorreur: 'Message du 31 octobre'
+      TitreCadeau: 'Titre du 25 décembre'
+      TexteCadeau: 'Message du 25 décembre'
+      CouleurFond: 'Couleur du fond'
+      CouleurTexte: 'Couleur du texte'
+      Noel: 'Noël'
+      Audio: 'Audio'
+      Neige: 'Neige'
+      Forme: 'Forme'
+      Style: 'Style'
+      Bordure: 'Bordure'
+      Zoom: 'Zoom'
+      Taille: 'Taille'
+      Tirage: 'Tirage au sort'
+      Pot2Miel: 'Pot de miel'
+    Indication:
+      Environnement: 'Ce champ représente l''environnement pour lequel l''application doit fonctionner'
+      Mot2Passe: 'Ce champ représente le mot de passe d''administration généré lors de l''installation'
+      Titre: 'Ce champ représente le texte affiché au dessus du calendrier'
+      TitreNouvelAn: 'Ce champ représente le titre de la modale surprise du nouvel an'
+      TexteNouvelAn: 'Ce champ représente le texte de la modale surprise du nouvel an'
+      TitreCupidon: 'Ce champ représente le titre de la modale surprise de la St Valentin'
+      TexteCupidon: 'Ce champ représente le texte de la modale surprise de la St Valentin'
+      TitrePoisson: 'Ce champ représente le titre de la modale surprise du 1er avril'
+      TextePoisson: 'Ce champ représente le texte de la modale surprise du 1er avril'
+      TitreHorreur: 'Ce champ représente le titre de la modale surprise d''Halloween'
+      TexteHorreur: 'Ce champ représente le texte de la modale surprise d''Halloween'
+      TitreCadeau: 'Ce champ représente le titre de la modale surprise de noël'
+      TexteCadeau: 'Ce champ représente le texte de la modale surprise de noël'
+      CouleurFond: 'Ce champ représente la couleur du fond d''écran du calendrier'
+      CouleurTexte: 'Ce champ représente la couleur du titre et des chiffres du calendrier'
+      Noel: 'Ce champ représente le fait d''afficher ou non la case du 25 décembre'
+      Audio: 'Ce champ représente le fait de jouer un son lors de la révélation du gagnant du jour'
+      Neige: 'Ce champ représente le type de neige à afficher sur le calendrier'
+      Forme: 'Ce champ représente le placement des cases du calendrier'
+      Style: 'Ce champ représente l''aspect graphique des cases du calendrier à révéler'
+      Bordure: 'Ce champ représente l''aspect de la bordure des cases du calendrier'
+      Zoom: 'Ce champ représente la position du bouton qui permet d''agrandir les résultats d''une case du calendrier'
+      Taille: 'Ce champ représente la taille des cases du calendrier'
+      Tirage: 'Ce champ représente le mode de tirage au sort des résultats'
+      Pot2Miel: 'Ce champ représente les informations à afficher en cas de triche'
+    Choix:
+      Aucun: 'Aucun'
+      Environnement:
+        Production: 'Production'
+        Developpement: 'Développement'
+      Neige:
+        Flocon: 'Flocon de neige'
+        Boule: 'Boule de neige'
+      Forme:
+        Grille: 'Grille'
+        Losange: 'Losange'
+        Sapin: 'Sapin'
+      Style:
+        PoliceUnique: 'FontAwesome (cadeau)'
+        PoliceAleatoire: 'FontAwesome (aléatoire)'
+        Dessin: 'Images personnalisées'
+      Bordure:
+        Carre: 'Carré'
+        Arrondie: 'Arrondie'
+        Ronde: 'Ronde'
+      Zoom:
+        GaucheHaut: 'En haut à gauche'
+        CentreHaut: 'En haut au milieu'
+        DroiteHaut: 'En haut à droite'
+        GaucheMilieu: 'Au milieu à gauche'
+        DroiteMilieu: 'Au milieu à droite'
+        GaucheBas: 'En bas à gauche'
+        CentreBas: 'En bas au milieu'
+        DroiteBas: 'En bas à droite'
+      Taille:
+        Petit: 'Petit'
+        Moyen: 'Moyen'
+        Large: 'Large'
+        Grand: 'Grand'
+      Tirage:
+        ParticipantLot: 'Participants & lots'
+        Participant: 'Participants'
+        Lot: 'Lots'
+    Bouton:
+      Soumettre: 'Soumettre'

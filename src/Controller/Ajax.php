@@ -43,8 +43,8 @@ class Ajax extends AbstractController
     #[Route(
         '/CSV/{clef}',
         name: 'FichierCSV',
-        requirements: ['clef' => '^(lots|participants|resultats)$'],
-        methods: ['GET']
+        requirements: [ 'clef' => '^(lots|participants|resultats)$' ],
+        methods: [ 'GET' ]
     )]
     public function resultatCSV(string $clef): Response
     {
@@ -63,8 +63,8 @@ class Ajax extends AbstractController
     #[Route(
         '/HTML/Resultat/{id}',
         name: 'ResultatHTML',
-        requirements: ['id' => '^([1-9]|1[0-9]|2[0-5])$'],
-        methods: ['GET']
+        requirements: [ 'id' => '^([1-9]|1[0-9]|2[0-5])$' ],
+        methods: [ 'GET' ]
     )]
     public function resultatHTML(int $id): Response
     {
@@ -91,8 +91,8 @@ class Ajax extends AbstractController
     #[Route(
         '/JSON/Resultat/{id}',
         name: 'ResultatJSON',
-        requirements: ['id' => '^([1-9]|1[0-9]|2[0-5])$'],
-        methods: ['GET']
+        requirements: [ 'id' => '^([1-9]|1[0-9]|2[0-5])$' ],
+        methods: [ 'GET' ]
     )]
     public function resultatJSON(int $id): JsonResponse
     {

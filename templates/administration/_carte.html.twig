@@ -6,9 +6,12 @@
 {{ Indentation }}    <h5 class="card-title">{{ Cadre['titre']|trans({}, 'messages') }} :</h5>
 {{ Indentation }}    <p class="card-text">{{ Cadre['description']|trans({}, 'messages') }}</p>
 {{ Indentation }}    <div class="text-center">
-{{ Indentation }}      <a href="{{ Cadre['lien'] }}" class="btn btn-primary" title="{{ 'Administration.Bouton.Aller'|trans({}, 'messages') }}">
-{{ Indentation }}        <i class="fa-solid fa-circle-right"></i>
-{{ Indentation }}      </a>
+{%~
+include 'bouton/_bouton-aller.html.twig'
+with { 'Indentation' : Indentation ~ '      ',
+       'Lien': Cadre['lien'],
+       'Titre': 'Administration.Bouton.Aller'|trans({}, 'messages') }
+~%}
 {{ Indentation }}    </div>
 {{ Indentation }}  </div>
 {{ Indentation }}</div>

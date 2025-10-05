@@ -1,0 +1,25 @@
+{% set Fermer = 'Modale.Fermer'|trans({}, 'messages') -%}
+
+{{ Indentation }}<div id="Information" class="text-center modal" tabindex="-1">
+{{ Indentation }}  <div class="modal-dialog modal-dialog-centered">
+{{ Indentation }}    <div class="modal-content border border-success border-2">
+{{ Indentation }}      <div class="modal-header border-success border-2 z-index-1">
+{{ Indentation }}        <h2 class="modal-title text-danger fw-bold">
+{{ Indentation }}          {{ 'Modale.Information.Titre'|trans({},'messages') }} :
+{{ Indentation }}        </h2>
+{{ Indentation }}        <button type="button" class="btn border border-success border-2" onclick="$('#Information').hide();" aria-label="{{ Fermer }}" title="{{ Fermer }}">
+{{ Indentation }}          <i class="fa-solid fa-times fa-2x fa-fw"></i>
+{{ Indentation }}        </button>
+{{ Indentation }}      </div>
+{{ Indentation }}      <div class="modal-body">
+{{ Indentation }}        <p id="aide" class="mb-0 h5 text-success fw-bold"></p>
+{{ Indentation }}      </div>
+{{ Indentation }}      <div class="modal-footer border-success border-2 text-center z-index-1">
+{{ Indentation }}        <div class="mx-auto d-flex align-items-center">
+{{ Indentation }}          <i class="me-1 fa-solid fa-message fa-2x fa-fw text-info"></i>
+{{ Indentation }}          <i class="ms-1 fa-solid fa-comment fa-2x fa-fw text-success"></i>
+{{ Indentation }}        </div>
+{{ Indentation }}      </div>
+{{ Indentation }}    </div>
+{{ Indentation }}  </div>
+{{ Indentation }}</div>

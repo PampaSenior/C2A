@@ -24,6 +24,11 @@ class AjaxTest extends WebTestCase
 
             $this->assertEquals(200, $client->getResponse()->getStatusCode());
         }
+
+        // Pour tester le "requirements" de la route et aussi une faille
+        $client->request('GET', '/Ajax/CSV/.env.local');
+
+        $this->assertResponseStatusCodeSame(404);
     }
 
     public function testResultat(): void
