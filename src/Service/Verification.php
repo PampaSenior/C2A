@@ -25,7 +25,7 @@ class Verification
             return;
         }
 
-        if ($parametres->getConfiguration() === []) { // S'il n'y a pas eu de chargement de la configuration
+        if ($parametres->getConfiguration() === []) { /* S'il n'y a pas eu de chargement de la configuration */
             $this->cas = 2;
             return;
         }

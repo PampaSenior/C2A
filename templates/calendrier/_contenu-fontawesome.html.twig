@@ -9,6 +9,6 @@
 {%~ endif -%}
 
 {{ Indentation }}<div id="{{ Jour }}" class="m-2 text-success bloc {{ Parametres.getBordure() }} {{ Parametres.getTaille() }}" title="Jour : {{ Jour }}" data-taille="{{ Parametres.getTaille() }}" data-url="{{ path('ResultatHTML', {'id': Jour}) }}">
-{{ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Parametres.getTaille() }}"></i>
+{{ Indentation }}  <i class="fa-solid {{ Image }} text-danger affiche {{ Parametres.getTaille() }} fa-fw"></i>
 {{ Indentation }}  <span class="chiffre contour {{ Parametres.getTaille() }}" style="color:{{ Parametres.getConfiguration()['CouleurTexte'] }}">{{ Jour }}</span>
 {{ Indentation }}</div>

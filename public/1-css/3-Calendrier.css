@@ -52,7 +52,7 @@ body{
 }
 
 .bordure-0{
-  --taille-fin: calc(var(--taille) - 1em);
+  --taille-fin: calc(var(--taille) - var(--taille-bordure) * 2);
 }
 
 .bordure-1{
@@ -120,33 +120,37 @@ body{
 
 .sm{
   --taille: 5em;
-  --top-chiffre: -60%;
+  --taille-bordure: 0.4em;
+  --top-chiffre: -63%;
   --font-chiffre: 2em;
-  --top-texte: 10%;
+  --top-texte: 12%;
   --font-texte: 3em;
 }
 
 .md{
   --taille: 8em;
-  --top-chiffre: -52%;
+  --taille-bordure: 0.5em;
+  --top-chiffre: -54%;
   --font-chiffre: 3em;
-  --top-texte: 12%;
+  --top-texte: 14%;
   --font-texte: 5em;
 }
 
 .lg{
   --taille: 10em;
-  --top-chiffre: -47%;
+  --taille-bordure: 0.6em;
+  --top-chiffre: -50%;
   --font-chiffre: 4em;
-  --top-texte: 15%;
+  --top-texte: 17%;
   --font-texte: 6em;
 }
 
 .xl{
   --taille: 11em;
-  --top-chiffre: -55%;
+  --taille-bordure: 0.7em;
+  --top-chiffre: -57%;
   --font-chiffre: 5em;
-  --top-texte: 13%;
+  --top-texte: 15%;
   --font-texte: 7em;
 }
 

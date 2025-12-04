@@ -20,26 +20,28 @@
   {%~ endif %}
   {{~ Indentation }}  <div class="mx-auto col-10 text-center">
   {{~ Indentation }}    <p class="my-5 h1 d-flex justify-content-center align-items-center">
-  {{~ Indentation }}      <i class="me-4 fa-solid fa-holly-berry fa-2x text-danger"></i>
+  {{~ Indentation }}      <i class="me-4 fa-solid fa-holly-berry fa-2x text-danger fa-fw"></i>
   {{~ Indentation }}      <span id="Titre" class="contour" style="color:{{ Parametres.getConfiguration()['CouleurTexte'] }}">{{ Parametres.getConfiguration()['Titre'] }}</span>
-  {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success"></i>
+  {{~ Indentation }}      <i class="ms-4 fa-solid fa-candy-cane fa-2x text-success fa-fw"></i>
   {{~ Indentation }}    </p>
   {%-
-  include 'calendrier/_forme-' ~ Parametres.getForme() ~ '.html.twig'
-  with { 'Indentation' : Indentation ~ '    ',
-         'Style' : Parametres.getConfiguration()['Style'] }
+    include 'calendrier/_forme-' ~ Parametres.getForme() ~ '.html.twig'
+    with {
+      'Indentation' : Indentation ~ '    ',
+      'Style' : Parametres.getConfiguration()['Style']
+    }
   -%}
   {{~ Indentation }}  </div>
   {%~ if Parametres.getJourSpecial() != [] %}
     {%~
-    include 'modale/jour-special.html.twig'
-    with { 'Indentation' : Indentation ~ '  ' }
+      include 'modale/jour-special.html.twig'
+      with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}
   {%~ if EstActif and Parametres.getZoom() != '' %}
     {%~
-    include 'modale/zoom-resultat.html.twig'
-    with { 'Indentation' : Indentation ~ '  ' }
+      include 'modale/zoom-resultat.html.twig'
+      with { 'Indentation' : Indentation ~ '  ' }
     ~%}
   {%~ endif %}
   {%~ block script %}

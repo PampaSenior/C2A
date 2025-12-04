@@ -1,16 +1,18 @@
 {{ Indentation }}<div class="card carte">
 {{ Indentation }}  <div class="card-header text-center">
-{{ Indentation }}    <i class="mx-auto my-2 fa-solid {{ Cadre['icone'] }} fa-2x"></i>
+{{ Indentation }}    <i class="mx-auto my-2 fa-solid {{ Cadre['icone'] }} fa-2x fa-fw"></i>
 {{ Indentation }}  </div>
 {{ Indentation }}  <div class="card-body">
 {{ Indentation }}    <h5 class="card-title">{{ Cadre['titre']|trans({}, 'messages') }} :</h5>
 {{ Indentation }}    <p class="card-text">{{ Cadre['description']|trans({}, 'messages') }}</p>
 {{ Indentation }}    <div class="text-center">
 {%~
-include 'bouton/_bouton-aller.html.twig'
-with { 'Indentation' : Indentation ~ '      ',
-       'Lien': Cadre['lien'],
-       'Titre': 'Administration.Bouton.Aller'|trans({}, 'messages') }
+  include 'bouton/_bouton-aller.html.twig'
+  with {
+    'Indentation' : Indentation ~ '      ',
+    'Lien': Cadre['lien'],
+    'Titre': 'Administration.Bouton.Aller'|trans({}, 'messages')
+  }
 ~%}
 {{ Indentation }}    </div>
 {{ Indentation }}  </div>

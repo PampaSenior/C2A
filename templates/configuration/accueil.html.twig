@@ -3,36 +3,40 @@
 {% block body %}
   {{~ Indentation }}<body class="vh-100 d-flex flex-column">
   {{~ Indentation }}  <div class="m-auto">
-  {%~ if Type == 'fichier' %}
+  {%~ if Cas == 'fichier' %}
     {%~
-    include 'configuration/_telechargement.html.twig'
-    with { 'Indentation' : Indentation ~ '    ' }
+      include 'configuration/_telechargement.html.twig'
+      with { 'Indentation' : Indentation ~ '    ' }
     ~%}
     {{~ Indentation }}    <hr class="my-4 opacity-0" />
   {%~ endif %}
   {{~ Indentation }}    <div class="p-2 border rounded formulaire">
   {{~ Indentation }}      <div class="text-center">
   {%~
-  include 'bouton/_bouton-retour.html.twig'
-  with { 'Indentation' : Indentation ~ '        ',
-         'Lien': path('Administration'),
-         'Titre': 'Administration.Bouton.Revenir'|trans({}, 'messages') }
+    include 'bouton/_bouton-retour.html.twig'
+    with {
+      'Indentation' : Indentation ~ '        ',
+      'Lien': path('Administration'),
+      'Titre': 'Administration.Bouton.Revenir'|trans({}, 'messages')
+    }
   ~%}
   {{~ Indentation }}      </div>
   {{~ Indentation }}      <hr class="mx-auto my-2 col-11" />
   {{~ Indentation }}      <div class="text-center">
   {%~
-  include 'bouton/_bouton-aide.html.twig'
-  with { 'Indentation' : Indentation ~ '        ',
-       'Titre': 'Information',
-       'Aide': 'Prochainement ;)/Soon ;)' }
+    include 'bouton/_bouton-aide.html.twig'
+    with {
+      'Indentation' : Indentation ~ '        ',
+      'Titre': 'Information',
+      'Aide': 'Prochainement ;)/Soon ;)'
+    }
   ~%}
   {{~ Indentation }}      </div>
   {{~ Indentation }}    </div>
   {{~ Indentation }}  </div>
   {%~
-  include 'modale/information-champ.html.twig'
-  with { 'Indentation' : Indentation ~ '  ' }
+    include 'modale/information-champ.html.twig'
+    with { 'Indentation' : Indentation ~ '  ' }
   ~%}
   {%~ block script %}
     {%- set Indentation = Indentation ~ '  ' -%}

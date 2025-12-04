@@ -5,16 +5,20 @@
 
 {{ Indentation }}<ul class="mx-auto col-10 nav nav-tabs" role="tablist">
 {%
-include 'message/_onglet-drapeau.html.twig'
-with { 'Indentation' : Indentation ~ '  ',
-       'Drapeaux' : Drapeaux }
+  include 'message/_onglet-drapeau.html.twig'
+  with {
+    'Indentation' : Indentation ~ '  ',
+    'Drapeaux' : Drapeaux
+  }
 %}
 {{ Indentation }}</ul>
-{{ Indentation }}<div class="mx-auto col-10 mb-3 border border-top-0 tab-content">
+{{ Indentation }}<div class="mx-auto col-10 mb-3 border border-top-0 rounded-bottom tab-content">
 {%
-include 'message/_traduction-information.html.twig'
-with { 'Indentation' : Indentation ~ '  ',
-       'Drapeaux' : Drapeaux,
-       'Message' : Message }
+  include 'message/_traduction-information.html.twig'
+  with {
+    'Indentation' : Indentation ~ '  ',
+    'Drapeaux' : Drapeaux,
+    'Message' : Message
+  }
 %}
 {{ Indentation }}</div>

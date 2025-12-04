@@ -8,9 +8,11 @@
       {{~ Indentation }}    <div class="mx-auto d-flex justify-content-center">
     {%~ endif %}
     {%~
-    include 'administration/_carte.html.twig'
-    with { 'Indentation' : Indentation ~ '      ',
-           'Cadre' : Cadre }
+      include 'administration/_carte.html.twig'
+      with {
+        'Indentation' : Indentation ~ '      ',
+        'Cadre' : Cadre
+      }
     ~%}
     {%~ if loop.index is even %}
       {{~ Indentation }}    </div>

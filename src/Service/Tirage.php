@@ -84,7 +84,7 @@ class Tirage
     private function extractionCSV(string $clef): array
     {
         $contenu = $this->ressources->lecture($clef, $this->ressources::CAS_ORIGINAL);
-        $contenu = preg_split("/\R/", $contenu); /* Transforme la chaine en tableau (\R = \r\n, \n et \r) */
+        $contenu = preg_split("/\R/", $contenu, 0, PREG_SPLIT_NO_EMPTY); /* Transforme la chaine en tableau sans les lignes vides (\R = \r\n, \n et \r) */ /* phpcs:ignore Generic.Files.LineLength.TooLong */
         $contenu = array_slice($contenu !== false ? $contenu : [], 1, null, false); /* Supprimer la ligne d'entête */
 
         if (in_array($clef, $this->parametres->getTirage())) {

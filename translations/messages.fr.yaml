@@ -43,7 +43,7 @@ Modale:
 Formulaire:
   Configuration:
     Etiquette:
-      Environnement: 'Environnement applicatif'
+      Environnement: 'Environnement'
       Mot2Passe: 'Mot de passe'
       Titre: 'Titre du calendrier'
       TitreNouvelAn: 'Titre du 1er janvier'

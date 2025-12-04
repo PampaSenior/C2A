@@ -4,13 +4,15 @@
   {{~ Indentation }}<body class="vh-100 d-flex">
   {{~ Indentation }}  <div id="Message" class="m-auto col-2 border border-2 border-warning rounded">
   {{~ Indentation }}    <div class="mx-auto col-10 mt-3 text-info text-center">
-  {{~ Indentation }}      <i class="fa-solid fa-exclamation-circle fa-3x"></i>
+  {{~ Indentation }}      <i class="fa-solid fa-exclamation-circle fa-3x fa-fw"></i>
   {{~ Indentation }}    </div>
-  {{~ Indentation }}    <hr class="mx-auto col-10 border border-warning rounded opacity-100"/>
+  {{~ Indentation }}    <hr class="mx-auto col-10 border border-warning rounded opacity-100" />
   {%~
-  include 'message/_affiche-langue.html.twig'
-  with { 'Indentation' : Indentation ~ '    ',
-         'Message' : Message }
+    include 'message/_affiche-langue.html.twig'
+    with {
+      'Indentation' : Indentation ~ '    ',
+      'Message' : Message
+    }
   ~%}
   {{~ Indentation }}  </div>
   {{~ Indentation }}</body>

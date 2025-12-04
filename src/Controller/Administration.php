@@ -22,25 +22,25 @@ class Administration extends AbstractController
                 'icone' => 'fa-tools text-danger',
                 'titre' => 'Administration.Titre.Outils',
                 'description' => 'Administration.Description.Outils',
-                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Outil' ]),
+                'lien' => $this->generateUrl('Configuration', [ 'cas' => 'Outil' ]),
             ],
             [
                 'icone' => 'fa-palette text-warning',
                 'titre' => 'Administration.Titre.Graphismes',
                 'description' => 'Administration.Description.Graphismes',
-                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Graphisme' ]),
+                'lien' => $this->generateUrl('Configuration', [ 'cas' => 'Graphisme' ]),
             ],
             [
                 'icone' => 'fa-egg text-tertiary',
                 'titre' => 'Administration.Titre.Oeufs',
                 'description' => 'Administration.Description.Oeufs',
-                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Surprise' ]),
+                'lien' => $this->generateUrl('Configuration', [ 'cas' => 'Surprise' ]),
             ],
             [
                 'icone' => 'fa-file-csv text-success',
                 'titre' => 'Administration.Titre.Fichiers',
                 'description' => 'Administration.Description.Fichiers',
-                'lien' => $this->generateUrl('Configuration2', [ 'cas' => 'Fichier' ]),
+                'lien' => $this->generateUrl('Configuration', [ 'cas' => 'Fichier' ]),
             ],
         ];
 
@@ -55,17 +55,17 @@ class Administration extends AbstractController
 
     #[Route(
         '/Configuration/{cas}',
-        name: 'Configuration2',
+        name: 'Configuration',
         methods: [ 'GET', 'POST' ],
         requirements: [ 'cas' => '^(Outil|Graphisme|Surprise|Fichier)$' ]
     )]
     public function configuration(string $cas): Response
     {
         return $this->render(
-            'configuration/configuration.html.twig',
+            'configuration/accueil.html.twig',
             [
                 'Indentation' => '  ',
-                'Type' => strtolower($cas),
+                'Cas' => strtolower($cas),
             ]
         );
     }

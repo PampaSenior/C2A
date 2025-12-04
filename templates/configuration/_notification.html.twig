@@ -1,7 +1,5 @@
-{% for label, messages in app.flashes %}
-  {%~ for message in messages %}
-    {{~ Indentation }}<div class="m-2 alert alert-{{ label }} text-center" role="alert">
-    {{~ Indentation }}  {{ message }}
-    {{~ Indentation }}</div>
-  {%~ endfor %}
+{% for message in messages %}
+  {{~ Indentation }}<div class="mb-0 alert alert-{{ label }} text-center" role="alert">
+  {{~ Indentation }}  {{ message }}
+  {{~ Indentation }}</div>
 {% endfor %}

@@ -13,11 +13,13 @@
   {%~ for j in 0..Max[i] - 1 %}
     {%~ set Compteur = Compteur + 1 %}
     {%~
-    include 'calendrier/_jour.html.twig'
-    with { 'Indentation' : Indentation ~ '  ',
-           'Style' : Style,
-           'JourEtoile' : JourEtoile,
-           'Jour' : Compteur }
+      include 'calendrier/_jour.html.twig'
+      with {
+        'Indentation' : Indentation ~ '  ',
+        'Style' : Style,
+        'JourEtoile' : JourEtoile,
+        'Jour' : Compteur
+      }
     ~%}
   {%~ endfor %}
   {{~ Indentation }}</div>

@@ -1,24 +1,30 @@
 {%~ if Style is defined %}
   {%~ if Style in 0..1 %}
     {%~
-    include 'calendrier/_contenu-fontawesome.html.twig'
-    with { 'Indentation' : Indentation,
-           'Aleatoire': Style,
-           'Jour': Jour,
-           'JourEtoile' : JourEtoile }
+      include 'calendrier/_contenu-fontawesome.html.twig'
+      with {
+        'Indentation' : Indentation,
+        'Aleatoire': Style,
+        'Jour': Jour,
+        'JourEtoile' : JourEtoile
+      }
     ~%}
   {%- else %}
     {%~
-    include 'calendrier/_contenu-image.html.twig'
-    with { 'Indentation' : Indentation,
-           'Jour': Jour }
+      include 'calendrier/_contenu-image.html.twig'
+      with {
+        'Indentation' : Indentation,
+        'Jour': Jour
+      }
     ~%}
   {%- endif %}
 {%~ else %}
   {%~
-  include 'calendrier/_contenu-texte.html.twig'
-  with { 'Indentation' : Indentation,
-         'Jour': Jour,
-         'Resultat': Resultat }
+    include 'calendrier/_contenu-texte.html.twig'
+    with {
+      'Indentation' : Indentation,
+      'Jour': Jour,
+      'Resultat': Resultat
+    }
   ~%}
 {%~ endif %}
