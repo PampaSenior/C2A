@@ -75,6 +75,8 @@ class Parametre
             case 1:
                 return 'losange';
             case 2:
+                return 'boule';
+            case 3:
                 return 'sapin';
             default:
                 return 'grille';

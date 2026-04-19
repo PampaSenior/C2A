@@ -85,8 +85,9 @@ class ParametreTest extends WebTestCase
                 'getForme' => [
                     [0, 'grille'],
                     [1, 'losange'],
-                    [2, 'sapin'],
-                    [3, 'grille'],
+                    [2, 'boule'],
+                    [3, 'sapin'],
+                    [4, 'grille'],
                 ]
             ],
             'BORDURE' => [
